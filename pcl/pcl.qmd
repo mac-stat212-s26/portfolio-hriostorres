@@ -9,3 +9,11 @@ title: "Pre-Class Learning Summaries"
 ## Quarto
 
 ![from qmd4sci.njtierney.com](0810-quarto.jpeg)
+
+## PCL 1
+
+![](PCL_1.jpeg)
+## PCL 2
+![](PCL_2.jpeg)
+
+
