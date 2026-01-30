@@ -21,25 +21,69 @@
     ]
   },
   {
-    "objectID": "tt/2025-07-08.html",
-    "href": "tt/2025-07-08.html",
-    "title": "TidyTuesday Sample 1",
+    "objectID": "tt/hw01-tt.html",
+    "href": "tt/hw01-tt.html",
+    "title": "Homework 01",
     "section": "",
-    "text": "Add content here",
+    "text": "TidyTuesday Section\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>TidyTuesday Sample 1</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 01</span>"
     ]
   },
   {
-    "objectID": "tt/2025-07-15.html",
-    "href": "tt/2025-07-15.html",
-    "title": "TidyTuesday Sample 2",
-    "section": "",
-    "text": "Add content here",
+    "objectID": "tt/hw01-tt.html#introduction",
+    "href": "tt/hw01-tt.html#introduction",
+    "title": "Homework 01",
+    "section": "Introduction",
+    "text": "Introduction\nIn this homework, I will explore the differences between micro- and small-enterprises in Brazil and their relationship with the lgal nature of each enterprise. The data is obtained from the TidyTuesday challenge, a weekly challenge for users to explore data cleaning and storytelling! In this case, I’m working with the data correponding to the 4th week of 2026.",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>TidyTuesday Sample 2</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 01</span>"
+    ]
+  },
+  {
+    "objectID": "tt/hw01-tt.html#importing-the-data-set",
+    "href": "tt/hw01-tt.html#importing-the-data-set",
+    "title": "Homework 01",
+    "section": "Importing the Data Set",
+    "text": "Importing the Data Set\n\nCode## libraries\nlibrary(tidyverse)\n\n## Importing the data sets\ntuesdata &lt;- tidytuesdayR::tt_load(2026, week = 4)\n\ncompanies &lt;- tuesdata$companies\nlegal_nature &lt;- tuesdata$legal_nature\nqualifications &lt;- tuesdata$qualifications\nsize &lt;- tuesdata$size",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 01</span>"
+    ]
+  },
+  {
+    "objectID": "tt/hw01-tt.html#research-question",
+    "href": "tt/hw01-tt.html#research-question",
+    "title": "Homework 01",
+    "section": "Research Question",
+    "text": "Research Question\n\nHow does legal nature relate to the distribution of capital stock among micro- and small enterprises in Brazil?",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 01</span>"
+    ]
+  },
+  {
+    "objectID": "tt/hw01-tt.html#data-cleaning",
+    "href": "tt/hw01-tt.html#data-cleaning",
+    "title": "Homework 01",
+    "section": "Data Cleaning",
+    "text": "Data Cleaning\n\nCode## exploring the data\nglimpse(companies)\n\nRows: 141,332\nColumns: 6\n$ company_id          &lt;dbl&gt; 41273639, 41274138, 41274505, 41274745, 41274856, …\n$ company_name        &lt;chr&gt; \"MH MATERIAIS DE CONSTRUCAO LTDA\", \"CLINICA ESTETI…\n$ legal_nature        &lt;chr&gt; \"Limited Liability Business Company (LLC)\", \"Limit…\n$ owner_qualification &lt;chr&gt; \"Managing Partner / Partner-Administrator\", \"Manag…\n$ capital_stock       &lt;dbl&gt; 1000000, 200000, 500000, 159600, 200000, 300000, 1…\n$ company_size        &lt;chr&gt; \"small-enterprise\", \"micro-enterprise\", \"small-ent…\n\nCodecompanies |&gt;\n  group_by(company_size) |&gt;\n  count()\n\n# A tibble: 3 × 2\n# Groups:   company_size [3]\n  company_size         n\n  &lt;chr&gt;            &lt;int&gt;\n1 micro-enterprise 66202\n2 other            42520\n3 small-enterprise 32610\n\nCode## keep only the micro enterprises\ncompanies_micro &lt;- companies |&gt;\n  filter(company_size == \"micro-enterprise\")\n\n#counting\ncompanies_micro |&gt;\n  count(legal_nature) |&gt;\n  arrange(desc(n))\n\n# A tibble: 9 × 2\n  legal_nature                                        n\n  &lt;chr&gt;                                           &lt;int&gt;\n1 Limited Liability Business Company (LLC)        51591\n2 Sole Proprietorship                             14162\n3 Simple Limited Partnership                        155\n4 Simple Innovation Company                         144\n5 Individual Limited Liability Company (Business)   108\n6 Sole Member Law Firm                               22\n7 Simple Partnership (Pure)                          14\n8 General Partnership                                 3\n9 Privately Held Corporation                          3\n\nCode# In Millions to avoid scientific notation\ncompanies_micro &lt;- companies_micro |&gt; \n  mutate(capital_stock_m = capital_stock/1000000) |&gt; \n  filter(capital_stock_m &lt; 1000) # remove obvious far out value\n\n# In Millions to avoid scientific notation\ncompanies &lt;- companies |&gt; \n  mutate(capital_stock_m = capital_stock/1000000)\n\n\n\nCode#bar plot mean\ncompanies_micro |&gt;\n  group_by(legal_nature) |&gt;\n  summarise(mean_capital_m = mean(capital_stock_m)) |&gt;\n  ggplot(aes(x = reorder(legal_nature, mean_capital_m), y = mean_capital_m)) +\n  geom_col() +\n  coord_flip() +\n  theme_minimal() +\n  labs(\n    title = \"Mean Capital Stock per Micro-Enterprise\",\n    x = \"Legal Nature\",\n    y = \"Mean Capital Stock (Million BRL)\")\n\n\n\n\n\n\nCode#bar plot median to see if any outliers remain / far out values\ncompanies_micro |&gt;\n  group_by(legal_nature) |&gt;\n  summarise(median_capital_m = median(capital_stock_m)) |&gt;\n  ggplot(aes(x = reorder(legal_nature, median_capital_m), y = median_capital_m)) +\n  geom_col() +\n  scale_fill_viridis_d() +\n  coord_flip() +\n  theme_minimal() +\n  labs(\n    title = \"Median Capital Stock per Micro-Enterprise\",\n    x = \"Legal Nature\",\n    y = \"Mean Capital Stock (Million BRL)\")\n\n\n\n\n\n\n\n\nCodecompanies |&gt;\n  mutate(capital_stock_m = capital_stock / 1000000) |&gt;\n  filter(capital_stock_m &lt; 1,\n    company_size %in% c(\"micro-enterprise\", \"small-enterprise\")) |&gt; \n  ggplot(aes(x = legal_nature, y = capital_stock_m, fill = legal_nature)) +\n  geom_boxplot()+\n  scale_color_viridis_d() +\n  facet_wrap(~ company_size) +\n  coord_flip() +\n  theme_minimal() +\n    theme(legend.position = \"none\")+\n  labs(\n    title = \"Capital Stock Distribution by Legal Nature\",\n    x = \"Legal Nature\",\n    y = \"Capital Stock (Million BRL)\")\n\n\n\nFig. 1: Capital stock distribution by legal nature among Brazilian micro- and small enterprises.",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 01</span>"
+    ]
+  },
+  {
+    "objectID": "tt/hw01-tt.html#conclusions",
+    "href": "tt/hw01-tt.html#conclusions",
+    "title": "Homework 01",
+    "section": "Conclusions",
+    "text": "Conclusions\nFig. 1 reveals the differences in how capital stock is distributed across legal forms for both micro- and small enterprises in Brazil. Even after restricting the study to firms with less than 1 million BRL in capital, the spread and central tendency of capital stock vary a lot by legal nature.\nFor micro-enterprises, most legal forms are located at low levels of declared capital. But there some that contradicts this. For example, Limited Liability Business Companies (LLCs) and Individual Limited Liability Companies display wider spreads and more outliers, suggesting that these structures are associated with firms that declare more capital even within the smallest size category. This would be an interesting study to pursue further with more time.\nAmong small enterprises, these differences become more obvious. Legal forms such as LLCs and Simple Limited Partnerships have higher medians and greater variability, while simpler structures remain concentrated at lower capital levels. This pattern indicates whenerver enterprises grow, the choice of legal nature becomes more strongly associated with how much capital they report.\nOne challenge I had during this project was dealing with outlier. I decided to limit the study to those firms with less than 1 million BRL in capital, but I do recognize this is not the best way on how to deal with it. Future studies should look at it from a proportion perspectives comparing to their median value in each legal category.\nOverall, our last visualization shows that legal nature is not just a formal label but carries information about the financial structure and scale of Brazilian enterprises. Even within the micro- and small-enterprise categories, organizational form is closely related to how much capital a firm declares.",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 01</span>"
     ]
   },
   {
@@ -50,7 +94,7 @@
     "text": "R",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
@@ -61,7 +105,7 @@
     "text": "Quarto\n\n\n\nfrom qmd4sci.njtierney.com",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
@@ -72,7 +116,7 @@
     "text": "PCL 1\n ## PCL 2",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
@@ -83,7 +127,7 @@
     "text": "Add content here",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ICA Sample 1</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>ICA Sample 1</span>"
     ]
   },
   {
@@ -94,7 +138,7 @@
     "text": "Add content here",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ICA Sample 2</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ICA Sample 2</span>"
     ]
   },
   {
@@ -105,7 +149,7 @@
     "text": "Exercise\nCarryout the following steps to clean and save the San Francisco Weather data. Make sure to download and add the data file to your portfolio repository as instructed.",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
     ]
   },
   {
@@ -116,7 +160,7 @@
     "text": "Read in the weather data in this file with the correct relative file path after you move it to the instructed location.\nThere is a variable that has values that don’t make sense in the data context. Figure out which variable this is and clean it up by making those values missing using na_if().\nCreate a variable called dateInYear that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).\nCreate a variable called month_name that shows the 3-letter abbreviation for each case.\nSave the wrangled data to the data/processed/ folder using write_csv(). Name this file weather_clean.csv. Look up the documentation for this function by typing ?write_csv in the Console. You’ll need to write an appropriate relative path.",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
     ]
   },
   {
@@ -127,7 +171,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Extra Sample 1</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Extra Sample 1</span>"
     ]
   },
   {
@@ -138,7 +182,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Extra Sample 2</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Extra Sample 2</span>"
     ]
   }
 ]
