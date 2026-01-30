@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.25">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Rios">
 <title>Homework 01 – COMP/STAT212 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
@@ -448,12 +447,6 @@ cookieconsent.run({
 
 <div class="quarto-title-meta column-body">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>David Rios </p>
-          </div>
-  </div>
     
   
     
@@ -606,8 +599,8 @@ $ company_size        &lt;chr&gt; "small-enterprise", "micro-enterprise", "small
 </section><section id="conclusions" class="level2"><h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
 <p>Fig. 1 reveals the differences in how capital stock is distributed across legal forms for both micro- and small enterprises in Brazil. Even after restricting the study to firms with less than 1 million BRL in capital, the spread and central tendency of capital stock vary a lot by legal nature.</p>
 <p>For micro-enterprises, most legal forms are located at low levels of declared capital. But there some that contradicts this. For example, Limited Liability Business Companies (LLCs) and Individual Limited Liability Companies display wider spreads and more outliers, suggesting that these structures are associated with firms that declare more capital even within the smallest size category. This would be an interesting study to pursue further with more time.</p>
-<p>Among small enterprises, these differences become more obvious. Legal forms such as LLCs and Simple Limited Partnerships have higher medians and greater variability, while simpler structures remain concentrated at lower capital levels. This pattern indicates whenerver enterprises grow, the choice of legal nature becomes more strongly associated with how much capital they report.</p>
-<p>One challenge I had during this project was dealing with outlier. I decided to limit the study to those firms with less than 1 million BRL in capital, but I do recognize this is not the best way on how to deal with it. Future studies should look at it from a proportion perspectives comparing to their median value in each legal category.</p>
+<p>Among small enterprises, these differences become more obvious. Legal forms such as LLCs and Simple Limited Partnerships have higher medians and greater variability, while simpler structures remain concentrated at lower capital levels. This pattern indicates that whenever enterprises grow, the choice of legal nature becomes more strongly associated with how much capital they report.</p>
+<p>One challenge I had during this project was dealing with outliers. I decided to limit the study to those firms with less than 1 million BRL in capital, but I do recognize this is not the best way to go about it. Future studies should look at it from a proportion perspectives comparing to their median value in each legal category.</p>
 <p>Overall, our last visualization shows that legal nature is not just a formal label but carries information about the financial structure and scale of Brazilian enterprises. Even within the micro- and small-enterprise categories, organizational form is closely related to how much capital a firm declares.</p>
 
 
@@ -1094,126 +1087,125 @@ $ company_size        &lt;chr&gt; "small-enterprise", "micro-enterprise", "small
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">---</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="an">title:</span><span class="co"> "Homework 01"</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="an">author:</span><span class="co"> David Rios</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co">---</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">---</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
 <span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-6"><a href="#cb12-6"></a></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="fu">## TidyTuesday Section</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a></span>
-<span id="cb12-9"><a href="#cb12-9"></a>Explore the week's <span class="co">[</span><span class="ot">TidyTuesday</span><span class="co">](https://github.com/rfordatascience/tidytuesday)</span> challenge. Develop a research question, then answer it through a short data story with <span class="co">[</span><span class="ot">effective visualization(s)</span><span class="co">]({{&lt; var effective-viz-url &gt;}})</span>.  Provide sufficient background for readers to grasp your narrative.</span>
-<span id="cb12-10"><a href="#cb12-10"></a></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="fu">## Introduction</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a></span>
-<span id="cb12-13"><a href="#cb12-13"></a>In this homework, I will explore the differences between micro- and small-enterprises in Brazil and their relationship with the lgal nature of each enterprise. The data is obtained from the TidyTuesday challenge, a weekly challenge for users to explore data cleaning and storytelling! In this case, I'm working with the data correponding to the 4th week of 2026. </span>
-<span id="cb12-14"><a href="#cb12-14"></a></span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="fu">## Importing the Data Set</span></span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="in">```{r}</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a><span class="do">## libraries</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb12-21"><a href="#cb12-21"></a></span>
-<span id="cb12-22"><a href="#cb12-22"></a><span class="do">## Importing the data sets</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">4</span>)</span>
-<span id="cb12-24"><a href="#cb12-24"></a></span>
-<span id="cb12-25"><a href="#cb12-25"></a>companies <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>companies</span>
-<span id="cb12-26"><a href="#cb12-26"></a>legal_nature <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>legal_nature</span>
-<span id="cb12-27"><a href="#cb12-27"></a>qualifications <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>qualifications</span>
-<span id="cb12-28"><a href="#cb12-28"></a>size <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>size</span>
-<span id="cb12-29"><a href="#cb12-29"></a><span class="in">```</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="fu">## TidyTuesday Section</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a>Explore the week's <span class="co">[</span><span class="ot">TidyTuesday</span><span class="co">](https://github.com/rfordatascience/tidytuesday)</span> challenge. Develop a research question, then answer it through a short data story with <span class="co">[</span><span class="ot">effective visualization(s)</span><span class="co">]({{&lt; var effective-viz-url &gt;}})</span>.  Provide sufficient background for readers to grasp your narrative.</span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="fu">## Introduction</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a></span>
+<span id="cb12-12"><a href="#cb12-12"></a>In this homework, I will explore the differences between micro- and small-enterprises in Brazil and their relationship with the lgal nature of each enterprise. The data is obtained from the TidyTuesday challenge, a weekly challenge for users to explore data cleaning and storytelling! In this case, I'm working with the data correponding to the 4th week of 2026. </span>
+<span id="cb12-13"><a href="#cb12-13"></a></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="fu">## Importing the Data Set</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="in">```{r}</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="do">## libraries</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb12-20"><a href="#cb12-20"></a></span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="do">## Importing the data sets</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">4</span>)</span>
+<span id="cb12-23"><a href="#cb12-23"></a></span>
+<span id="cb12-24"><a href="#cb12-24"></a>companies <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>companies</span>
+<span id="cb12-25"><a href="#cb12-25"></a>legal_nature <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>legal_nature</span>
+<span id="cb12-26"><a href="#cb12-26"></a>qualifications <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>qualifications</span>
+<span id="cb12-27"><a href="#cb12-27"></a>size <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>size</span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="in">```</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a></span>
 <span id="cb12-30"><a href="#cb12-30"></a></span>
-<span id="cb12-31"><a href="#cb12-31"></a></span>
-<span id="cb12-32"><a href="#cb12-32"></a><span class="fu">## Research Question </span></span>
-<span id="cb12-33"><a href="#cb12-33"></a></span>
-<span id="cb12-34"><a href="#cb12-34"></a><span class="at">&gt; How does legal nature relate to the distribution of capital stock among micro- and small enterprises in Brazil?</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a><span class="fu">## Research Question </span></span>
+<span id="cb12-32"><a href="#cb12-32"></a></span>
+<span id="cb12-33"><a href="#cb12-33"></a><span class="at">&gt; How does legal nature relate to the distribution of capital stock among micro- and small enterprises in Brazil?</span></span>
+<span id="cb12-34"><a href="#cb12-34"></a></span>
 <span id="cb12-35"><a href="#cb12-35"></a></span>
-<span id="cb12-36"><a href="#cb12-36"></a></span>
-<span id="cb12-37"><a href="#cb12-37"></a><span class="fu">## Data Cleaning</span></span>
-<span id="cb12-40"><a href="#cb12-40"></a><span class="in">```{r}</span></span>
-<span id="cb12-41"><a href="#cb12-41"></a><span class="do">## exploring the data</span></span>
-<span id="cb12-42"><a href="#cb12-42"></a><span class="fu">glimpse</span>(companies)</span>
-<span id="cb12-43"><a href="#cb12-43"></a></span>
-<span id="cb12-44"><a href="#cb12-44"></a>companies <span class="sc">|&gt;</span></span>
-<span id="cb12-45"><a href="#cb12-45"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">|&gt;</span></span>
-<span id="cb12-46"><a href="#cb12-46"></a>  <span class="fu">count</span>()</span>
-<span id="cb12-47"><a href="#cb12-47"></a></span>
-<span id="cb12-48"><a href="#cb12-48"></a><span class="do">## keep only the micro enterprises</span></span>
-<span id="cb12-49"><a href="#cb12-49"></a>companies_micro <span class="ot">&lt;-</span> companies <span class="sc">|&gt;</span></span>
-<span id="cb12-50"><a href="#cb12-50"></a>  <span class="fu">filter</span>(company_size <span class="sc">==</span> <span class="st">"micro-enterprise"</span>)</span>
-<span id="cb12-51"><a href="#cb12-51"></a></span>
-<span id="cb12-52"><a href="#cb12-52"></a><span class="co">#counting</span></span>
-<span id="cb12-53"><a href="#cb12-53"></a>companies_micro <span class="sc">|&gt;</span></span>
-<span id="cb12-54"><a href="#cb12-54"></a>  <span class="fu">count</span>(legal_nature) <span class="sc">|&gt;</span></span>
-<span id="cb12-55"><a href="#cb12-55"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
-<span id="cb12-56"><a href="#cb12-56"></a></span>
-<span id="cb12-57"><a href="#cb12-57"></a><span class="co"># In Millions to avoid scientific notation</span></span>
-<span id="cb12-58"><a href="#cb12-58"></a>companies_micro <span class="ot">&lt;-</span> companies_micro <span class="sc">|&gt;</span> </span>
-<span id="cb12-59"><a href="#cb12-59"></a>  <span class="fu">mutate</span>(<span class="at">capital_stock_m =</span> capital_stock<span class="sc">/</span><span class="dv">1000000</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb12-60"><a href="#cb12-60"></a>  <span class="fu">filter</span>(capital_stock_m <span class="sc">&lt;</span> <span class="dv">1000</span>) <span class="co"># remove obvious far out value</span></span>
-<span id="cb12-61"><a href="#cb12-61"></a></span>
-<span id="cb12-62"><a href="#cb12-62"></a><span class="co"># In Millions to avoid scientific notation</span></span>
-<span id="cb12-63"><a href="#cb12-63"></a>companies <span class="ot">&lt;-</span> companies <span class="sc">|&gt;</span> </span>
-<span id="cb12-64"><a href="#cb12-64"></a>  <span class="fu">mutate</span>(<span class="at">capital_stock_m =</span> capital_stock<span class="sc">/</span><span class="dv">1000000</span>)</span>
-<span id="cb12-65"><a href="#cb12-65"></a><span class="in">```</span></span>
-<span id="cb12-66"><a href="#cb12-66"></a></span>
-<span id="cb12-69"><a href="#cb12-69"></a><span class="in">```{r}</span></span>
-<span id="cb12-70"><a href="#cb12-70"></a><span class="co">#bar plot mean</span></span>
-<span id="cb12-71"><a href="#cb12-71"></a>companies_micro <span class="sc">|&gt;</span></span>
-<span id="cb12-72"><a href="#cb12-72"></a>  <span class="fu">group_by</span>(legal_nature) <span class="sc">|&gt;</span></span>
-<span id="cb12-73"><a href="#cb12-73"></a>  <span class="fu">summarise</span>(<span class="at">mean_capital_m =</span> <span class="fu">mean</span>(capital_stock_m)) <span class="sc">|&gt;</span></span>
-<span id="cb12-74"><a href="#cb12-74"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(legal_nature, mean_capital_m), <span class="at">y =</span> mean_capital_m)) <span class="sc">+</span></span>
-<span id="cb12-75"><a href="#cb12-75"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb12-76"><a href="#cb12-76"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb12-77"><a href="#cb12-77"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb12-78"><a href="#cb12-78"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-79"><a href="#cb12-79"></a>    <span class="at">title =</span> <span class="st">"Mean Capital Stock per Micro-Enterprise"</span>,</span>
-<span id="cb12-80"><a href="#cb12-80"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
-<span id="cb12-81"><a href="#cb12-81"></a>    <span class="at">y =</span> <span class="st">"Mean Capital Stock (Million BRL)"</span>)</span>
-<span id="cb12-82"><a href="#cb12-82"></a></span>
-<span id="cb12-83"><a href="#cb12-83"></a><span class="co">#bar plot median to see if any outliers remain / far out values</span></span>
-<span id="cb12-84"><a href="#cb12-84"></a>companies_micro <span class="sc">|&gt;</span></span>
-<span id="cb12-85"><a href="#cb12-85"></a>  <span class="fu">group_by</span>(legal_nature) <span class="sc">|&gt;</span></span>
-<span id="cb12-86"><a href="#cb12-86"></a>  <span class="fu">summarise</span>(<span class="at">median_capital_m =</span> <span class="fu">median</span>(capital_stock_m)) <span class="sc">|&gt;</span></span>
-<span id="cb12-87"><a href="#cb12-87"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(legal_nature, median_capital_m), <span class="at">y =</span> median_capital_m)) <span class="sc">+</span></span>
-<span id="cb12-88"><a href="#cb12-88"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb12-89"><a href="#cb12-89"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb12-90"><a href="#cb12-90"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb12-91"><a href="#cb12-91"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb12-92"><a href="#cb12-92"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-93"><a href="#cb12-93"></a>    <span class="at">title =</span> <span class="st">"Median Capital Stock per Micro-Enterprise"</span>,</span>
-<span id="cb12-94"><a href="#cb12-94"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
-<span id="cb12-95"><a href="#cb12-95"></a>    <span class="at">y =</span> <span class="st">"Mean Capital Stock (Million BRL)"</span>)</span>
-<span id="cb12-96"><a href="#cb12-96"></a><span class="in">```</span></span>
-<span id="cb12-97"><a href="#cb12-97"></a></span>
-<span id="cb12-98"><a href="#cb12-98"></a><span class="in">```{r fig.alt="This is a figure that plots Boxplots of capital stock (in million BRL) by legal nature for micro- and small enterprises in Brazil.", fig.cap="Fig. 1: Capital stock distribution by legal nature among Brazilian micro- and small enterprises."}</span></span>
-<span id="cb12-99"><a href="#cb12-99"></a>companies <span class="sc">|&gt;</span></span>
-<span id="cb12-100"><a href="#cb12-100"></a>  <span class="fu">mutate</span>(<span class="at">capital_stock_m =</span> capital_stock <span class="sc">/</span> <span class="dv">1000000</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-101"><a href="#cb12-101"></a>  <span class="fu">filter</span>(capital_stock_m <span class="sc">&lt;</span> <span class="dv">1</span>,</span>
-<span id="cb12-102"><a href="#cb12-102"></a>    company_size <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"micro-enterprise"</span>, <span class="st">"small-enterprise"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb12-103"><a href="#cb12-103"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> legal_nature, <span class="at">y =</span> capital_stock_m, <span class="at">fill =</span> legal_nature)) <span class="sc">+</span></span>
-<span id="cb12-104"><a href="#cb12-104"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb12-105"><a href="#cb12-105"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb12-106"><a href="#cb12-106"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> company_size) <span class="sc">+</span></span>
-<span id="cb12-107"><a href="#cb12-107"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb12-108"><a href="#cb12-108"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb12-109"><a href="#cb12-109"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
-<span id="cb12-110"><a href="#cb12-110"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-111"><a href="#cb12-111"></a>    <span class="at">title =</span> <span class="st">"Capital Stock Distribution by Legal Nature"</span>,</span>
-<span id="cb12-112"><a href="#cb12-112"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
-<span id="cb12-113"><a href="#cb12-113"></a>    <span class="at">y =</span> <span class="st">"Capital Stock (Million BRL)"</span>)</span>
-<span id="cb12-114"><a href="#cb12-114"></a><span class="in">```</span></span>
-<span id="cb12-115"><a href="#cb12-115"></a></span>
-<span id="cb12-116"><a href="#cb12-116"></a><span class="fu">## Conclusions</span></span>
-<span id="cb12-117"><a href="#cb12-117"></a></span>
-<span id="cb12-118"><a href="#cb12-118"></a>Fig. 1 reveals the differences in how capital stock is distributed across legal forms for both micro- and small enterprises in Brazil. Even after restricting the study to firms with less than 1 million BRL in capital, the spread and central tendency of capital stock vary a lot by legal nature.</span>
-<span id="cb12-119"><a href="#cb12-119"></a></span>
-<span id="cb12-120"><a href="#cb12-120"></a>For micro-enterprises, most legal forms are located at low levels of declared capital. But there some that contradicts this. For example, Limited Liability Business Companies (LLCs) and Individual Limited Liability Companies display wider spreads and more outliers, suggesting that these structures are associated with firms that declare more capital even within the smallest size category. This would be an interesting study to pursue further with more time.</span>
-<span id="cb12-121"><a href="#cb12-121"></a></span>
-<span id="cb12-122"><a href="#cb12-122"></a>Among small enterprises, these differences become more obvious. Legal forms such as LLCs and Simple Limited Partnerships have higher medians and greater variability, while simpler structures remain concentrated at lower capital levels. This pattern indicates whenerver enterprises grow, the choice of legal nature becomes more strongly associated with how much capital they report.</span>
-<span id="cb12-123"><a href="#cb12-123"></a></span>
-<span id="cb12-124"><a href="#cb12-124"></a>One challenge I had during this project was dealing with outlier. I decided to limit the study to those firms with less than 1 million BRL in capital, but I do recognize this is not the best way on how to deal with it. Future studies should look at it from a proportion perspectives comparing to their median value in each legal category.</span>
-<span id="cb12-125"><a href="#cb12-125"></a></span>
-<span id="cb12-126"><a href="#cb12-126"></a>Overall, our last visualization shows that legal nature is not just a formal label but carries information about the financial structure and scale of Brazilian enterprises. Even within the micro- and small-enterprise categories, organizational form is closely related to how much capital a firm declares. </span>
+<span id="cb12-36"><a href="#cb12-36"></a><span class="fu">## Data Cleaning</span></span>
+<span id="cb12-39"><a href="#cb12-39"></a><span class="in">```{r}</span></span>
+<span id="cb12-40"><a href="#cb12-40"></a><span class="do">## exploring the data</span></span>
+<span id="cb12-41"><a href="#cb12-41"></a><span class="fu">glimpse</span>(companies)</span>
+<span id="cb12-42"><a href="#cb12-42"></a></span>
+<span id="cb12-43"><a href="#cb12-43"></a>companies <span class="sc">|&gt;</span></span>
+<span id="cb12-44"><a href="#cb12-44"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">|&gt;</span></span>
+<span id="cb12-45"><a href="#cb12-45"></a>  <span class="fu">count</span>()</span>
+<span id="cb12-46"><a href="#cb12-46"></a></span>
+<span id="cb12-47"><a href="#cb12-47"></a><span class="do">## keep only the micro enterprises</span></span>
+<span id="cb12-48"><a href="#cb12-48"></a>companies_micro <span class="ot">&lt;-</span> companies <span class="sc">|&gt;</span></span>
+<span id="cb12-49"><a href="#cb12-49"></a>  <span class="fu">filter</span>(company_size <span class="sc">==</span> <span class="st">"micro-enterprise"</span>)</span>
+<span id="cb12-50"><a href="#cb12-50"></a></span>
+<span id="cb12-51"><a href="#cb12-51"></a><span class="co">#counting</span></span>
+<span id="cb12-52"><a href="#cb12-52"></a>companies_micro <span class="sc">|&gt;</span></span>
+<span id="cb12-53"><a href="#cb12-53"></a>  <span class="fu">count</span>(legal_nature) <span class="sc">|&gt;</span></span>
+<span id="cb12-54"><a href="#cb12-54"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
+<span id="cb12-55"><a href="#cb12-55"></a></span>
+<span id="cb12-56"><a href="#cb12-56"></a><span class="co"># In Millions to avoid scientific notation</span></span>
+<span id="cb12-57"><a href="#cb12-57"></a>companies_micro <span class="ot">&lt;-</span> companies_micro <span class="sc">|&gt;</span> </span>
+<span id="cb12-58"><a href="#cb12-58"></a>  <span class="fu">mutate</span>(<span class="at">capital_stock_m =</span> capital_stock<span class="sc">/</span><span class="dv">1000000</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-59"><a href="#cb12-59"></a>  <span class="fu">filter</span>(capital_stock_m <span class="sc">&lt;</span> <span class="dv">1000</span>) <span class="co"># remove obvious far out value</span></span>
+<span id="cb12-60"><a href="#cb12-60"></a></span>
+<span id="cb12-61"><a href="#cb12-61"></a><span class="co"># In Millions to avoid scientific notation</span></span>
+<span id="cb12-62"><a href="#cb12-62"></a>companies <span class="ot">&lt;-</span> companies <span class="sc">|&gt;</span> </span>
+<span id="cb12-63"><a href="#cb12-63"></a>  <span class="fu">mutate</span>(<span class="at">capital_stock_m =</span> capital_stock<span class="sc">/</span><span class="dv">1000000</span>)</span>
+<span id="cb12-64"><a href="#cb12-64"></a><span class="in">```</span></span>
+<span id="cb12-65"><a href="#cb12-65"></a></span>
+<span id="cb12-68"><a href="#cb12-68"></a><span class="in">```{r}</span></span>
+<span id="cb12-69"><a href="#cb12-69"></a><span class="co">#bar plot mean</span></span>
+<span id="cb12-70"><a href="#cb12-70"></a>companies_micro <span class="sc">|&gt;</span></span>
+<span id="cb12-71"><a href="#cb12-71"></a>  <span class="fu">group_by</span>(legal_nature) <span class="sc">|&gt;</span></span>
+<span id="cb12-72"><a href="#cb12-72"></a>  <span class="fu">summarise</span>(<span class="at">mean_capital_m =</span> <span class="fu">mean</span>(capital_stock_m)) <span class="sc">|&gt;</span></span>
+<span id="cb12-73"><a href="#cb12-73"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(legal_nature, mean_capital_m), <span class="at">y =</span> mean_capital_m)) <span class="sc">+</span></span>
+<span id="cb12-74"><a href="#cb12-74"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb12-75"><a href="#cb12-75"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb12-76"><a href="#cb12-76"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-77"><a href="#cb12-77"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-78"><a href="#cb12-78"></a>    <span class="at">title =</span> <span class="st">"Mean Capital Stock per Micro-Enterprise"</span>,</span>
+<span id="cb12-79"><a href="#cb12-79"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
+<span id="cb12-80"><a href="#cb12-80"></a>    <span class="at">y =</span> <span class="st">"Mean Capital Stock (Million BRL)"</span>)</span>
+<span id="cb12-81"><a href="#cb12-81"></a></span>
+<span id="cb12-82"><a href="#cb12-82"></a><span class="co">#bar plot median to see if any outliers remain / far out values</span></span>
+<span id="cb12-83"><a href="#cb12-83"></a>companies_micro <span class="sc">|&gt;</span></span>
+<span id="cb12-84"><a href="#cb12-84"></a>  <span class="fu">group_by</span>(legal_nature) <span class="sc">|&gt;</span></span>
+<span id="cb12-85"><a href="#cb12-85"></a>  <span class="fu">summarise</span>(<span class="at">median_capital_m =</span> <span class="fu">median</span>(capital_stock_m)) <span class="sc">|&gt;</span></span>
+<span id="cb12-86"><a href="#cb12-86"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(legal_nature, median_capital_m), <span class="at">y =</span> median_capital_m)) <span class="sc">+</span></span>
+<span id="cb12-87"><a href="#cb12-87"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb12-88"><a href="#cb12-88"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb12-89"><a href="#cb12-89"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb12-90"><a href="#cb12-90"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-91"><a href="#cb12-91"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-92"><a href="#cb12-92"></a>    <span class="at">title =</span> <span class="st">"Median Capital Stock per Micro-Enterprise"</span>,</span>
+<span id="cb12-93"><a href="#cb12-93"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
+<span id="cb12-94"><a href="#cb12-94"></a>    <span class="at">y =</span> <span class="st">"Mean Capital Stock (Million BRL)"</span>)</span>
+<span id="cb12-95"><a href="#cb12-95"></a><span class="in">```</span></span>
+<span id="cb12-96"><a href="#cb12-96"></a></span>
+<span id="cb12-97"><a href="#cb12-97"></a><span class="in">```{r fig.alt="This is a figure that plots Boxplots of capital stock (in million BRL) by legal nature for micro- and small enterprises in Brazil.", fig.cap="Fig. 1: Capital stock distribution by legal nature among Brazilian micro- and small enterprises."}</span></span>
+<span id="cb12-98"><a href="#cb12-98"></a>companies <span class="sc">|&gt;</span></span>
+<span id="cb12-99"><a href="#cb12-99"></a>  <span class="fu">mutate</span>(<span class="at">capital_stock_m =</span> capital_stock <span class="sc">/</span> <span class="dv">1000000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-100"><a href="#cb12-100"></a>  <span class="fu">filter</span>(capital_stock_m <span class="sc">&lt;</span> <span class="dv">1</span>,</span>
+<span id="cb12-101"><a href="#cb12-101"></a>    company_size <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"micro-enterprise"</span>, <span class="st">"small-enterprise"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-102"><a href="#cb12-102"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> legal_nature, <span class="at">y =</span> capital_stock_m, <span class="at">fill =</span> legal_nature)) <span class="sc">+</span></span>
+<span id="cb12-103"><a href="#cb12-103"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb12-104"><a href="#cb12-104"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb12-105"><a href="#cb12-105"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> company_size) <span class="sc">+</span></span>
+<span id="cb12-106"><a href="#cb12-106"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb12-107"><a href="#cb12-107"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-108"><a href="#cb12-108"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb12-109"><a href="#cb12-109"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-110"><a href="#cb12-110"></a>    <span class="at">title =</span> <span class="st">"Capital Stock Distribution by Legal Nature"</span>,</span>
+<span id="cb12-111"><a href="#cb12-111"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
+<span id="cb12-112"><a href="#cb12-112"></a>    <span class="at">y =</span> <span class="st">"Capital Stock (Million BRL)"</span>)</span>
+<span id="cb12-113"><a href="#cb12-113"></a><span class="in">```</span></span>
+<span id="cb12-114"><a href="#cb12-114"></a></span>
+<span id="cb12-115"><a href="#cb12-115"></a><span class="fu">## Conclusions</span></span>
+<span id="cb12-116"><a href="#cb12-116"></a></span>
+<span id="cb12-117"><a href="#cb12-117"></a>Fig. 1 reveals the differences in how capital stock is distributed across legal forms for both micro- and small enterprises in Brazil. Even after restricting the study to firms with less than 1 million BRL in capital, the spread and central tendency of capital stock vary a lot by legal nature.</span>
+<span id="cb12-118"><a href="#cb12-118"></a></span>
+<span id="cb12-119"><a href="#cb12-119"></a>For micro-enterprises, most legal forms are located at low levels of declared capital. But there some that contradicts this. For example, Limited Liability Business Companies (LLCs) and Individual Limited Liability Companies display wider spreads and more outliers, suggesting that these structures are associated with firms that declare more capital even within the smallest size category. This would be an interesting study to pursue further with more time.</span>
+<span id="cb12-120"><a href="#cb12-120"></a></span>
+<span id="cb12-121"><a href="#cb12-121"></a>Among small enterprises, these differences become more obvious. Legal forms such as LLCs and Simple Limited Partnerships have higher medians and greater variability, while simpler structures remain concentrated at lower capital levels. This pattern indicates that whenever enterprises grow, the choice of legal nature becomes more strongly associated with how much capital they report.</span>
+<span id="cb12-122"><a href="#cb12-122"></a></span>
+<span id="cb12-123"><a href="#cb12-123"></a>One challenge I had during this project was dealing with outliers. I decided to limit the study to those firms with less than 1 million BRL in capital, but I do recognize this is not the best way to go about it. Future studies should look at it from a proportion perspectives comparing to their median value in each legal category.</span>
+<span id="cb12-124"><a href="#cb12-124"></a></span>
+<span id="cb12-125"><a href="#cb12-125"></a>Overall, our last visualization shows that legal nature is not just a formal label but carries information about the financial structure and scale of Brazilian enterprises. Even within the micro- and small-enterprise categories, organizational form is closely related to how much capital a firm declares. </span>
+<span id="cb12-126"><a href="#cb12-126"></a></span>
 <span id="cb12-127"><a href="#cb12-127"></a></span>
-<span id="cb12-128"><a href="#cb12-128"></a></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
