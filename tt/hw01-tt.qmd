@@ -1,6 +1,5 @@
 ---
 title: "Homework 01"
-author: David Rios
 ---
 
 
@@ -113,9 +112,9 @@ Fig. 1 reveals the differences in how capital stock is distributed across legal 
 
 For micro-enterprises, most legal forms are located at low levels of declared capital. But there some that contradicts this. For example, Limited Liability Business Companies (LLCs) and Individual Limited Liability Companies display wider spreads and more outliers, suggesting that these structures are associated with firms that declare more capital even within the smallest size category. This would be an interesting study to pursue further with more time.
 
-Among small enterprises, these differences become more obvious. Legal forms such as LLCs and Simple Limited Partnerships have higher medians and greater variability, while simpler structures remain concentrated at lower capital levels. This pattern indicates whenerver enterprises grow, the choice of legal nature becomes more strongly associated with how much capital they report.
+Among small enterprises, these differences become more obvious. Legal forms such as LLCs and Simple Limited Partnerships have higher medians and greater variability, while simpler structures remain concentrated at lower capital levels. This pattern indicates that whenever enterprises grow, the choice of legal nature becomes more strongly associated with how much capital they report.
 
-One challenge I had during this project was dealing with outlier. I decided to limit the study to those firms with less than 1 million BRL in capital, but I do recognize this is not the best way on how to deal with it. Future studies should look at it from a proportion perspectives comparing to their median value in each legal category.
+One challenge I had during this project was dealing with outliers. I decided to limit the study to those firms with less than 1 million BRL in capital, but I do recognize this is not the best way to go about it. Future studies should look at it from a proportion perspectives comparing to their median value in each legal category.
 
 Overall, our last visualization shows that legal nature is not just a formal label but carries information about the financial structure and scale of Brazilian enterprises. Even within the micro- and small-enterprise categories, organizational form is closely related to how much capital a firm declares. 
 
