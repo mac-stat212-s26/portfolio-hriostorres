@@ -29,7 +29,7 @@ size <- tuesdata$size
 
 ## Research Question 
 
-> What's the capital stock distribution by legal nature in micro- and small-enterprises in Brazil
+> What's the capital stock distribution by legal nature in micro- and small-enterprises in Brazil?
 
 
 ## Data Cleaning
