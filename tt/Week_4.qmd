@@ -1,5 +1,6 @@
 ---
-title: "Homework 01"
+title: "Week 4"
+subtitle: TidyTuesday Challenge
 ---
 
 
@@ -9,7 +10,7 @@ Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
 
 ## Introduction
 
-In this homework, I will explore the differences between micro- and small-enterprises in Brazil and their relationship with the lgal nature of each enterprise. The data is obtained from the TidyTuesday challenge, a weekly challenge for users to explore data cleaning and storytelling! In this case, I'm working with the data correponding to the 4th week of 2026. 
+In this homework, I will explore capital stock distribution by legal nature in micro- and small-enterprises in Brazil. The data is obtained from the TidyTuesday challenge, a weekly challenge for users to explore data cleaning and storytelling! In this case, I'm working with the data correponding to the 4th week of 2026. 
 
 ## Importing the Data Set
 ```{r}
@@ -28,10 +29,13 @@ size <- tuesdata$size
 
 ## Research Question 
 
-> How does legal nature relate to the distribution of capital stock among micro- and small enterprises in Brazil?
+> What's the capital stock distribution by legal nature in micro- and small-enterprises in Brazil
 
 
 ## Data Cleaning
+
+I begin by loading the necessary libraries and importing the relevant datasets from the TidyTuesday repository. The primary dataset used in this analysis is companies, which contains information on firm size, legal nature, and declared capital stock.
+
 ```{r}
 ## exploring the data
 glimpse(companies)
@@ -101,20 +105,24 @@ companies |>
   theme_minimal() +
     theme(legend.position = "none")+
   labs(
-    title = "Capital Stock Distribution by Legal Nature",
+    title = "Capital Stock Distribution by Legal Nature in Brazilian Enterprises",
     x = "Legal Nature",
     y = "Capital Stock (Million BRL)")
 ```
 
+
+
 ## Conclusions
 
-Fig. 1 reveals the differences in how capital stock is distributed across legal forms for both micro- and small enterprises in Brazil. Even after restricting the study to firms with less than 1 million BRL in capital, the spread and central tendency of capital stock vary a lot by legal nature.
+To understand how capital stock varies by legal nature among micro-enterprises, I first examined both mean and median capital stock values. Comparing these two measures helps assess the influence of remaining outliers and skewness in the data.
 
-For micro-enterprises, most legal forms are located at low levels of declared capital. But there some that contradicts this. For example, Limited Liability Business Companies (LLCs) and Individual Limited Liability Companies display wider spreads and more outliers, suggesting that these structures are associated with firms that declare more capital even within the smallest size category. This would be an interesting study to pursue further with more time.
+Fig. 1 reveals the differences in how capital stock is distributed across legal forms for both micro- and small enterprises in Brazil. Even after restricting the study to firms with less than 1 million BRL in capital, given the amount of outliers, the spread and tendency of capital stock vary a lot by legal nature. Note that this study assumes that both micro- and small-enterprises reports their capital stock consciously.
+
+For micro-enterprises, most legal forms are located at low levels of declared capital. But there some enterprises that contradicts this. For example, Limited Liability Business Companies (LLCs) and Individual Limited Liability Companies display wider spreads and more outliers, suggesting that these structures are associated with firms that declare more capital even within the smallest size category. This would be an interesting study to pursue further with more time.
 
 Among small enterprises, these differences become more obvious. Legal forms such as LLCs and Simple Limited Partnerships have higher medians and greater variability, while simpler structures remain concentrated at lower capital levels. This pattern indicates that whenever enterprises grow, the choice of legal nature becomes more strongly associated with how much capital they report.
 
-One challenge I had during this project was dealing with outliers. I decided to limit the study to those firms with less than 1 million BRL in capital, but I do recognize this is not the best way to go about it. Future studies should look at it from a proportion perspectives comparing to their median value in each legal category.
+One challenge I had during this project was dealing with outliers. I decided to limit the study to those firms with less than 1 million BRL in capital, but I do recognize this is not the best way to go about it. Future studies should look at it from a proportion perspectives comparing to their median value in each legal category. Another possibility could be using a logarithmic transformation to emphasize proportional differences rather than absolute values on the capital stock variable.
 
 Overall, our last visualization shows that legal nature is not just a formal label but carries information about the financial structure and scale of Brazilian enterprises. Even within the micro- and small-enterprise categories, organizational form is closely related to how much capital a firm declares. 
 

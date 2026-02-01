@@ -64,11 +64,11 @@ book:
       chapters:
       - pv/pv-01.qmd
 
-    - part: "TidyTuesday"
+    - part: "TidyTuesday 2026"
       chapters:
       # - tt/2025-01-08.qmd
       # - tt/2025-07-15.qmd
-      - tt/hw01-tt.qmd
+      - tt/Week_4.qmd
 
     - part: "Pre-Class Learnings"
       chapters:
