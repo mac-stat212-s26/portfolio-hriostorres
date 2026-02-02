@@ -107,7 +107,9 @@ companies |>
   labs(
     title = "Capital Stock Distribution by Legal Nature in Brazilian Enterprises",
     x = "Legal Nature",
-    y = "Capital Stock (Million BRL)")
+    y = "Capital Stock (Million BRL)",
+    caption = "Source: TidyTuesday Challenge Week 4, 2026. Author: David Rios") +
+    theme(plot.title.position = "plot")
 ```
 
 
