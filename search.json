@@ -91,40 +91,29 @@
     "href": "pcl/pcl.html",
     "title": "Pre-Class Learning Summaries",
     "section": "",
-    "text": "R",
+    "text": "How to organize your files?",
     "crumbs": [
       "Pre-Class Learnings",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
-    "objectID": "pcl/pcl.html#quarto",
-    "href": "pcl/pcl.html#quarto",
+    "objectID": "pcl/pcl.html#intro-to-data-science-review",
+    "href": "pcl/pcl.html#intro-to-data-science-review",
     "title": "Pre-Class Learning Summaries",
-    "section": "Quarto",
-    "text": "Quarto\n\n\n\nfrom qmd4sci.njtierney.com",
+    "section": "Intro to Data Science Review!",
+    "text": "Intro to Data Science Review!",
     "crumbs": [
       "Pre-Class Learnings",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
-    "objectID": "pcl/pcl.html#pcl-1",
-    "href": "pcl/pcl.html#pcl-1",
+    "objectID": "pcl/pcl.html#advanced-spatial-visualization",
+    "href": "pcl/pcl.html#advanced-spatial-visualization",
     "title": "Pre-Class Learning Summaries",
-    "section": "PCL 1",
-    "text": "PCL 1",
-    "crumbs": [
-      "Pre-Class Learnings",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
-    ]
-  },
-  {
-    "objectID": "pcl/pcl.html#pcl-2",
-    "href": "pcl/pcl.html#pcl-2",
-    "title": "Pre-Class Learning Summaries",
-    "section": "PCL 2",
-    "text": "PCL 2",
+    "section": "Advanced Spatial Visualization",
+    "text": "Advanced Spatial Visualization\nWe pretend the Earth is an ellipsoid, but there is a lot of disagreement when plotting the world map. The U.S. has a metric system surprisingly!\nEllipsoid: shape of the earth\nDatum: where the ellipsoid goes\nProjection: how to flatten 2D or 3D\nCRS = Datum + Ellipsoid\n\nWhy do we use many different local CRSs rather than just one CRS for the whole earth?\n\n\nAccuracy and Precision. The ellipsoid model doesn’t fit perfectly, so we adjust the model and datum for each small region.\n\n\nWhy do we care about Coordinate Reference System?\n\n\nDifferent datasets may use different CRSs. If these CRSs are not accounted for, the spatial points/regions will not align correctly on a map.\nDifferent CRSs may use different units (e.g., meters, feet). Consistency in units is essential for accurate distance and area calculations.\nJoining datasets from multiple sources requires a common CRS.",
     "crumbs": [
       "Pre-Class Learnings",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"

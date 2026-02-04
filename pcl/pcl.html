@@ -452,10 +452,9 @@ cookieconsent.run({
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#r" id="toc-r" class="nav-link active" data-scroll-target="#r">R</a></li>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto">Quarto</a></li>
-  <li><a href="#pcl-1" id="toc-pcl-1" class="nav-link" data-scroll-target="#pcl-1">PCL 1</a></li>
-  <li><a href="#pcl-2" id="toc-pcl-2" class="nav-link" data-scroll-target="#pcl-2">PCL 2</a></li>
+  <li><a href="#how-to-organize-your-files" id="toc-how-to-organize-your-files" class="nav-link active" data-scroll-target="#how-to-organize-your-files">How to organize your files?</a></li>
+  <li><a href="#intro-to-data-science-review" id="toc-intro-to-data-science-review" class="nav-link" data-scroll-target="#intro-to-data-science-review">Intro to Data Science Review!</a></li>
+  <li><a href="#advanced-spatial-visualization" id="toc-advanced-spatial-visualization" class="nav-link" data-scroll-target="#advanced-spatial-visualization">Advanced Spatial Visualization</a></li>
   </ul>
 </nav>
     </div>
@@ -482,26 +481,35 @@ cookieconsent.run({
 </header>
 
 
-<section id="r" class="level2">
-<h2 class="anchored" data-anchor-id="r">R</h2>
-<p><img src="0808-r.png" class="img-fluid"></p>
-</section>
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="0810-quarto.jpeg" class="img-fluid figure-img"></p>
-<figcaption>from qmd4sci.njtierney.com</figcaption>
-</figure>
-</div>
-</section>
-<section id="pcl-1" class="level2">
-<h2 class="anchored" data-anchor-id="pcl-1">PCL 1</h2>
+<section id="how-to-organize-your-files" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-organize-your-files">How to organize your files?</h2>
 <p><img src="PCL_1.jpeg" class="img-fluid"></p>
 </section>
-<section id="pcl-2" class="level2">
-<h2 class="anchored" data-anchor-id="pcl-2">PCL 2</h2>
+<section id="intro-to-data-science-review" class="level2">
+<h2 class="anchored" data-anchor-id="intro-to-data-science-review">Intro to Data Science Review!</h2>
 <p><img src="PCL_2.jpeg" class="img-fluid"></p>
+</section>
+<section id="advanced-spatial-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-spatial-visualization"><a href="https://www.youtube.com/watch?v=xJyJlKbZFlc">Advanced Spatial Visualization</a></h2>
+<p>We pretend the Earth is an ellipsoid, but there is a lot of disagreement when plotting the world map. The U.S. has a metric system surprisingly!</p>
+<p><strong>Ellipsoid:</strong> shape of the earth</p>
+<p><strong>Datum:</strong> where the ellipsoid goes</p>
+<p><strong>Projection:</strong> how to flatten 2D or 3D</p>
+<p><strong>CRS</strong> = Datum + Ellipsoid</p>
+<blockquote class="blockquote">
+<p>Why do we use many different local CRSs rather than just one CRS for the whole earth?</p>
+</blockquote>
+<ul>
+<li>Accuracy and Precision. The ellipsoid model doesn’t fit perfectly, so we adjust the model and datum for each small region.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Why do we care about Coordinate Reference System?</p>
+</blockquote>
+<ul>
+<li><p>Different datasets may use different CRSs. If these CRSs are not accounted for, the spatial points/regions will not align correctly on a map.</p></li>
+<li><p>Different CRSs may use different units (e.g., meters, feet). Consistency in units is essential for accurate distance and area calculations.</p></li>
+<li><p>Joining datasets from multiple sources requires a common CRS.</p></li>
+</ul>
 
 
 <!-- -->
@@ -994,22 +1002,43 @@ cookieconsent.run({
 <span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "Pre-Class Learning Summaries"</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="co">---</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">## R</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">## How to organize your files?</span></span>
 <span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="al">![](0808-r.png)</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="al">![](PCL_1.jpeg)</span></span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="fu">## Quarto</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="fu">## Intro to Data Science Review!</span></span>
 <span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="al">![from qmd4sci.njtierney.com](0810-quarto.jpeg)</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="al">![](PCL_2.jpeg)</span></span>
 <span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">## PCL 1</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">## [Advanced Spatial Visualization](https://www.youtube.com/watch?v=xJyJlKbZFlc)</span></span>
 <span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="al">![](PCL_1.jpeg)</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="fu">## PCL 2</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="al">![](PCL_2.jpeg)</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a>We pretend the Earth is an ellipsoid, but there is a lot of disagreement when plotting the world map. The U.S. has a metric system surprisingly!</span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a>  </span>
+<span id="cb1-19"><a href="#cb1-19"></a>**Ellipsoid:** shape of the earth </span>
+<span id="cb1-20"><a href="#cb1-20"></a></span>
+<span id="cb1-21"><a href="#cb1-21"></a>**Datum:** where the ellipsoid goes</span>
+<span id="cb1-22"><a href="#cb1-22"></a></span>
+<span id="cb1-23"><a href="#cb1-23"></a>**Projection:** how to flatten 2D or 3D</span>
+<span id="cb1-24"><a href="#cb1-24"></a></span>
+<span id="cb1-25"><a href="#cb1-25"></a>**CRS** = Datum + Ellipsoid</span>
+<span id="cb1-26"><a href="#cb1-26"></a></span>
+<span id="cb1-27"><a href="#cb1-27"></a></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="at">&gt; Why do we use many different local CRSs rather than just one CRS for the whole earth?</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="ss">  - </span>Accuracy and Precision. The ellipsoid model doesn't fit perfectly, so we adjust the model and datum for each small region.</span>
+<span id="cb1-31"><a href="#cb1-31"></a></span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="at">&gt; Why do we care about Coordinate Reference System?</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a></span>
+<span id="cb1-34"><a href="#cb1-34"></a><span class="ss">  - </span>Different datasets may use different CRSs. If these CRSs are not accounted for, the spatial points/regions will not align correctly on a map.</span>
+<span id="cb1-35"><a href="#cb1-35"></a></span>
+<span id="cb1-36"><a href="#cb1-36"></a><span class="ss">  - </span>Different CRSs may use different units (e.g., meters, feet). Consistency in units is essential for accurate distance and area calculations.</span>
+<span id="cb1-37"><a href="#cb1-37"></a></span>
+<span id="cb1-38"><a href="#cb1-38"></a><span class="ss">  - </span>Joining datasets from multiple sources requires a common CRS.</span>
+<span id="cb1-39"><a href="#cb1-39"></a></span>
+<span id="cb1-40"><a href="#cb1-40"></a></span>
+<span id="cb1-41"><a href="#cb1-41"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
