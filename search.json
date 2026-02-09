@@ -87,6 +87,61 @@
     ]
   },
   {
+    "objectID": "tt/Week_6.html",
+    "href": "tt/Week_6.html",
+    "title": "Week 6",
+    "section": "",
+    "text": "Introduction\nIn this TT challenge, I will be exploring the data set about the winter olympics. The 2026 Winter Olympics is happening at Milan-Cortina, Italy. The dataset contains detailed information about all 1,866 Olympic events, including both competition and training sessions across various winter sport disciplines.\n…",
+    "crumbs": [
+      "TidyTuesday 2026",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Week 6</span>"
+    ]
+  },
+  {
+    "objectID": "tt/Week_6.html#importing-the-data-set",
+    "href": "tt/Week_6.html#importing-the-data-set",
+    "title": "Week 6",
+    "section": "Importing the Data Set",
+    "text": "Importing the Data Set\n\nCode## libraries\nlibrary(tidyverse)\n\n## Importing the data sets\nolympics &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-02-10/schedule.csv')",
+    "crumbs": [
+      "TidyTuesday 2026",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Week 6</span>"
+    ]
+  },
+  {
+    "objectID": "tt/Week_6.html#research-question",
+    "href": "tt/Week_6.html#research-question",
+    "title": "Week 6",
+    "section": "Research Question",
+    "text": "Research Question\n\nWhich days of the week host the most medal events at the 2026 Winter Olympics, and how do these events distribute across different sport disciplines?",
+    "crumbs": [
+      "TidyTuesday 2026",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Week 6</span>"
+    ]
+  },
+  {
+    "objectID": "tt/Week_6.html#data-cleaning",
+    "href": "tt/Week_6.html#data-cleaning",
+    "title": "Week 6",
+    "section": "Data Cleaning",
+    "text": "Data Cleaning\nI first prepare the data set which I will use later on. There is a lot of variables, and I am only keeping those who directly answer my research question.\n\nCode## exploring the data\n# glimpse(olympics)\n\nolympics_clean &lt;- olympics |&gt; \n  select(date, discipline_name, event_description, is_medal_event, venue_name, day_of_week)\n\n# Summarize medal events by day of week\nmedal_summary &lt;- olympics_clean %&gt;% \n  group_by(day_of_week, is_medal_event) %&gt;% \n  summarise(count = n(), .groups = 'drop') %&gt;% \n  pivot_wider(names_from = is_medal_event, values_from = count, values_fill = 0) %&gt;% \n  rename(medal_events = `TRUE`, non_medal_events = `FALSE`) %&gt;% \n  mutate( total_events = medal_events + non_medal_events,\n    medal_percentage = (medal_events / total_events) * 100,\n    day_order = factor(day_of_week, levels = c(\"Monday\", \"Tuesday\", \"Wednesday\", \n                                                 \"Thursday\", \"Friday\", \"Saturday\", \"Sunday\"))) %&gt;% \n  arrange(day_order)\n\n\n\nCodemedal_summary %&gt;% \n  arrange(desc(medal_events)) %&gt;% \n  select(day_of_week, medal_events, non_medal_events, total_events, medal_percentage) %&gt;% \n  mutate(medal_percentage = round(medal_percentage, 1))\n\n# A tibble: 7 × 5\n  day_of_week medal_events non_medal_events total_events medal_percentage\n  &lt;chr&gt;              &lt;int&gt;            &lt;int&gt;        &lt;int&gt;            &lt;dbl&gt;\n1 Saturday              57              230          287             19.9\n2 Sunday                55              220          275             20  \n3 Friday                52              246          298             17.4\n4 Wednesday             48              218          266             18  \n5 Thursday              45              219          264             17  \n6 Monday                44              206          250             17.6\n7 Tuesday               43              183          226             19  \n\n\n\nCodemedal_summary %&gt;% \n  ggplot(aes(\n    x = fct_reorder(day_order, medal_events),\n    y = medal_events,\n    fill = medal_events)) +\n  geom_col() +\n  scale_fill_viridis_c(\"Medal Events\") +\n  labs(title = \"Medal Events by Day of the Week\",\n       subtitle = \"2026 Winter Olympics\",\n    x = NULL,\n    y = \"Number of Medal Events\",\n    caption = \"Source: TidyTuesday Challenge Week 6, 2026. Author: David Rios\") +\n  coord_flip() +\n  theme_minimal() \n\n\n\nFig. 1: We see how Saturday is the day with more medals events\n\n\n\n\nCodeolympics|&gt; \n  filter(is_medal_event) |&gt;  \n  count(day_of_week, discipline_name) |&gt; \n  ggplot(aes(\n    x = day_of_week,\n    y = fct_reorder(discipline_name, n, sum),\n    fill = n)) +\n  geom_tile() +\n  scale_fill_viridis_c(\"Medal Events\") +\n  labs(title = \"Medal Events by Day and Sport Discipline\",\n       subtitle = \"2026 Winter Olympics\",\n       x = NULL,\n       y = NULL, \n    caption = \"Source: TidyTuesday Challenge Week 6, 2026. Author: David Rios\") +\n  theme_minimal()\n\n\n\nFig. 2: We see that Freestyle Skiins and Speed Skating has the higher amount of Medal Events",
+    "crumbs": [
+      "TidyTuesday 2026",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Week 6</span>"
+    ]
+  },
+  {
+    "objectID": "tt/Week_6.html#conclusions",
+    "href": "tt/Week_6.html#conclusions",
+    "title": "Week 6",
+    "section": "Conclusions",
+    "text": "Conclusions\nIn this TT challenge, I found out two things:\n\nSaturday dominates medal events.\nSport-specific distribution patterns are evident.\n\nThe heatmap shows that Freestyle Skiing has the highest concentration of medal events. From prior knowledge, there was significant attention and anticipation surrounding the competition between the U.S. and Japan in this discipline. Ultimately, the Japanese team won the gold medal, while the U.S. team earned silver.\n\nIt’s worth noting that some sports have not yet occurred, which directly affects our interpretation of the plot.\n\nDespite this, we can observe interesting temporal patterns and strategic insights from the 2026 Winter Olympics schedule:\n\nFriday serves as a “pre-weekend peak” with high medal event concentration, particularly in Freestyle Skiing, creating momentum leading into the weekend\nThursday represents a mid-week surge, possibly timed to maintain audience engagement between the weekend peaks\nSunday maintains strong medal activity, ensuring the week ends on a high note before the Monday reset\n\nOverall, the 2026 Winter Olympics schedule demonstrates careful planning: Saturday serves as the apex for medal events, while the distribution across disciplines highlights sports prominence, with Freestyle Skiing and Speed Skating leading the way. At the same time, the temporal patterns balance weekend viewership peaks with consistent daily engagement across the Games.",
+    "crumbs": [
+      "TidyTuesday 2026",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Week 6</span>"
+    ]
+  },
+  {
     "objectID": "pcl/pcl.html",
     "href": "pcl/pcl.html",
     "title": "Pre-Class Learning Summaries",
@@ -94,7 +149,7 @@
     "text": "How to organize your files?",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
@@ -105,7 +160,7 @@
     "text": "Intro to Data Science Review!",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
@@ -116,7 +171,29 @@
     "text": "Advanced Spatial Visualization\nWe pretend the Earth is an ellipsoid, but there is a lot of disagreement when plotting the world map. The U.S. has a metric system surprisingly!\nEllipsoid: shape of the earth\nDatum: where the ellipsoid goes\nProjection: how to flatten 2D or 3D\nCRS = Datum + Ellipsoid\n\nWhy do we use many different local CRSs rather than just one CRS for the whole earth?\n\n\nAccuracy and Precision. The ellipsoid model doesn’t fit perfectly, so we adjust the model and datum for each small region.\n\n\nWhy do we care about Coordinate Reference System?\n\n\nDifferent datasets may use different CRSs. If these CRSs are not accounted for, the spatial points/regions will not align correctly on a map.\nDifferent CRSs may use different units (e.g., meters, feet). Consistency in units is essential for accurate distance and area calculations.\nJoining datasets from multiple sources requires a common CRS.",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/pcl.html#structure-data.-types-revisited",
+    "href": "pcl/pcl.html#structure-data.-types-revisited",
+    "title": "Pre-Class Learning Summaries",
+    "section": "Structure Data. Types: Revisited",
+    "text": "Structure Data. Types: Revisited\n\nlist: most common one. Could be name and unnamed when referring to the elements in this list.\n\nvector: name and unammed\ndataframe:named list. All the columns have a name.\n\ntibble: a special type of data frame\nsf: it has a geometry column.",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/pcl.html#visualizing-spatial-data",
+    "href": "pcl/pcl.html#visualizing-spatial-data",
+    "title": "Pre-Class Learning Summaries",
+    "section": "Visualizing Spatial Data",
+    "text": "Visualizing Spatial Data\n\nGet the spatial data, usually by obtaining a shapefile and read using sf::st_read or “USAboundaries”\nJoint other data. Important: Make sure both are in the same CRS, if not use sf::st_crs & sf::st_transform.\nPlot sf::geom_sf",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
@@ -127,7 +204,7 @@
     "text": "Add content here",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>ICA Sample 1</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ICA Sample 1</span>"
     ]
   },
   {
@@ -138,7 +215,7 @@
     "text": "Add content here",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ICA Sample 2</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ICA Sample 2</span>"
     ]
   },
   {
@@ -149,7 +226,7 @@
     "text": "Exercise\nCarryout the following steps to clean and save the San Francisco Weather data. Make sure to download and add the data file to your portfolio repository as instructed.",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
     ]
   },
   {
@@ -160,7 +237,7 @@
     "text": "Read in the weather data in this file with the correct relative file path after you move it to the instructed location.\nThere is a variable that has values that don’t make sense in the data context. Figure out which variable this is and clean it up by making those values missing using na_if().\nCreate a variable called dateInYear that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).\nCreate a variable called month_name that shows the 3-letter abbreviation for each case.\nSave the wrangled data to the data/processed/ folder using write_csv(). Name this file weather_clean.csv. Look up the documentation for this function by typing ?write_csv in the Console. You’ll need to write an appropriate relative path.",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
     ]
   },
   {
@@ -171,7 +248,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Extra Sample 1</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Extra Sample 1</span>"
     ]
   },
   {
@@ -182,7 +259,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Extra Sample 2</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Extra Sample 2</span>"
     ]
   }
 ]

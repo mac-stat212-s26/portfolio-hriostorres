@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../ica/ica-sample1.html" rel="next">
-<link href="../tt/Week_4.html" rel="prev">
+<link href="../tt/Week_6.html" rel="prev">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -377,6 +377,11 @@ cookieconsent.run({
   <a href="../tt/Week_4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Week 4</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tt/Week_6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Week 6</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -455,6 +460,8 @@ cookieconsent.run({
   <li><a href="#how-to-organize-your-files" id="toc-how-to-organize-your-files" class="nav-link active" data-scroll-target="#how-to-organize-your-files">How to organize your files?</a></li>
   <li><a href="#intro-to-data-science-review" id="toc-intro-to-data-science-review" class="nav-link" data-scroll-target="#intro-to-data-science-review">Intro to Data Science Review!</a></li>
   <li><a href="#advanced-spatial-visualization" id="toc-advanced-spatial-visualization" class="nav-link" data-scroll-target="#advanced-spatial-visualization">Advanced Spatial Visualization</a></li>
+  <li><a href="#structure-data.-types-revisited" id="toc-structure-data.-types-revisited" class="nav-link" data-scroll-target="#structure-data.-types-revisited">Structure Data. Types: Revisited</a></li>
+  <li><a href="#visualizing-spatial-data" id="toc-visualizing-spatial-data" class="nav-link" data-scroll-target="#visualizing-spatial-data">Visualizing Spatial Data</a></li>
   </ul>
 </nav>
     </div>
@@ -510,6 +517,28 @@ cookieconsent.run({
 <li><p>Different CRSs may use different units (e.g., meters, feet). Consistency in units is essential for accurate distance and area calculations.</p></li>
 <li><p>Joining datasets from multiple sources requires a common CRS.</p></li>
 </ul>
+</section>
+<section id="structure-data.-types-revisited" class="level2">
+<h2 class="anchored" data-anchor-id="structure-data.-types-revisited">Structure Data. Types: Revisited</h2>
+<ul>
+<li>list: most common one. Could be name and unnamed when referring to the elements in this list.
+<ul>
+<li>vector: name and unammed</li>
+<li>dataframe:named list. All the columns have a name.
+<ul>
+<li>tibble: a special type of data frame</li>
+<li>sf: it has a geometry column.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="visualizing-spatial-data" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-spatial-data">Visualizing Spatial Data</h2>
+<ol type="1">
+<li>Get the spatial data, usually by obtaining a shapefile and read using sf::st_read or “USAboundaries”</li>
+<li>Joint other data. <strong>Important:</strong> Make sure both are in the same CRS, if not use <em>sf::st_crs</em> &amp; <em>sf::st_transform.</em></li>
+<li>Plot sf::geom_sf</li>
+</ol>
 
 
 <!-- -->
@@ -988,8 +1017,8 @@ cookieconsent.run({
   </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="../tt/Week_4.html" class="pagination-link" aria-label="Week 4">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Week 4</span></span>
+      <a href="../tt/Week_6.html" class="pagination-link" aria-label="Week 6">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Week 6</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1036,9 +1065,24 @@ cookieconsent.run({
 <span id="cb1-36"><a href="#cb1-36"></a><span class="ss">  - </span>Different CRSs may use different units (e.g., meters, feet). Consistency in units is essential for accurate distance and area calculations.</span>
 <span id="cb1-37"><a href="#cb1-37"></a></span>
 <span id="cb1-38"><a href="#cb1-38"></a><span class="ss">  - </span>Joining datasets from multiple sources requires a common CRS.</span>
-<span id="cb1-39"><a href="#cb1-39"></a></span>
-<span id="cb1-40"><a href="#cb1-40"></a></span>
-<span id="cb1-41"><a href="#cb1-41"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-39"><a href="#cb1-39"></a>  </span>
+<span id="cb1-40"><a href="#cb1-40"></a>  </span>
+<span id="cb1-41"><a href="#cb1-41"></a><span class="fu">## Structure Data. Types: Revisited</span></span>
+<span id="cb1-42"><a href="#cb1-42"></a></span>
+<span id="cb1-43"><a href="#cb1-43"></a><span class="ss">  - </span>list: most common one. Could be name and unnamed when referring to the elements in this list.</span>
+<span id="cb1-44"><a href="#cb1-44"></a><span class="ss">    - </span>vector: name and unammed</span>
+<span id="cb1-45"><a href="#cb1-45"></a><span class="ss">    - </span>dataframe:named list. All the columns have a name.</span>
+<span id="cb1-46"><a href="#cb1-46"></a><span class="ss">      - </span>tibble: a special type of data frame</span>
+<span id="cb1-47"><a href="#cb1-47"></a><span class="ss">      - </span>sf: it has a geometry column.</span>
+<span id="cb1-48"><a href="#cb1-48"></a>      </span>
+<span id="cb1-49"><a href="#cb1-49"></a><span class="fu">## Visualizing Spatial Data</span></span>
+<span id="cb1-50"><a href="#cb1-50"></a></span>
+<span id="cb1-51"><a href="#cb1-51"></a><span class="ss">1. </span>Get the spatial data, usually by obtaining a shapefile and read using sf::st_read or "USAboundaries"</span>
+<span id="cb1-52"><a href="#cb1-52"></a><span class="ss">2. </span>Joint other data. **Important:** Make sure both are in the same CRS, if not use *sf::st_crs* &amp; *sf::st_transform.*</span>
+<span id="cb1-53"><a href="#cb1-53"></a><span class="ss">3. </span>Plot sf::geom_sf</span>
+<span id="cb1-54"><a href="#cb1-54"></a></span>
+<span id="cb1-55"><a href="#cb1-55"></a></span>
+<span id="cb1-56"><a href="#cb1-56"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
