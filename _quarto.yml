@@ -69,6 +69,7 @@ book:
       # - tt/2025-01-08.qmd
       # - tt/2025-07-15.qmd
       - tt/Week_4.qmd
+      - tt/Week_6.qmd
 
     - part: "Pre-Class Learnings"
       chapters:

@@ -1,0 +1,111 @@
+---
+title: "Week 6"
+subtitle: TidyTuesday Challenge
+---
+
+
+## Introduction
+In this TT challenge, I will be exploring the data set about the winter olympics. The 2026 Winter Olympics is happening at Milan-Cortina, Italy. The dataset contains detailed information about all 1,866 Olympic events, including both competition and training sessions across various winter sport disciplines.
+
+...
+
+## Importing the Data Set
+```{r}
+## libraries
+library(tidyverse)
+
+## Importing the data sets
+olympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-02-10/schedule.csv')
+```
+
+
+## Research Question 
+
+> Which days of the week host the most medal events at the 2026 Winter Olympics, and how do these events distribute across different sport disciplines?
+
+## Data Cleaning
+
+I first prepare the data set which I will use later on. There is a lot of variables, and I am only keeping those who directly answer my research question. 
+
+```{r}
+## exploring the data
+# glimpse(olympics)
+
+olympics_clean <- olympics |> 
+  select(date, discipline_name, event_description, is_medal_event, venue_name, day_of_week)
+
+# Summarize medal events by day of week
+medal_summary <- olympics_clean %>% 
+  group_by(day_of_week, is_medal_event) %>% 
+  summarise(count = n(), .groups = 'drop') %>% 
+  pivot_wider(names_from = is_medal_event, values_from = count, values_fill = 0) %>% 
+  rename(medal_events = `TRUE`, non_medal_events = `FALSE`) %>% 
+  mutate( total_events = medal_events + non_medal_events,
+    medal_percentage = (medal_events / total_events) * 100,
+    day_order = factor(day_of_week, levels = c("Monday", "Tuesday", "Wednesday", 
+                                                 "Thursday", "Friday", "Saturday", "Sunday"))) %>% 
+  arrange(day_order)
+```
+
+```{r}
+medal_summary %>% 
+  arrange(desc(medal_events)) %>% 
+  select(day_of_week, medal_events, non_medal_events, total_events, medal_percentage) %>% 
+  mutate(medal_percentage = round(medal_percentage, 1))
+```
+
+```{r, fig.alt="Medal Evetns by Day of the Week in the 2026 Olympics", fig.cap="Fig. 1: We see how Saturday is the day with more medals events"}
+medal_summary %>% 
+  ggplot(aes(
+    x = fct_reorder(day_order, medal_events),
+    y = medal_events,
+    fill = medal_events)) +
+  geom_col() +
+  scale_fill_viridis_c("Medal Events") +
+  labs(title = "Medal Events by Day of the Week",
+       subtitle = "2026 Winter Olympics",
+    x = NULL,
+    y = "Number of Medal Events",
+    caption = "Source: TidyTuesday Challenge Week 6, 2026. Author: David Rios") +
+  coord_flip() +
+  theme_minimal() 
+```
+
+```{r, fig.alt="Heat map of Medal Events by Day and Spot Discipline", fig.cap="Fig. 2: We see that Freestyle Skiins and Speed Skating has the higher amount of Medal Events"}
+olympics|> 
+  filter(is_medal_event) |>  
+  count(day_of_week, discipline_name) |> 
+  ggplot(aes(
+    x = day_of_week,
+    y = fct_reorder(discipline_name, n, sum),
+    fill = n)) +
+  geom_tile() +
+  scale_fill_viridis_c("Medal Events") +
+  labs(title = "Medal Events by Day and Sport Discipline",
+       subtitle = "2026 Winter Olympics",
+       x = NULL,
+       y = NULL, 
+    caption = "Source: TidyTuesday Challenge Week 6, 2026. Author: David Rios") +
+  theme_minimal()
+```
+
+
+## Conclusions
+
+In this TT challenge, I found out two things:
+
+  1. Saturday dominates medal events.
+  2. Sport-specific distribution patterns are evident.
+
+The heatmap shows that Freestyle Skiing has the highest concentration of medal events. From prior knowledge, there was significant attention and anticipation surrounding the competition between the U.S. and Japan in this discipline. Ultimately, the Japanese team won the gold medal, while the U.S. team earned silver. 
+
+> It’s worth noting that some sports have not yet occurred, which directly affects our interpretation of the plot.
+
+Despite this, we can observe interesting temporal patterns and strategic insights from the 2026 Winter Olympics schedule:
+
+  - Friday serves as a "pre-weekend peak" with high medal event concentration, particularly in Freestyle Skiing, creating momentum leading into the weekend
+  - Thursday represents a mid-week surge, possibly timed to maintain audience engagement between the weekend peaks
+  - Sunday maintains strong medal activity, ensuring the week ends on a high note before the Monday reset
+
+Overall, the 2026 Winter Olympics schedule demonstrates careful planning: Saturday serves as the apex for medal events, while the distribution across disciplines highlights sports prominence, with Freestyle Skiing and Speed Skating leading the way. At the same time, the temporal patterns balance weekend viewership peaks with consistent daily engagement across the Games.
+

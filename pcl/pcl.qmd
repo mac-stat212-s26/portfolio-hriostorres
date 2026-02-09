@@ -36,6 +36,21 @@ We pretend the Earth is an ellipsoid, but there is a lot of disagreement when pl
   - Different CRSs may use different units (e.g., meters, feet). Consistency in units is essential for accurate distance and area calculations.
 
   - Joining datasets from multiple sources requires a common CRS.
+  
+  
+## Structure Data. Types: Revisited
+
+  - list: most common one. Could be name and unnamed when referring to the elements in this list.
+    - vector: name and unammed
+    - dataframe:named list. All the columns have a name.
+      - tibble: a special type of data frame
+      - sf: it has a geometry column.
+      
+## Visualizing Spatial Data
+
+1. Get the spatial data, usually by obtaining a shapefile and read using sf::st_read or "USAboundaries"
+2. Joint other data. **Important:** Make sure both are in the same CRS, if not use *sf::st_crs* & *sf::st_transform.*
+3. Plot sf::geom_sf
 
 
 
