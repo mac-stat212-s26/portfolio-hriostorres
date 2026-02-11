@@ -1,0 +1,124 @@
+---
+title: "Week 5"
+format: 
+  html: 
+    embed-resources: true
+---
+
+
+## TidyTuesday Section (optional)
+
+::: {.callout-important title="Instructions"}
+
+You can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.
+
+:::
+
+
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
+
+```{r warning = FALSE, message = FALSE}
+library(tidyverse)
+edible_plants <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-02-03/edible_plants.csv')
+```
+
+> How do water requirements relate to nutrient density and caloric content among edible plants?
+
+```{r}
+edible_clean <- edible_plants %>% 
+  mutate(
+    water = str_to_title(str_trim(water)),
+    nutrients = str_to_title(str_trim(nutrients))
+  ) %>% 
+  filter(!is.na(water), !is.na(nutrients)) %>%   # ← THIS removes NA rows
+  mutate(
+    water = factor(water, 
+                   levels = c("Very Low", "Low", "Medium", "High", "Very High"),
+                   ordered = TRUE),
+    nutrients = factor(nutrients,
+                       levels = c("Low", "Medium", "High"),
+                       ordered = TRUE)
+  )
+
+# edible_clean %>% 
+#   count(water, nutrients)
+```
+
+
+```{r}
+#data cleaning
+energy_summary <- edible_clean %>% 
+  group_by(water) %>% 
+  summarise(mean_energy = mean(energy, na.rm = TRUE)) 
+```
+
+  
+```{r, fig.alt = "Stacked proportional bar chart showing the distribution of nutrient levels (low, medium, high) across water requirement categories (very low to very high).", fig.cap="Fig. 1: Distribution of nutrient levels by water requirement, with average caloric content shown above each category."}
+edible_clean %>%
+ggplot(aes(x = water, fill = nutrients)) +
+  geom_bar(position = "fill", na.rm = TRUE) +
+  geom_text(
+    data = energy_summary,
+    aes(x = water, y = 1.05, 
+        label = paste0("Avg kcal: ", round(mean_energy, 1))),
+    inherit.aes = FALSE) +
+  scale_y_continuous(labels = scales::percent_format(),
+                     limits = c(0, 1.1)) +
+  labs(
+    title = "Water Needs, Nutrient Density, and Energy Content",
+    x = "Water Requirement",
+    y = "Proportion of Plants",
+    caption = "Source: TidyTuesday Week 5 (2026) – Edible Plants dataset. Author: David Rios.",
+    fill = "Nutrient Level") +
+  theme_minimal() +
+  theme(plot.title.position = "plot")
+
+```
+```{r}
+edible_collapsed <- edible_clean %>% 
+  mutate(
+    water = fct_collapse(
+      water,
+      Low = c("Very Low", "Low"),
+      Medium = "Medium",
+      High = c("High", "Very High")
+    )
+  )
+
+
+energy_summary <- edible_collapsed %>% 
+  group_by(water) %>% 
+  summarise(mean_energy = mean(energy, na.rm = TRUE))
+
+```
+
+```{r, fig.alt="Stacked proportional bar chart showing nutrient level distribution (low, medium, high) across three water requirement categories (low, medium, high). Average caloric content in kilocalories is displayed above each bar.", fig.cap="Fig. 1: Nutrient level distribution by collapsed water requirement categories, with average caloric content shown above each group."}
+
+ggplot(edible_collapsed, aes(x = water, fill = nutrients)) +
+  geom_bar(position = "fill") +
+  geom_text(
+    data = energy_summary,
+    aes(x = water, y = 1.05,
+        label = paste0("Avg kcal: ", round(mean_energy, 1))),
+    inherit.aes = FALSE
+  ) +
+  scale_y_continuous(
+    labels = scales::percent_format(),
+    limits = c(0, 1.1)
+  ) +
+  labs(
+    title = "Water Needs, Nutrient Density, and Energy Content",
+    subtitle = "Some extreme water categories were collapsed",
+    x = "Water Requirement",
+    y = "Proportion of Plants",
+    fill = "Nutrient Level",
+    caption = "Source: TidyTuesday Week 5 (2026) – Edible Plants dataset. Author: David Rios."
+  ) +
+  theme_minimal() +
+  theme(plot.title.position = "plot")
+```
+
+
+## Conclusion
+
+Plants requiring higher water levels tend to have a greater share of high nutrient classifications, while low-water plants are more likely to be low nutrient. However, caloric content does not increase consistently with water demand, suggesting that nutrient density and energy content may not move together.
