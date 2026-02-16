@@ -1,5 +1,5 @@
 ---
-title: "4 Adv Spatial Viz P1"
+title: "Adv Spatial Viz P1"
 ---
 
 
@@ -63,6 +63,7 @@ library(terra)
 library(stars)
 library(tidycensus) # spatial data for the US with census information
 library(USAboundaries) # access to boundaries for US states, counties, zip codes, and congressional districts 
+
 
 ```
 
@@ -276,16 +277,17 @@ Build on our existing map by adding a raster layer for elevation as the backgrou
 
 ```{r}
 ggplot() +
-    geom_raster(data = elev_df, aes(x = x, y = y, fill = elevation)) + # adding the elevation as first (bottom) layer
-    scale_fill_gradient(low = "darkgreen", high = "white", guide = FALSE) +
-    geom_sf(data = mn_counties, fill = NA, color = "black") + 
-    geom_sf(data = mn_cities |> filter(Population >= 10000), mapping = aes(color = Population, size = Population))+ # cities layer
+    geom_raster(data = elev_df, aes(x = x, y = y,fill = elevation)) +
+    scale_fill_gradient(low = 'darkgreen', high = 'white') +
+    geom_sf(data = mn_counties, fill = NA) + 
+    geom_sf(data = mn_cities |> filter(Population >= 10000), mapping = aes(color = Population, size = Population)) + # cities layer
     scale_color_viridis_c() + # continuous (gradient) color scale
+   
     labs(title = "Minnesota Cities with Population >= 10,000") + 
     ggthemes::theme_map() +
     theme(legend.position = "bottom") # move legend
-```
 
+```
 
 
 ### Zoom in to Twin Cities and Add Water
@@ -296,12 +298,20 @@ ggplot() +
 - We then use `st_crop()` to trim a spatial object to a given bounding box.
 
 ```{r get_elevation_data_zoom_in}
+
+names(mn_counties)
+# Let's rename the second one
+names(mn_counties)[9] <- "namelsad2"
+
+
 seven_countyarea <- mn_counties |>
     filter(name %in% c("Anoka", "Hennepin", "Ramsey", "Dakota", "Carver", "Washington", "Scott")) |> 
     st_bbox()
-seven_countyarea
 
-elevation <- elevatr::get_elev_raster(mn_counties |> st_crop(seven_countyarea), z = 9, clip = "bbox")
+seven_countyarea
+county_crop <- mn_counties %>% st_crop(seven_countyarea) %>% st_cast('MULTIPOLYGON')
+
+elevation <- elevatr::get_elev_raster(county_crop, z = 9, clip = 'bbox')
 raster::crs(elevation) <- sf::st_crs(mn_counties)
 
 # Convert to data frame for plotting
@@ -322,13 +332,15 @@ ggplot() +
     coord_sf(xlim = seven_countyarea[c("xmin", "xmax")], ylim = seven_countyarea[c("ymin", "ymax")]) + # NEW: crop map to Twin Cities bounding box
     labs(title = "Twin Cities with Population >= 10,000") + 
     ggthemes::theme_map() +
-    theme(legend.position = "none") # remove legend
+    theme(legend.position = "none")
+    # remove legend
+    
 ```
 
 Let's add to the above code chunk to save the map above to an image file called `tc_map_zoom.png` in the `figures` folder. The code example below shows a general template for saving a plot to file. Choose a reasonable width and height. (There are also `jpeg()` and `pdf()` functions for writing images.)
 
 ```{r save_plot_example, eval=FALSE}
-png("relative path to image", width = width_in_pixels, height = height_in_pixels)
+png("../figures/tc_map_zoom.png", width = 1040, height = 1040, units = "px")
 # Code for creating plot
 dev.off()
 ```
@@ -364,4 +376,3 @@ mn_counties_leaf |>
 ## Done!
 
 - Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website
-

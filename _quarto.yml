@@ -66,8 +66,6 @@ book:
 
     - part: "TidyTuesday 2026"
       chapters:
-      # - tt/2025-01-08.qmd
-      # - tt/2025-07-15.qmd
       - tt/Week_4.qmd
       - tt/Week_5.qmd
       - tt/Week_6.qmd
@@ -78,9 +76,11 @@ book:
 
     - part: "In-Class Activities"
       chapters:
-      - ica/ica-sample1.qmd
-      - ica/ica-sample2.qmd
       - ica/cleaning.qmd
+      - ica/03-adv-ggplot-notes.qmd
+      - ica/04-adv-maps-1-notes.qmd
+      - ica/06-wrangling-1-notes.qmd
+      - ica/07-wrangling-2-notes.qmd
 
     - part: "Extras"
       chapters:
