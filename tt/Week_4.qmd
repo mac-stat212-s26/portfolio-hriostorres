@@ -94,18 +94,25 @@ companies_micro |>
 
 ```{r fig.alt="This is a figure that plots Boxplots of capital stock (in million BRL) by legal nature for micro- and small enterprises in Brazil.", fig.cap="Fig. 1: Capital stock distribution by legal nature among Brazilian micro- and small enterprises."}
 companies |>
-  mutate(capital_stock_m = capital_stock / 1000000) |>
-  filter(capital_stock_m < 1,
-    company_size %in% c("micro-enterprise", "small-enterprise")) |> 
-  ggplot(aes(x = legal_nature, y = capital_stock_m, fill = legal_nature)) +
+  mutate(
+    capital_stock_m = capital_stock / 1000000,
+    company_size = recode(
+      company_size,
+      "micro-enterprise" = "Micro-Enterprise",
+      "small-enterprise" = "Small-Enterprise")) |>
+  filter(
+    capital_stock_m < 1,
+    company_size %in% c("Micro-Enterprise", "Small-Enterprise")) |> 
+  ggplot(aes(x = legal_nature, y = capital_stock_m)) +
   geom_boxplot()+
   scale_color_viridis_d() +
   facet_wrap(~ company_size) +
   coord_flip() +
-  theme_minimal() +
-    theme(legend.position = "none")+
+  theme_bw() +
+    theme(legend.position = "none") +
   labs(
-    title = "Capital Stock Distribution by Legal Nature in Brazilian Enterprises",
+  title = "Capital Stock Distribution by Legal Nature in Brazilian Enterprises",
+  subtitle = "Note that we limited the study to enterprises with capital stock below 1 million BRL,\nand we ignore a third category called 'other'.",
     x = "Legal Nature",
     y = "Capital Stock (Million BRL)",
     caption = "Source: TidyTuesday Challenge Week 4, 2026. Author: David Rios") +
