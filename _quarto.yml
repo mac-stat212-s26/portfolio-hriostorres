@@ -69,6 +69,7 @@ book:
       - tt/Week_4.qmd
       - tt/Week_5.qmd
       - tt/Week_6.qmd
+      - tt/Week_7.qmd
 
     - part: "Pre-Class Learnings"
       chapters:
@@ -81,11 +82,13 @@ book:
       - ica/04-adv-maps-1-notes.qmd
       - ica/06-wrangling-1-notes.qmd
       - ica/07-wrangling-2-notes.qmd
+      - ica/08-missing-data-notes.qmd
 
     - part: "Extras"
       chapters:
-      - extra/extra-sample1.qmd
-      - extra/extra-sample2.qmd
+      - extra/missing_data.qmd
+      - extra/Projections.qmd
+      # - extra/extra-sample2.qmd
 
 
 
