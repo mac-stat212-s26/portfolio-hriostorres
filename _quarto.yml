@@ -88,8 +88,7 @@ book:
       chapters:
       - extra/missing_data.qmd
       - extra/Projections.qmd
-      # - extra/extra-sample2.qmd
-
+      - extra/exam.qmd
 
 
 
