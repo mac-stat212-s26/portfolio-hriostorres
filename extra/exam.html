@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.25">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Week 4 – COMP/STAT212 Portfolio</title>
+<meta name="author" content="David Rios">
+<title>Exam 1 – COMP/STAT212 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,8 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../tt/Week_5.html" rel="next">
-<link href="../pv/pv-01.html" rel="prev">
+<link href="../extra/Projections.html" rel="prev">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -291,7 +291,7 @@ cookieconsent.run({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tt/Week_4.html">TidyTuesday 2026</a></li><li class="breadcrumb-item"><a href="../tt/Week_4.html"><span class="chapter-title">Week 4</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../extra/missing_data.html">Extras</a></li><li class="breadcrumb-item"><a href="../extra/exam.html"><span class="chapter-title">Exam 1</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -354,7 +354,7 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tt/Week_4.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Week 4</span></a>
+  <a href="../tt/Week_4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -452,7 +452,7 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../extra/exam.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exam 1</span></a>
+  <a href="../extra/exam.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Exam 1</span></a>
   </div>
 </li>
       </ul>
@@ -465,24 +465,30 @@ cookieconsent.run({
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#tidytuesday-section" id="toc-tidytuesday-section" class="nav-link active" data-scroll-target="#tidytuesday-section">TidyTuesday Section</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#importing-the-data-set" id="toc-importing-the-data-set" class="nav-link" data-scroll-target="#importing-the-data-set">Importing the Data Set</a></li>
-  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research Question</a></li>
-  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
-  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+<li><a href="#reading-a-geom-help-page" id="toc-reading-a-geom-help-page" class="nav-link active" data-scroll-target="#reading-a-geom-help-page">Reading a <code>geom</code> Help Page</a></li>
+  <li><a href="#multiple-data-arguments-in-one-plot" id="toc-multiple-data-arguments-in-one-plot" class="nav-link" data-scroll-target="#multiple-data-arguments-in-one-plot">Multiple <code>data=</code> Arguments in One Plot</a></li>
+  <li><a href="#fixed-vs.-mapped-aesthetics" id="toc-fixed-vs.-mapped-aesthetics" class="nav-link" data-scroll-target="#fixed-vs.-mapped-aesthetics">Fixed vs.&nbsp;Mapped Aesthetics</a></li>
+  <li><a href="#useful-color-references-case-study" id="toc-useful-color-references-case-study" class="nav-link" data-scroll-target="#useful-color-references-case-study">Useful Color References (Case Study)</a></li>
+  <li><a href="#quick-reference-common-geoms" id="toc-quick-reference-common-geoms" class="nav-link" data-scroll-target="#quick-reference-common-geoms">Quick Reference: Common <code>geom</code>s</a></li>
+  <li><a href="#workflow-checklist-for-recreating-a-visualization" id="toc-workflow-checklist-for-recreating-a-visualization" class="nav-link" data-scroll-target="#workflow-checklist-for-recreating-a-visualization">Workflow Checklist for Recreating a Visualization</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tt/Week_4.html">TidyTuesday 2026</a></li><li class="breadcrumb-item"><a href="../tt/Week_4.html"><span class="chapter-title">Week 4</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Week 4</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
-<p class="subtitle lead">TidyTuesday Challenge</p>
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../extra/missing_data.html">Extras</a></li><li class="breadcrumb-item"><a href="../extra/exam.html"><span class="chapter-title">Exam 1</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Exam 1</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">Summary of the content covered</p>
 </div>
 
 
 
 <div class="quarto-title-meta column-body">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>David Rios </p>
+          </div>
+  </div>
     
   
     
@@ -490,165 +496,176 @@ cookieconsent.run({
   
 
 
-</header><section id="tidytuesday-section" class="level2"><h2 class="anchored" data-anchor-id="tidytuesday-section">TidyTuesday Section</h2>
-<p>Explore the week’s <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a> challenge. Develop a research question, then answer it through a short data story with <a href="?var:effective-viz-url">effective visualization(s)</a>. Provide sufficient background for readers to grasp your narrative.</p>
-</section><section id="introduction" class="level2"><h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In this homework, I will explore capital stock distribution by legal nature in micro- and small-enterprises in Brazil. The data is obtained from the TidyTuesday challenge, a weekly challenge for users to explore data cleaning and storytelling! In this case, I’m working with the data correponding to the 4th week of 2026.</p>
-</section><section id="importing-the-data-set" class="level2"><h2 class="anchored" data-anchor-id="importing-the-data-set">Importing the Data Set</h2>
+</header><section id="reading-a-geom-help-page" class="level1"><h1>Reading a <code>geom</code> Help Page</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 65%">
+</colgroup>
+<thead><tr class="header">
+<th>Section</th>
+<th>What to look for</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>Usage</strong></td>
+<td>All available arguments — names hint at customization options</td>
+</tr>
+<tr class="even">
+<td><strong>Arguments</strong></td>
+<td>
+<code>mapping</code> (aes), <code>data</code> (dataset), <code>...</code> (fixed aesthetics like <code>color="red"</code>)</td>
+</tr>
+<tr class="odd">
+<td><strong>Aesthetics</strong></td>
+<td>Which visual channels (x, y, color, size…) the geom supports</td>
+</tr>
+</tbody>
+</table>
+<hr></section><section id="multiple-data-arguments-in-one-plot" class="level1"><h1>Multiple <code>data=</code> Arguments in One Plot</h1>
+<p>By default one dataset is passed to <code>ggplot()</code>. Override per-layer with <code>data=</code> inside <code>geom_*()</code>.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="do">## libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="do">## Importing the data sets</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">4</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>companies <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>companies</span>
-<span id="cb1-8"><a href="#cb1-8"></a>legal_nature <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>legal_nature</span>
-<span id="cb1-9"><a href="#cb1-9"></a>qualifications <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>qualifications</span>
-<span id="cb1-10"><a href="#cb1-10"></a>size <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>size</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Dataset 1 in ggplot(), Dataset 2 in a specific geom layer</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> diamonds_avg_price,        <span class="co"># &lt;-- different dataset</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>             <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> avg_price),</span>
+<span id="cb1-6"><a href="#cb1-6"></a>             <span class="at">color =</span> <span class="st">"deepskyblue"</span>, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-</section><section id="research-question" class="level2"><h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
-<blockquote class="blockquote">
-<p>What’s the capital stock distribution by legal nature in micro- and small-enterprises in Brazil?</p>
-</blockquote>
-</section><section id="data-cleaning" class="level2"><h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
-<p>I begin by loading the necessary libraries and importing the relevant datasets from the TidyTuesday repository. The primary dataset used in this analysis is companies, which contains information on firm size, legal nature, and declared capital stock.</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="do">## exploring the data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">glimpse</span>(companies)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>Rows: 141,332
-Columns: 6
-$ company_id          &lt;dbl&gt; 41273639, 41274138, 41274505, 41274745, 41274856, …
-$ company_name        &lt;chr&gt; "MH MATERIAIS DE CONSTRUCAO LTDA", "CLINICA ESTETI…
-$ legal_nature        &lt;chr&gt; "Limited Liability Business Company (LLC)", "Limit…
-$ owner_qualification &lt;chr&gt; "Managing Partner / Partner-Administrator", "Manag…
-$ capital_stock       &lt;dbl&gt; 1000000, 200000, 500000, 159600, 200000, 300000, 1…
-$ company_size        &lt;chr&gt; "small-enterprise", "micro-enterprise", "small-ent…</code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>companies <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-# Groups:   company_size [3]
-  company_size         n
-  &lt;chr&gt;            &lt;int&gt;
-1 micro-enterprise 66202
-2 other            42520
-3 small-enterprise 32610</code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="do">## keep only the micro enterprises</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>companies_micro <span class="ot">&lt;-</span> companies <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">filter</span>(company_size <span class="sc">==</span> <span class="st">"micro-enterprise"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#counting</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>companies_micro <span class="sc">|&gt;</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">count</span>(legal_nature) <span class="sc">|&gt;</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 9 × 2
-  legal_nature                                        n
-  &lt;chr&gt;                                           &lt;int&gt;
-1 Limited Liability Business Company (LLC)        51591
-2 Sole Proprietorship                             14162
-3 Simple Limited Partnership                        155
-4 Simple Innovation Company                         144
-5 Individual Limited Liability Company (Business)   108
-6 Sole Member Law Firm                               22
-7 Simple Partnership (Pure)                          14
-8 General Partnership                                 3
-9 Privately Held Corporation                          3</code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># In Millions to avoid scientific notation</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>companies_micro <span class="ot">&lt;-</span> companies_micro <span class="sc">|&gt;</span> </span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">mutate</span>(<span class="at">capital_stock_m =</span> capital_stock<span class="sc">/</span><span class="dv">1000000</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">filter</span>(capital_stock_m <span class="sc">&lt;</span> <span class="dv">1000</span>) <span class="co"># remove obvious far out value</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co"># In Millions to avoid scientific notation</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>companies <span class="ot">&lt;-</span> companies <span class="sc">|&gt;</span> </span>
-<span id="cb8-8"><a href="#cb8-8"></a>  <span class="fu">mutate</span>(<span class="at">capital_stock_m =</span> capital_stock<span class="sc">/</span><span class="dv">1000000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">#bar plot mean</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>companies_micro <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">group_by</span>(legal_nature) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">summarise</span>(<span class="at">mean_capital_m =</span> <span class="fu">mean</span>(capital_stock_m)) <span class="sc">|&gt;</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(legal_nature, mean_capital_m), <span class="at">y =</span> mean_capital_m)) <span class="sc">+</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-10"><a href="#cb9-10"></a>    <span class="at">title =</span> <span class="st">"Mean Capital Stock per Micro-Enterprise"</span>,</span>
-<span id="cb9-11"><a href="#cb9-11"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
-<span id="cb9-12"><a href="#cb9-12"></a>    <span class="at">y =</span> <span class="st">"Mean Capital Stock (Million BRL)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="Week_4_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">#bar plot median to see if any outliers remain / far out values</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>companies_micro <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">group_by</span>(legal_nature) <span class="sc">|&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">summarise</span>(<span class="at">median_capital_m =</span> <span class="fu">median</span>(capital_stock_m)) <span class="sc">|&gt;</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(legal_nature, median_capital_m), <span class="at">y =</span> median_capital_m)) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-11"><a href="#cb10-11"></a>    <span class="at">title =</span> <span class="st">"Median Capital Stock per Micro-Enterprise"</span>,</span>
-<span id="cb10-12"><a href="#cb10-12"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
-<span id="cb10-13"><a href="#cb10-13"></a>    <span class="at">y =</span> <span class="st">"Mean Capital Stock (Million BRL)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="Week_4_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>companies <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-3"><a href="#cb11-3"></a>    <span class="at">capital_stock_m =</span> capital_stock <span class="sc">/</span> <span class="dv">1000000</span>,</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="at">company_size =</span> <span class="fu">recode</span>(</span>
-<span id="cb11-5"><a href="#cb11-5"></a>      company_size,</span>
-<span id="cb11-6"><a href="#cb11-6"></a>      <span class="st">"micro-enterprise"</span> <span class="ot">=</span> <span class="st">"Micro-Enterprise"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7"></a>      <span class="st">"small-enterprise"</span> <span class="ot">=</span> <span class="st">"Small-Enterprise"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">filter</span>(</span>
-<span id="cb11-9"><a href="#cb11-9"></a>    capital_stock_m <span class="sc">&lt;</span> <span class="dv">1</span>,</span>
-<span id="cb11-10"><a href="#cb11-10"></a>    company_size <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Micro-Enterprise"</span>, <span class="st">"Small-Enterprise"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb11-11"><a href="#cb11-11"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> legal_nature, <span class="at">y =</span> capital_stock_m)) <span class="sc">+</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> company_size) <span class="sc">+</span></span>
-<span id="cb11-15"><a href="#cb11-15"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb11-16"><a href="#cb11-16"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb11-18"><a href="#cb11-18"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-19"><a href="#cb11-19"></a>  <span class="at">title =</span> <span class="st">"Capital Stock Distribution by Legal Nature in Brazilian Enterprises"</span>,</span>
-<span id="cb11-20"><a href="#cb11-20"></a>  <span class="at">subtitle =</span> <span class="st">"Note that we limited the study to enterprises with capital stock below 1 million BRL,</span><span class="sc">\n</span><span class="st">and we ignore a third category called 'other'."</span>,</span>
-<span id="cb11-21"><a href="#cb11-21"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
-<span id="cb11-22"><a href="#cb11-22"></a>    <span class="at">y =</span> <span class="st">"Capital Stock (Million BRL)"</span>,</span>
-<span id="cb11-23"><a href="#cb11-23"></a>    <span class="at">caption =</span> <span class="st">"Source: TidyTuesday Challenge Week 4, 2026. Author: David Rios"</span>) <span class="sc">+</span></span>
-<span id="cb11-24"><a href="#cb11-24"></a>    <span class="fu">theme</span>(<span class="at">plot.title.position =</span> <span class="st">"plot"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="Week_4_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" alt="This is a figure that plots Boxplots of capital stock (in million BRL) by legal nature for micro- and small enterprises in Brazil." width="672"></p>
-<figcaption>Fig. 1: Capital stock distribution by legal nature among Brazilian micro- and small enterprises.</figcaption></figure>
-</div>
-</div>
-</div>
-</section><section id="conclusions" class="level2"><h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
-<p>To understand how capital stock varies by legal nature among micro-enterprises, I first examined both mean and median capital stock values. Comparing these two measures helps assess the influence of remaining outliers and skewness in the data.</p>
-<p>Fig. 1 reveals the differences in how capital stock is distributed across legal forms for both micro- and small enterprises in Brazil. Even after restricting the study to firms with less than 1 million BRL in capital, given the amount of outliers, the spread and tendency of capital stock vary a lot by legal nature. Note that this study assumes that both micro- and small-enterprises reports their capital stock consciously.</p>
-<p>For micro-enterprises, most legal forms are located at low levels of declared capital. But there some enterprises that contradicts this. For example, Limited Liability Business Companies (LLCs) and Individual Limited Liability Companies display wider spreads and more outliers, suggesting that these structures are associated with firms that declare more capital even within the smallest size category. This would be an interesting study to pursue further with more time.</p>
-<p>Among small enterprises, these differences become more obvious. Legal forms such as LLCs and Simple Limited Partnerships have higher medians and greater variability, while simpler structures remain concentrated at lower capital levels. This pattern indicates that whenever enterprises grow, the choice of legal nature becomes more strongly associated with how much capital they report.</p>
-<p>One challenge I had during this project was dealing with outliers. I decided to limit the study to those firms with less than 1 million BRL in capital, but I do recognize this is not the best way to go about it. Future studies should look at it from a proportion perspectives comparing to their median value in each legal category. Another possibility could be using a logarithmic transformation to emphasize proportional differences rather than absolute values on the capital stock variable.</p>
-<p>Overall, our last visualization shows that legal nature is not just a formal label but carries information about the financial structure and scale of Brazilian enterprises. Even within the micro- and small-enterprise categories, organizational form is closely related to how much capital a firm declares.</p>
+<p><strong>When is this needed?</strong> When one layer needs data filtered/summarised differently from the rest (e.g., adding summary stats, annotations, or vertical dividers at specific rows).</p>
+<hr></section><section id="fixed-vs.-mapped-aesthetics" class="level1"><h1>Fixed vs.&nbsp;Mapped Aesthetics</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 48%">
+<col style="width: 31%">
+</colgroup>
+<thead><tr class="header">
+<th>Type</th>
+<th>Where it goes</th>
+<th>Example</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>
+<strong>Mapped</strong> (varies by data)</td>
+<td>Inside <code>aes()</code>
+</td>
+<td><code>aes(color = cut)</code></td>
+</tr>
+<tr class="even">
+<td>
+<strong>Fixed</strong> (same for all rows)</td>
+<td>Outside <code>aes()</code>, in <code>...</code>
+</td>
+<td><code>color = "red"</code></td>
+</tr>
+</tbody>
+</table>
+<hr></section><section id="useful-color-references-case-study" class="level1"><h1>Useful Color References (Case Study)</h1>
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Purpose</th>
+<th>Hex</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Record range (tan-grey)</td>
+<td><code>"#ECEBE3"</code></td>
+</tr>
+<tr class="even">
+<td>Normal range (mauve)</td>
+<td><code>"#C8B8BA"</code></td>
+</tr>
+<tr class="odd">
+<td>Actual temp (red)</td>
+<td><code>"#A90248"</code></td>
+</tr>
+<tr class="even">
+<td>Precip bar (blue)</td>
+<td><code>"#32a3d8"</code></td>
+</tr>
+<tr class="odd">
+<td>Precip background (tan)</td>
+<td><code>"#ebeae2"</code></td>
+</tr>
+</tbody>
+</table>
+<hr></section><section id="quick-reference-common-geoms" class="level1"><h1>Quick Reference: Common <code>geom</code>s</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 30%">
+<col style="width: 45%">
+</colgroup>
+<thead><tr class="header">
+<th><code>geom</code></th>
+<th>Best for</th>
+<th>Key aesthetics</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>geom_point</code></td>
+<td>Scatterplots, dot annotations</td>
+<td>x, y, shape, size, color</td>
+</tr>
+<tr class="even">
+<td><code>geom_linerange</code></td>
+<td>Vertical intervals/ranges</td>
+<td>x, ymin, ymax</td>
+</tr>
+<tr class="odd">
+<td><code>geom_vline</code></td>
+<td>Vertical reference lines</td>
+<td>xintercept</td>
+</tr>
+<tr class="even">
+<td><code>geom_hline</code></td>
+<td>Horizontal reference lines</td>
+<td>yintercept</td>
+</tr>
+<tr class="odd">
+<td><code>geom_text</code></td>
+<td>Text labels on plot</td>
+<td>x, y, label, hjust, vjust</td>
+</tr>
+<tr class="even">
+<td><code>geom_bar</code></td>
+<td>Counts / bar charts</td>
+<td>x</td>
+</tr>
+<tr class="odd">
+<td><code>geom_col</code></td>
+<td>Pre-computed bar heights</td>
+<td>x, y</td>
+</tr>
+<tr class="even">
+<td><code>geom_smooth</code></td>
+<td>Trend lines</td>
+<td>x, y, method</td>
+</tr>
+</tbody>
+</table>
+<hr></section><section id="workflow-checklist-for-recreating-a-visualization" class="level1"><h1>Workflow Checklist for Recreating a Visualization</h1>
+<ol type="1">
+<li>
+<strong>Identify variables</strong> → what maps to position, color, size, shape?</li>
+<li>
+<strong>Choose geoms</strong> → browse ggplot2 reference, check small thumbnails</li>
+<li>
+<strong>Check aesthetics</strong> → open help page, read Usage + Aesthetics sections</li>
+<li>
+<strong>Layer order</strong> → background geoms first, foreground last</li>
+<li>
+<strong>Separate datasets per layer</strong> → use <code>data=</code> inside geom when needed</li>
+<li>
+<strong>Axis &amp; labels</strong> → <code>scale_x_continuous(breaks, labels)</code>, <code>labs()</code>
+</li>
+<li>
+<strong>Theme</strong> → <code>theme_classic()</code> / <code>theme_bw()</code> + <code>theme()</code> for fine-tuning</li>
+</ol>
+<hr>
 
 
 <!-- -->
@@ -1122,154 +1139,95 @@ $ company_size        &lt;chr&gt; "small-enterprise", "micro-enterprise", "small
     }
   });
   </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
-      <a href="../pv/pv-01.html" class="pagination-link" aria-label="Professional Viz">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Professional Viz</span></span>
+      <a href="../extra/Projections.html" class="pagination-link" aria-label="Projections Blog">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Projections Blog</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../tt/Week_5.html" class="pagination-link" aria-label="Week 5">
-        <span class="nav-page-text"><span class="chapter-title">Week 5</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">---</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="an">title:</span><span class="co"> "Week 4"</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="an">subtitle:</span><span class="co"> TidyTuesday Challenge</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co">---</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-6"><a href="#cb12-6"></a></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="fu">## TidyTuesday Section</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a></span>
-<span id="cb12-9"><a href="#cb12-9"></a>Explore the week's <span class="co">[</span><span class="ot">TidyTuesday</span><span class="co">](https://github.com/rfordatascience/tidytuesday)</span> challenge. Develop a research question, then answer it through a short data story with <span class="co">[</span><span class="ot">effective visualization(s)</span><span class="co">]({{&lt; var effective-viz-url &gt;}})</span>.  Provide sufficient background for readers to grasp your narrative.</span>
-<span id="cb12-10"><a href="#cb12-10"></a></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="fu">## Introduction</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a></span>
-<span id="cb12-13"><a href="#cb12-13"></a>In this homework, I will explore capital stock distribution by legal nature in micro- and small-enterprises in Brazil. The data is obtained from the TidyTuesday challenge, a weekly challenge for users to explore data cleaning and storytelling! In this case, I'm working with the data correponding to the 4th week of 2026. </span>
-<span id="cb12-14"><a href="#cb12-14"></a></span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="fu">## Importing the Data Set</span></span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="in">```{r}</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a><span class="do">## libraries</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb12-21"><a href="#cb12-21"></a></span>
-<span id="cb12-22"><a href="#cb12-22"></a><span class="do">## Importing the data sets</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">4</span>)</span>
-<span id="cb12-24"><a href="#cb12-24"></a></span>
-<span id="cb12-25"><a href="#cb12-25"></a>companies <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>companies</span>
-<span id="cb12-26"><a href="#cb12-26"></a>legal_nature <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>legal_nature</span>
-<span id="cb12-27"><a href="#cb12-27"></a>qualifications <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>qualifications</span>
-<span id="cb12-28"><a href="#cb12-28"></a>size <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>size</span>
-<span id="cb12-29"><a href="#cb12-29"></a><span class="in">```</span></span>
-<span id="cb12-30"><a href="#cb12-30"></a></span>
-<span id="cb12-31"><a href="#cb12-31"></a></span>
-<span id="cb12-32"><a href="#cb12-32"></a><span class="fu">## Research Question </span></span>
-<span id="cb12-33"><a href="#cb12-33"></a></span>
-<span id="cb12-34"><a href="#cb12-34"></a><span class="at">&gt; What's the capital stock distribution by legal nature in micro- and small-enterprises in Brazil?</span></span>
-<span id="cb12-35"><a href="#cb12-35"></a></span>
-<span id="cb12-36"><a href="#cb12-36"></a></span>
-<span id="cb12-37"><a href="#cb12-37"></a><span class="fu">## Data Cleaning</span></span>
-<span id="cb12-38"><a href="#cb12-38"></a></span>
-<span id="cb12-39"><a href="#cb12-39"></a>I begin by loading the necessary libraries and importing the relevant datasets from the TidyTuesday repository. The primary dataset used in this analysis is companies, which contains information on firm size, legal nature, and declared capital stock.</span>
-<span id="cb12-40"><a href="#cb12-40"></a></span>
-<span id="cb12-43"><a href="#cb12-43"></a><span class="in">```{r}</span></span>
-<span id="cb12-44"><a href="#cb12-44"></a><span class="do">## exploring the data</span></span>
-<span id="cb12-45"><a href="#cb12-45"></a><span class="fu">glimpse</span>(companies)</span>
-<span id="cb12-46"><a href="#cb12-46"></a></span>
-<span id="cb12-47"><a href="#cb12-47"></a>companies <span class="sc">|&gt;</span></span>
-<span id="cb12-48"><a href="#cb12-48"></a>  <span class="fu">group_by</span>(company_size) <span class="sc">|&gt;</span></span>
-<span id="cb12-49"><a href="#cb12-49"></a>  <span class="fu">count</span>()</span>
-<span id="cb12-50"><a href="#cb12-50"></a></span>
-<span id="cb12-51"><a href="#cb12-51"></a><span class="do">## keep only the micro enterprises</span></span>
-<span id="cb12-52"><a href="#cb12-52"></a>companies_micro <span class="ot">&lt;-</span> companies <span class="sc">|&gt;</span></span>
-<span id="cb12-53"><a href="#cb12-53"></a>  <span class="fu">filter</span>(company_size <span class="sc">==</span> <span class="st">"micro-enterprise"</span>)</span>
-<span id="cb12-54"><a href="#cb12-54"></a></span>
-<span id="cb12-55"><a href="#cb12-55"></a><span class="co">#counting</span></span>
-<span id="cb12-56"><a href="#cb12-56"></a>companies_micro <span class="sc">|&gt;</span></span>
-<span id="cb12-57"><a href="#cb12-57"></a>  <span class="fu">count</span>(legal_nature) <span class="sc">|&gt;</span></span>
-<span id="cb12-58"><a href="#cb12-58"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
-<span id="cb12-59"><a href="#cb12-59"></a></span>
-<span id="cb12-60"><a href="#cb12-60"></a><span class="co"># In Millions to avoid scientific notation</span></span>
-<span id="cb12-61"><a href="#cb12-61"></a>companies_micro <span class="ot">&lt;-</span> companies_micro <span class="sc">|&gt;</span> </span>
-<span id="cb12-62"><a href="#cb12-62"></a>  <span class="fu">mutate</span>(<span class="at">capital_stock_m =</span> capital_stock<span class="sc">/</span><span class="dv">1000000</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb12-63"><a href="#cb12-63"></a>  <span class="fu">filter</span>(capital_stock_m <span class="sc">&lt;</span> <span class="dv">1000</span>) <span class="co"># remove obvious far out value</span></span>
-<span id="cb12-64"><a href="#cb12-64"></a></span>
-<span id="cb12-65"><a href="#cb12-65"></a><span class="co"># In Millions to avoid scientific notation</span></span>
-<span id="cb12-66"><a href="#cb12-66"></a>companies <span class="ot">&lt;-</span> companies <span class="sc">|&gt;</span> </span>
-<span id="cb12-67"><a href="#cb12-67"></a>  <span class="fu">mutate</span>(<span class="at">capital_stock_m =</span> capital_stock<span class="sc">/</span><span class="dv">1000000</span>)</span>
-<span id="cb12-68"><a href="#cb12-68"></a><span class="in">```</span></span>
-<span id="cb12-69"><a href="#cb12-69"></a></span>
-<span id="cb12-72"><a href="#cb12-72"></a><span class="in">```{r}</span></span>
-<span id="cb12-73"><a href="#cb12-73"></a><span class="co">#bar plot mean</span></span>
-<span id="cb12-74"><a href="#cb12-74"></a>companies_micro <span class="sc">|&gt;</span></span>
-<span id="cb12-75"><a href="#cb12-75"></a>  <span class="fu">group_by</span>(legal_nature) <span class="sc">|&gt;</span></span>
-<span id="cb12-76"><a href="#cb12-76"></a>  <span class="fu">summarise</span>(<span class="at">mean_capital_m =</span> <span class="fu">mean</span>(capital_stock_m)) <span class="sc">|&gt;</span></span>
-<span id="cb12-77"><a href="#cb12-77"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(legal_nature, mean_capital_m), <span class="at">y =</span> mean_capital_m)) <span class="sc">+</span></span>
-<span id="cb12-78"><a href="#cb12-78"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb12-79"><a href="#cb12-79"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb12-80"><a href="#cb12-80"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb12-81"><a href="#cb12-81"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-82"><a href="#cb12-82"></a>    <span class="at">title =</span> <span class="st">"Mean Capital Stock per Micro-Enterprise"</span>,</span>
-<span id="cb12-83"><a href="#cb12-83"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
-<span id="cb12-84"><a href="#cb12-84"></a>    <span class="at">y =</span> <span class="st">"Mean Capital Stock (Million BRL)"</span>)</span>
-<span id="cb12-85"><a href="#cb12-85"></a></span>
-<span id="cb12-86"><a href="#cb12-86"></a><span class="co">#bar plot median to see if any outliers remain / far out values</span></span>
-<span id="cb12-87"><a href="#cb12-87"></a>companies_micro <span class="sc">|&gt;</span></span>
-<span id="cb12-88"><a href="#cb12-88"></a>  <span class="fu">group_by</span>(legal_nature) <span class="sc">|&gt;</span></span>
-<span id="cb12-89"><a href="#cb12-89"></a>  <span class="fu">summarise</span>(<span class="at">median_capital_m =</span> <span class="fu">median</span>(capital_stock_m)) <span class="sc">|&gt;</span></span>
-<span id="cb12-90"><a href="#cb12-90"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(legal_nature, median_capital_m), <span class="at">y =</span> median_capital_m)) <span class="sc">+</span></span>
-<span id="cb12-91"><a href="#cb12-91"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb12-92"><a href="#cb12-92"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb12-93"><a href="#cb12-93"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb12-94"><a href="#cb12-94"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb12-95"><a href="#cb12-95"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-96"><a href="#cb12-96"></a>    <span class="at">title =</span> <span class="st">"Median Capital Stock per Micro-Enterprise"</span>,</span>
-<span id="cb12-97"><a href="#cb12-97"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
-<span id="cb12-98"><a href="#cb12-98"></a>    <span class="at">y =</span> <span class="st">"Mean Capital Stock (Million BRL)"</span>)</span>
-<span id="cb12-99"><a href="#cb12-99"></a><span class="in">```</span></span>
-<span id="cb12-100"><a href="#cb12-100"></a></span>
-<span id="cb12-101"><a href="#cb12-101"></a><span class="in">```{r fig.alt="This is a figure that plots Boxplots of capital stock (in million BRL) by legal nature for micro- and small enterprises in Brazil.", fig.cap="Fig. 1: Capital stock distribution by legal nature among Brazilian micro- and small enterprises."}</span></span>
-<span id="cb12-102"><a href="#cb12-102"></a>companies <span class="sc">|&gt;</span></span>
-<span id="cb12-103"><a href="#cb12-103"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb12-104"><a href="#cb12-104"></a>    <span class="at">capital_stock_m =</span> capital_stock <span class="sc">/</span> <span class="dv">1000000</span>,</span>
-<span id="cb12-105"><a href="#cb12-105"></a>    <span class="at">company_size =</span> <span class="fu">recode</span>(</span>
-<span id="cb12-106"><a href="#cb12-106"></a>      company_size,</span>
-<span id="cb12-107"><a href="#cb12-107"></a>      <span class="st">"micro-enterprise"</span> <span class="ot">=</span> <span class="st">"Micro-Enterprise"</span>,</span>
-<span id="cb12-108"><a href="#cb12-108"></a>      <span class="st">"small-enterprise"</span> <span class="ot">=</span> <span class="st">"Small-Enterprise"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb12-109"><a href="#cb12-109"></a>  <span class="fu">filter</span>(</span>
-<span id="cb12-110"><a href="#cb12-110"></a>    capital_stock_m <span class="sc">&lt;</span> <span class="dv">1</span>,</span>
-<span id="cb12-111"><a href="#cb12-111"></a>    company_size <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Micro-Enterprise"</span>, <span class="st">"Small-Enterprise"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb12-112"><a href="#cb12-112"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> legal_nature, <span class="at">y =</span> capital_stock_m)) <span class="sc">+</span></span>
-<span id="cb12-113"><a href="#cb12-113"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb12-114"><a href="#cb12-114"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb12-115"><a href="#cb12-115"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> company_size) <span class="sc">+</span></span>
-<span id="cb12-116"><a href="#cb12-116"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb12-117"><a href="#cb12-117"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb12-118"><a href="#cb12-118"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb12-119"><a href="#cb12-119"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-120"><a href="#cb12-120"></a>  <span class="at">title =</span> <span class="st">"Capital Stock Distribution by Legal Nature in Brazilian Enterprises"</span>,</span>
-<span id="cb12-121"><a href="#cb12-121"></a>  <span class="at">subtitle =</span> <span class="st">"Note that we limited the study to enterprises with capital stock below 1 million BRL,</span><span class="sc">\n</span><span class="st">and we ignore a third category called 'other'."</span>,</span>
-<span id="cb12-122"><a href="#cb12-122"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
-<span id="cb12-123"><a href="#cb12-123"></a>    <span class="at">y =</span> <span class="st">"Capital Stock (Million BRL)"</span>,</span>
-<span id="cb12-124"><a href="#cb12-124"></a>    <span class="at">caption =</span> <span class="st">"Source: TidyTuesday Challenge Week 4, 2026. Author: David Rios"</span>) <span class="sc">+</span></span>
-<span id="cb12-125"><a href="#cb12-125"></a>    <span class="fu">theme</span>(<span class="at">plot.title.position =</span> <span class="st">"plot"</span>)</span>
-<span id="cb12-126"><a href="#cb12-126"></a><span class="in">```</span></span>
-<span id="cb12-127"><a href="#cb12-127"></a></span>
-<span id="cb12-128"><a href="#cb12-128"></a></span>
-<span id="cb12-129"><a href="#cb12-129"></a></span>
-<span id="cb12-130"><a href="#cb12-130"></a><span class="fu">## Conclusions</span></span>
-<span id="cb12-131"><a href="#cb12-131"></a></span>
-<span id="cb12-132"><a href="#cb12-132"></a>To understand how capital stock varies by legal nature among micro-enterprises, I first examined both mean and median capital stock values. Comparing these two measures helps assess the influence of remaining outliers and skewness in the data.</span>
-<span id="cb12-133"><a href="#cb12-133"></a></span>
-<span id="cb12-134"><a href="#cb12-134"></a>Fig. 1 reveals the differences in how capital stock is distributed across legal forms for both micro- and small enterprises in Brazil. Even after restricting the study to firms with less than 1 million BRL in capital, given the amount of outliers, the spread and tendency of capital stock vary a lot by legal nature. Note that this study assumes that both micro- and small-enterprises reports their capital stock consciously.</span>
-<span id="cb12-135"><a href="#cb12-135"></a></span>
-<span id="cb12-136"><a href="#cb12-136"></a>For micro-enterprises, most legal forms are located at low levels of declared capital. But there some enterprises that contradicts this. For example, Limited Liability Business Companies (LLCs) and Individual Limited Liability Companies display wider spreads and more outliers, suggesting that these structures are associated with firms that declare more capital even within the smallest size category. This would be an interesting study to pursue further with more time.</span>
-<span id="cb12-137"><a href="#cb12-137"></a></span>
-<span id="cb12-138"><a href="#cb12-138"></a>Among small enterprises, these differences become more obvious. Legal forms such as LLCs and Simple Limited Partnerships have higher medians and greater variability, while simpler structures remain concentrated at lower capital levels. This pattern indicates that whenever enterprises grow, the choice of legal nature becomes more strongly associated with how much capital they report.</span>
-<span id="cb12-139"><a href="#cb12-139"></a></span>
-<span id="cb12-140"><a href="#cb12-140"></a>One challenge I had during this project was dealing with outliers. I decided to limit the study to those firms with less than 1 million BRL in capital, but I do recognize this is not the best way to go about it. Future studies should look at it from a proportion perspectives comparing to their median value in each legal category. Another possibility could be using a logarithmic transformation to emphasize proportional differences rather than absolute values on the capital stock variable.</span>
-<span id="cb12-141"><a href="#cb12-141"></a></span>
-<span id="cb12-142"><a href="#cb12-142"></a>Overall, our last visualization shows that legal nature is not just a formal label but carries information about the financial structure and scale of Brazilian enterprises. Even within the micro- and small-enterprise categories, organizational form is closely related to how much capital a firm declares. </span>
-<span id="cb12-143"><a href="#cb12-143"></a></span>
-<span id="cb12-144"><a href="#cb12-144"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="an">title:</span><span class="co"> "Exam 1"</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="an">subtitle:</span><span class="co"> Summary of the content covered</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="an">author:</span><span class="co"> David Rios</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">---</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="fu"># Reading a `geom` Help Page</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="pp">|</span> Section <span class="pp">|</span> What to look for <span class="pp">|</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="pp">|---------|-----------------|</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="pp">|</span> **Usage** <span class="pp">|</span> All available arguments — names hint at customization options <span class="pp">|</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="pp">|</span> **Arguments** <span class="pp">|</span> <span class="in">`mapping`</span> (aes), <span class="in">`data`</span> (dataset), <span class="in">`...`</span> (fixed aesthetics like <span class="in">`color="red"`</span>) <span class="pp">|</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="pp">|</span> **Aesthetics** <span class="pp">|</span> Which visual channels (x, y, color, size…) the geom supports <span class="pp">|</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a>---</span>
+<span id="cb2-17"><a href="#cb2-17"></a></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="fu"># Multiple `data=` Arguments in One Plot</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a></span>
+<span id="cb2-20"><a href="#cb2-20"></a>By default one dataset is passed to <span class="in">`ggplot()`</span>. Override per-layer with <span class="in">`data=`</span> inside <span class="in">`geom_*()`</span>.</span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="in">```{r}</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#| eval: false</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="co"># Dataset 1 in ggplot(), Dataset 2 in a specific geom layer</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> diamonds_avg_price,        <span class="co"># &lt;-- different dataset</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a>             <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> avg_price),</span>
+<span id="cb2-31"><a href="#cb2-31"></a>             <span class="at">color =</span> <span class="st">"deepskyblue"</span>, <span class="at">size =</span> <span class="dv">3</span>)</span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="in">```</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a></span>
+<span id="cb2-34"><a href="#cb2-34"></a>**When is this needed?** When one layer needs data filtered/summarised differently from the rest (e.g., adding summary stats, annotations, or vertical dividers at specific rows).</span>
+<span id="cb2-35"><a href="#cb2-35"></a></span>
+<span id="cb2-36"><a href="#cb2-36"></a>---</span>
+<span id="cb2-37"><a href="#cb2-37"></a></span>
+<span id="cb2-38"><a href="#cb2-38"></a><span class="fu"># Fixed vs. Mapped Aesthetics</span></span>
+<span id="cb2-39"><a href="#cb2-39"></a></span>
+<span id="cb2-40"><a href="#cb2-40"></a><span class="pp">|</span> Type <span class="pp">|</span> Where it goes <span class="pp">|</span> Example <span class="pp">|</span></span>
+<span id="cb2-41"><a href="#cb2-41"></a><span class="pp">|------|--------------|---------|</span></span>
+<span id="cb2-42"><a href="#cb2-42"></a><span class="pp">|</span> **Mapped** (varies by data) <span class="pp">|</span> Inside <span class="in">`aes()`</span> <span class="pp">|</span> <span class="in">`aes(color = cut)`</span> <span class="pp">|</span></span>
+<span id="cb2-43"><a href="#cb2-43"></a><span class="pp">|</span> **Fixed** (same for all rows) <span class="pp">|</span> Outside <span class="in">`aes()`</span>, in <span class="in">`...`</span> <span class="pp">|</span> <span class="in">`color = "red"`</span> <span class="pp">|</span></span>
+<span id="cb2-44"><a href="#cb2-44"></a></span>
+<span id="cb2-45"><a href="#cb2-45"></a>---</span>
+<span id="cb2-46"><a href="#cb2-46"></a></span>
+<span id="cb2-47"><a href="#cb2-47"></a><span class="fu"># Useful Color References (Case Study)</span></span>
+<span id="cb2-48"><a href="#cb2-48"></a></span>
+<span id="cb2-49"><a href="#cb2-49"></a><span class="pp">|</span> Purpose <span class="pp">|</span> Hex <span class="pp">|</span></span>
+<span id="cb2-50"><a href="#cb2-50"></a><span class="pp">|---------|-----|</span></span>
+<span id="cb2-51"><a href="#cb2-51"></a><span class="pp">|</span> Record range (tan-grey) <span class="pp">|</span> <span class="in">`"#ECEBE3"`</span> <span class="pp">|</span></span>
+<span id="cb2-52"><a href="#cb2-52"></a><span class="pp">|</span> Normal range (mauve) <span class="pp">|</span> <span class="in">`"#C8B8BA"`</span> <span class="pp">|</span></span>
+<span id="cb2-53"><a href="#cb2-53"></a><span class="pp">|</span> Actual temp (red) <span class="pp">|</span> <span class="in">`"#A90248"`</span> <span class="pp">|</span></span>
+<span id="cb2-54"><a href="#cb2-54"></a><span class="pp">|</span> Precip bar (blue) <span class="pp">|</span> <span class="in">`"#32a3d8"`</span> <span class="pp">|</span></span>
+<span id="cb2-55"><a href="#cb2-55"></a><span class="pp">|</span> Precip background (tan) <span class="pp">|</span> <span class="in">`"#ebeae2"`</span> <span class="pp">|</span></span>
+<span id="cb2-56"><a href="#cb2-56"></a></span>
+<span id="cb2-57"><a href="#cb2-57"></a>---</span>
+<span id="cb2-58"><a href="#cb2-58"></a></span>
+<span id="cb2-59"><a href="#cb2-59"></a><span class="fu"># Quick Reference: Common `geom`s</span></span>
+<span id="cb2-60"><a href="#cb2-60"></a></span>
+<span id="cb2-61"><a href="#cb2-61"></a><span class="pp">|</span> <span class="in">`geom`</span> <span class="pp">|</span> Best for <span class="pp">|</span> Key aesthetics <span class="pp">|</span></span>
+<span id="cb2-62"><a href="#cb2-62"></a><span class="pp">|--------|----------|---------------|</span></span>
+<span id="cb2-63"><a href="#cb2-63"></a><span class="pp">|</span> <span class="in">`geom_point`</span> <span class="pp">|</span> Scatterplots, dot annotations <span class="pp">|</span> x, y, shape, size, color <span class="pp">|</span></span>
+<span id="cb2-64"><a href="#cb2-64"></a><span class="pp">|</span> <span class="in">`geom_linerange`</span> <span class="pp">|</span> Vertical intervals/ranges <span class="pp">|</span> x, ymin, ymax <span class="pp">|</span></span>
+<span id="cb2-65"><a href="#cb2-65"></a><span class="pp">|</span> <span class="in">`geom_vline`</span> <span class="pp">|</span> Vertical reference lines <span class="pp">|</span> xintercept <span class="pp">|</span></span>
+<span id="cb2-66"><a href="#cb2-66"></a><span class="pp">|</span> <span class="in">`geom_hline`</span> <span class="pp">|</span> Horizontal reference lines <span class="pp">|</span> yintercept <span class="pp">|</span></span>
+<span id="cb2-67"><a href="#cb2-67"></a><span class="pp">|</span> <span class="in">`geom_text`</span> <span class="pp">|</span> Text labels on plot <span class="pp">|</span> x, y, label, hjust, vjust <span class="pp">|</span></span>
+<span id="cb2-68"><a href="#cb2-68"></a><span class="pp">|</span> <span class="in">`geom_bar`</span> <span class="pp">|</span> Counts / bar charts <span class="pp">|</span> x <span class="pp">|</span></span>
+<span id="cb2-69"><a href="#cb2-69"></a><span class="pp">|</span> <span class="in">`geom_col`</span> <span class="pp">|</span> Pre-computed bar heights <span class="pp">|</span> x, y <span class="pp">|</span></span>
+<span id="cb2-70"><a href="#cb2-70"></a><span class="pp">|</span> <span class="in">`geom_smooth`</span> <span class="pp">|</span> Trend lines <span class="pp">|</span> x, y, method <span class="pp">|</span></span>
+<span id="cb2-71"><a href="#cb2-71"></a></span>
+<span id="cb2-72"><a href="#cb2-72"></a>---</span>
+<span id="cb2-73"><a href="#cb2-73"></a></span>
+<span id="cb2-74"><a href="#cb2-74"></a><span class="fu"># Workflow Checklist for Recreating a Visualization</span></span>
+<span id="cb2-75"><a href="#cb2-75"></a></span>
+<span id="cb2-76"><a href="#cb2-76"></a><span class="ss">1. </span>**Identify variables** → what maps to position, color, size, shape?</span>
+<span id="cb2-77"><a href="#cb2-77"></a><span class="ss">2. </span>**Choose geoms** → browse ggplot2 reference, check small thumbnails</span>
+<span id="cb2-78"><a href="#cb2-78"></a><span class="ss">3. </span>**Check aesthetics** → open help page, read Usage + Aesthetics sections</span>
+<span id="cb2-79"><a href="#cb2-79"></a><span class="ss">4. </span>**Layer order** → background geoms first, foreground last</span>
+<span id="cb2-80"><a href="#cb2-80"></a><span class="ss">5. </span>**Separate datasets per layer** → use <span class="in">`data=`</span> inside geom when needed</span>
+<span id="cb2-81"><a href="#cb2-81"></a><span class="ss">6. </span>**Axis &amp; labels** → <span class="in">`scale_x_continuous(breaks, labels)`</span>, <span class="in">`labs()`</span></span>
+<span id="cb2-82"><a href="#cb2-82"></a><span class="ss">7. </span>**Theme** → <span class="in">`theme_classic()`</span> / <span class="in">`theme_bw()`</span> + <span class="in">`theme()`</span> for fine-tuning</span>
+<span id="cb2-83"><a href="#cb2-83"></a></span>
+<span id="cb2-84"><a href="#cb2-84"></a>---</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
