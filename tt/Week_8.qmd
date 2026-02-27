@@ -9,7 +9,7 @@ This week, I'll be exploring the Irish STEM research and ancillary projects fund
 
 ## Research Question
 
-> How does program duration relate to funding intensity across SFI programmes between 2000–2014?
+> How does program duration relate to funding intensity across Ireland's SFI programmes between 2000–2014?
 
 
 ```{r data_loading, message=FALSE, warning = FALSE}
