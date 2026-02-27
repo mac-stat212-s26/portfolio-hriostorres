@@ -495,7 +495,7 @@ cookieconsent.run({
 <p>This week, I’ll be exploring the Irish STEM research and ancillary projects funded by Science Foundation Ireland (SFI) since its foundation in 2000 to its dissolution on 31st July 2024. The data comes from Ireland’s Open Data Portal.</p>
 </section><section id="research-question" class="level2"><h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
 <blockquote class="blockquote">
-<p>What institutions have received the higher amount in grant in Ireland overtime (2000-2014)?</p>
+<p>How does program duration relate to funding intensity across Ireland’s SFI programmes between 2000–2014?</p>
 </blockquote>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#libraries </span></span>
@@ -542,74 +542,79 @@ cookieconsent.run({
 <span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb4-8"><a href="#cb4-8"></a>    <span class="at">total_commitment =</span> <span class="fu">sum</span>(current_total_commitment, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb4-9"><a href="#cb4-9"></a>    <span class="at">program_long =</span> <span class="fu">mean</span>(program_long, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># average duration if multiple rows per program</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>    <span class="at">grant_per_month_avg =</span> total_commitment <span class="sc">/</span> program_long</span>
-<span id="cb4-11"><a href="#cb4-11"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(grant_per_month_avg))</span>
-<span id="cb4-13"><a href="#cb4-13"></a></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co"># Plot</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="fu">ggplot</span>(grant_summary, <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg)) <span class="sc">+</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-18"><a href="#cb4-18"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
-<span id="cb4-19"><a href="#cb4-19"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month"</span>,</span>
-<span id="cb4-20"><a href="#cb4-20"></a>    <span class="at">title =</span> <span class="st">"Average Grant per Month vs Program Duration"</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a>    <span class="co"># colour = "Program"</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="at">grant_per_month_avg =</span> total_commitment <span class="sc">/</span> program_long) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(grant_per_month_avg))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Plot</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">ggplot</span>(grant_summary, <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="at">title =</span> <span class="st">"Average Grant per Month vs Program Duration"</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="co"># colour = "Program"</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="Week_8_files/figure-html/DEA-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>grant_summary <span class="ot">&lt;-</span> grant_summary <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(<span class="at">top10 =</span> grant_per_month_avg <span class="sc">%in%</span> <span class="fu">slice_max</span>(grant_summary, grant_per_month_avg, <span class="at">n =</span> <span class="dv">7</span>)<span class="sc">$</span>grant_per_month_avg)</span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">ggplot</span>(grant_summary, <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg)) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10), <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg, <span class="at">colour =</span> programme_name), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10), <span class="fu">aes</span>(<span class="at">label =</span> programme_name), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">size =</span> <span class="fl">2.3</span>) <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-9"><a href="#cb5-9"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
-<span id="cb5-10"><a href="#cb5-10"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month"</span>,</span>
-<span id="cb5-11"><a href="#cb5-11"></a>    <span class="at">title =</span> <span class="st">"Average Grant per Month vs Program Duration (Top 7 Highlighted)"</span>) <span class="sc">+</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="Week_8_files/figure-html/DEA-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="Week_8_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>grant_summary <span class="ot">&lt;-</span> grant_summary <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb6-3"><a href="#cb6-3"></a>    <span class="at">grant_per_month_millions =</span> grant_per_month_avg <span class="sc">/</span> <span class="fl">1e6</span>,</span>
-<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">top10 =</span> <span class="fu">row_number</span>(<span class="fu">desc</span>(grant_per_month_avg)) <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(<span class="at">top10 =</span> grant_per_month_avg <span class="sc">%in%</span> <span class="fu">slice_max</span>(grant_summary, grant_per_month_avg, <span class="at">n =</span> <span class="dv">7</span>)<span class="sc">$</span>grant_per_month_avg)</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="fu">ggplot</span>(grant_summary, <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10), <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg, <span class="at">colour =</span> programme_name), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10), <span class="fu">aes</span>(<span class="at">label =</span> programme_name), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">size =</span> <span class="fl">2.3</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-9"><a href="#cb6-9"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11"></a>    <span class="at">title =</span> <span class="st">"Average Grant per Month vs Program Duration (Top 7 Highlighted)"</span>) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="Week_8_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>grant_summary <span class="ot">&lt;-</span> grant_summary <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="at">grant_per_month_millions =</span> grant_per_month_avg <span class="sc">/</span> <span class="fl">1e6</span>,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">top10 =</span> <span class="fu">row_number</span>(<span class="fu">desc</span>(grant_per_month_avg)) <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>grant_summary <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_millions)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"gray70"</span>) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  </span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10),</span>
-<span id="cb7-7"><a href="#cb7-7"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb7-8"><a href="#cb7-8"></a>    <span class="at">color =</span> <span class="st">"#0E0E55"</span>) <span class="sc">+</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">geom_text_repel</span>(</span>
-<span id="cb7-10"><a href="#cb7-10"></a>    <span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10),</span>
-<span id="cb7-11"><a href="#cb7-11"></a>    <span class="fu">aes</span>(<span class="at">label =</span> programme_name),</span>
-<span id="cb7-12"><a href="#cb7-12"></a>    <span class="at">size =</span> <span class="fl">2.5</span>,</span>
-<span id="cb7-13"><a href="#cb7-13"></a>    <span class="at">box.padding =</span> <span class="fl">0.4</span>,</span>
-<span id="cb7-14"><a href="#cb7-14"></a>    <span class="at">point.padding =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-16"><a href="#cb7-16"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
-<span id="cb7-17"><a href="#cb7-17"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month (Millions)"</span>,</span>
-<span id="cb7-18"><a href="#cb7-18"></a>    <span class="at">title =</span> <span class="st">"Average Grant per Month vs Program Duration in Ireland's SFI*"</span>,</span>
-<span id="cb7-19"><a href="#cb7-19"></a>    <span class="at">subtitle =</span> <span class="st">"Top 10 Grants Highlighted (2000-2014) "</span>,</span>
-<span id="cb7-20"><a href="#cb7-20"></a>    <span class="at">caption =</span> <span class="st">"</span></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="st">    * SFI was the national Science Foundation in Ireland for investment in scientific and engineering research </span><span class="sc">\n</span><span class="st"> </span></span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="st">    Source: Ireland's Open Data Portal, obtained from TidyTueday Week 8. Author: David Rios"</span>) <span class="sc">+</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a>  <span class="fu">theme_classic</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>grant_summary <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_millions)) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"gray70"</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  </span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10),</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="at">color =</span> <span class="st">"#0E0E55"</span>) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb8-10"><a href="#cb8-10"></a>    <span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10),</span>
+<span id="cb8-11"><a href="#cb8-11"></a>    <span class="fu">aes</span>(<span class="at">label =</span> programme_name),</span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="at">size =</span> <span class="fl">2.5</span>,</span>
+<span id="cb8-13"><a href="#cb8-13"></a>    <span class="at">box.padding =</span> <span class="fl">0.4</span>,</span>
+<span id="cb8-14"><a href="#cb8-14"></a>    <span class="at">point.padding =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-16"><a href="#cb8-16"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
+<span id="cb8-17"><a href="#cb8-17"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month (Millions)"</span>,</span>
+<span id="cb8-18"><a href="#cb8-18"></a>    <span class="at">title =</span> <span class="st">"Monthly Average Grants vs Program Duration in Ireland's SFI* (2000-2014)"</span>,</span>
+<span id="cb8-19"><a href="#cb8-19"></a>    <span class="at">subtitle =</span> <span class="st">"We see how 'Research Centres Programme' took the lead out of all the programs </span><span class="sc">\n</span><span class="st">Top 10 Grants Highlighted."</span>,</span>
+<span id="cb8-20"><a href="#cb8-20"></a>    <span class="at">caption =</span> <span class="st">"</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a><span class="st">    * SFI was the national Science Foundation in Ireland for investment in scientific and engineering research</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="st">    Source: Ireland's Open Data Portal, obtained from TidyTueday Week 8. | Author: David Rios"</span>) <span class="sc">+</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-25"><a href="#cb8-25"></a>    <span class="co"># Axis lines in black</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>, <span class="at">linewidth =</span> <span class="fl">0.6</span>),</span>
+<span id="cb8-27"><a href="#cb8-27"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size=</span><span class="dv">9</span>, <span class="at">color=</span><span class="st">"gray60"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="Week_8_files/figure-html/final_graph-1.png" class="img-fluid figure-img" width="672"></p>
@@ -1100,110 +1105,115 @@ cookieconsent.run({
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="an">title:</span><span class="co"> "W8: Ireland Science Grants"</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">---</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="fu">## Welcome</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a></span>
-<span id="cb8-8"><a href="#cb8-8"></a>This week, I'll be exploring the Irish STEM research and ancillary projects funded by Science Foundation Ireland (SFI) since its foundation in 2000 to its dissolution on 31st July 2024. The data comes from Ireland's Open Data Portal.</span>
-<span id="cb8-9"><a href="#cb8-9"></a></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="fu">## Research Question</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="at">&gt; What institutions have received the higher amount in grant in Ireland overtime (2000-2014)?</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a></span>
-<span id="cb8-14"><a href="#cb8-14"></a></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="in">```{r data_loading, message=FALSE, warning = FALSE}</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#libraries </span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb8-20"><a href="#cb8-20"></a></span>
-<span id="cb8-21"><a href="#cb8-21"></a><span class="co"># loading the data</span></span>
-<span id="cb8-22"><a href="#cb8-22"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">8</span>)</span>
-<span id="cb8-23"><a href="#cb8-23"></a>sfi_grants <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>sfi_grants</span>
-<span id="cb8-24"><a href="#cb8-24"></a><span class="in">```</span></span>
-<span id="cb8-25"><a href="#cb8-25"></a></span>
-<span id="cb8-26"><a href="#cb8-26"></a></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="fu">## Visualization</span></span>
-<span id="cb8-28"><a href="#cb8-28"></a></span>
-<span id="cb8-29"><a href="#cb8-29"></a><span class="in">```{r DEA}</span></span>
-<span id="cb8-30"><a href="#cb8-30"></a>sfi_grants <span class="sc">|&gt;</span> </span>
-<span id="cb8-31"><a href="#cb8-31"></a><span class="fu">mutate</span>(<span class="at">start_date =</span> <span class="fu">as.Date</span>(start_date),</span>
-<span id="cb8-32"><a href="#cb8-32"></a>       <span class="at">end_date   =</span> <span class="fu">as.Date</span>(end_date),</span>
-<span id="cb8-33"><a href="#cb8-33"></a>       <span class="at">program_long =</span> <span class="fu">as.numeric</span>(end_date <span class="sc">-</span> start_date)) <span class="co"># duration in day</span></span>
-<span id="cb8-34"><a href="#cb8-34"></a></span>
-<span id="cb8-35"><a href="#cb8-35"></a>sfi_grants <span class="ot">&lt;-</span> sfi_grants <span class="sc">%&gt;%</span></span>
-<span id="cb8-36"><a href="#cb8-36"></a>  <span class="fu">mutate</span>(<span class="at">program_long =</span> <span class="fu">interval</span>(start_date, end_date) <span class="sc">/</span> <span class="fu">months</span>(<span class="dv">1</span>))  <span class="co"># duration in months</span></span>
-<span id="cb8-37"><a href="#cb8-37"></a></span>
-<span id="cb8-38"><a href="#cb8-38"></a><span class="co"># Calculate average grant per month per program</span></span>
-<span id="cb8-39"><a href="#cb8-39"></a>grant_summary <span class="ot">&lt;-</span> sfi_grants <span class="sc">%&gt;%</span></span>
-<span id="cb8-40"><a href="#cb8-40"></a>  <span class="fu">group_by</span>(programme_name) <span class="sc">%&gt;%</span></span>
-<span id="cb8-41"><a href="#cb8-41"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb8-42"><a href="#cb8-42"></a>    <span class="at">total_commitment =</span> <span class="fu">sum</span>(current_total_commitment, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-43"><a href="#cb8-43"></a>    <span class="at">program_long =</span> <span class="fu">mean</span>(program_long, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># average duration if multiple rows per program</span></span>
-<span id="cb8-44"><a href="#cb8-44"></a>    <span class="at">grant_per_month_avg =</span> total_commitment <span class="sc">/</span> program_long</span>
-<span id="cb8-45"><a href="#cb8-45"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb8-46"><a href="#cb8-46"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(grant_per_month_avg))</span>
-<span id="cb8-47"><a href="#cb8-47"></a></span>
-<span id="cb8-48"><a href="#cb8-48"></a><span class="co"># Plot</span></span>
-<span id="cb8-49"><a href="#cb8-49"></a><span class="fu">ggplot</span>(grant_summary, <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg)) <span class="sc">+</span></span>
-<span id="cb8-50"><a href="#cb8-50"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb8-51"><a href="#cb8-51"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-52"><a href="#cb8-52"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
-<span id="cb8-53"><a href="#cb8-53"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month"</span>,</span>
-<span id="cb8-54"><a href="#cb8-54"></a>    <span class="at">title =</span> <span class="st">"Average Grant per Month vs Program Duration"</span></span>
-<span id="cb8-55"><a href="#cb8-55"></a>    <span class="co"># colour = "Program"</span></span>
-<span id="cb8-56"><a href="#cb8-56"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-57"><a href="#cb8-57"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb8-58"><a href="#cb8-58"></a></span>
-<span id="cb8-59"><a href="#cb8-59"></a></span>
-<span id="cb8-60"><a href="#cb8-60"></a></span>
-<span id="cb8-61"><a href="#cb8-61"></a>grant_summary <span class="ot">&lt;-</span> grant_summary <span class="sc">%&gt;%</span></span>
-<span id="cb8-62"><a href="#cb8-62"></a>  <span class="fu">mutate</span>(<span class="at">top10 =</span> grant_per_month_avg <span class="sc">%in%</span> <span class="fu">slice_max</span>(grant_summary, grant_per_month_avg, <span class="at">n =</span> <span class="dv">7</span>)<span class="sc">$</span>grant_per_month_avg)</span>
-<span id="cb8-63"><a href="#cb8-63"></a></span>
-<span id="cb8-64"><a href="#cb8-64"></a><span class="fu">ggplot</span>(grant_summary, <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg)) <span class="sc">+</span></span>
-<span id="cb8-65"><a href="#cb8-65"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
-<span id="cb8-66"><a href="#cb8-66"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10), <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg, <span class="at">colour =</span> programme_name), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb8-67"><a href="#cb8-67"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10), <span class="fu">aes</span>(<span class="at">label =</span> programme_name), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">size =</span> <span class="fl">2.3</span>) <span class="sc">+</span></span>
-<span id="cb8-68"><a href="#cb8-68"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-69"><a href="#cb8-69"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
-<span id="cb8-70"><a href="#cb8-70"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month"</span>,</span>
-<span id="cb8-71"><a href="#cb8-71"></a>    <span class="at">title =</span> <span class="st">"Average Grant per Month vs Program Duration (Top 7 Highlighted)"</span>) <span class="sc">+</span></span>
-<span id="cb8-72"><a href="#cb8-72"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb8-73"><a href="#cb8-73"></a></span>
-<span id="cb8-74"><a href="#cb8-74"></a>grant_summary <span class="ot">&lt;-</span> grant_summary <span class="sc">%&gt;%</span></span>
-<span id="cb8-75"><a href="#cb8-75"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb8-76"><a href="#cb8-76"></a>    <span class="at">grant_per_month_millions =</span> grant_per_month_avg <span class="sc">/</span> <span class="fl">1e6</span>,</span>
-<span id="cb8-77"><a href="#cb8-77"></a>    <span class="at">top10 =</span> <span class="fu">row_number</span>(<span class="fu">desc</span>(grant_per_month_avg)) <span class="sc">&lt;=</span> <span class="dv">10</span>)</span>
-<span id="cb8-78"><a href="#cb8-78"></a><span class="in">```</span></span>
-<span id="cb8-79"><a href="#cb8-79"></a><span class="in">```{r final_graph}</span></span>
-<span id="cb8-80"><a href="#cb8-80"></a>grant_summary <span class="sc">|&gt;</span> </span>
-<span id="cb8-81"><a href="#cb8-81"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_millions)) <span class="sc">+</span></span>
-<span id="cb8-82"><a href="#cb8-82"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"gray70"</span>) <span class="sc">+</span></span>
-<span id="cb8-83"><a href="#cb8-83"></a>  </span>
-<span id="cb8-84"><a href="#cb8-84"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb8-85"><a href="#cb8-85"></a>    <span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10),</span>
-<span id="cb8-86"><a href="#cb8-86"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb8-87"><a href="#cb8-87"></a>    <span class="at">color =</span> <span class="st">"#0E0E55"</span>) <span class="sc">+</span></span>
-<span id="cb8-88"><a href="#cb8-88"></a>  <span class="fu">geom_text_repel</span>(</span>
-<span id="cb8-89"><a href="#cb8-89"></a>    <span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10),</span>
-<span id="cb8-90"><a href="#cb8-90"></a>    <span class="fu">aes</span>(<span class="at">label =</span> programme_name),</span>
-<span id="cb8-91"><a href="#cb8-91"></a>    <span class="at">size =</span> <span class="fl">2.5</span>,</span>
-<span id="cb8-92"><a href="#cb8-92"></a>    <span class="at">box.padding =</span> <span class="fl">0.4</span>,</span>
-<span id="cb8-93"><a href="#cb8-93"></a>    <span class="at">point.padding =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb8-94"><a href="#cb8-94"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-95"><a href="#cb8-95"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
-<span id="cb8-96"><a href="#cb8-96"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month (Millions)"</span>,</span>
-<span id="cb8-97"><a href="#cb8-97"></a>    <span class="at">title =</span> <span class="st">"Average Grant per Month vs Program Duration in Ireland's SFI*"</span>,</span>
-<span id="cb8-98"><a href="#cb8-98"></a>    <span class="at">subtitle =</span> <span class="st">"Top 10 Grants Highlighted (2000-2014) "</span>,</span>
-<span id="cb8-99"><a href="#cb8-99"></a>    <span class="at">caption =</span> <span class="st">"</span></span>
-<span id="cb8-100"><a href="#cb8-100"></a><span class="st">    * SFI was the national Science Foundation in Ireland for investment in scientific and engineering research </span><span class="sc">\n</span><span class="st"> </span></span>
-<span id="cb8-101"><a href="#cb8-101"></a><span class="st">    Source: Ireland's Open Data Portal, obtained from TidyTueday Week 8. Author: David Rios"</span>) <span class="sc">+</span></span>
-<span id="cb8-102"><a href="#cb8-102"></a>  <span class="fu">theme_classic</span>() </span>
-<span id="cb8-103"><a href="#cb8-103"></a></span>
-<span id="cb8-104"><a href="#cb8-104"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="an">title:</span><span class="co"> "W8: Ireland Science Grants"</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">---</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="fu">## Welcome</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a>This week, I'll be exploring the Irish STEM research and ancillary projects funded by Science Foundation Ireland (SFI) since its foundation in 2000 to its dissolution on 31st July 2024. The data comes from Ireland's Open Data Portal.</span>
+<span id="cb9-9"><a href="#cb9-9"></a></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="fu">## Research Question</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="at">&gt; How does program duration relate to funding intensity across Ireland's SFI programmes between 2000–2014?</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="in">```{r data_loading, message=FALSE, warning = FALSE}</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#libraries </span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb9-20"><a href="#cb9-20"></a></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="co"># loading the data</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2026</span>, <span class="at">week =</span> <span class="dv">8</span>)</span>
+<span id="cb9-23"><a href="#cb9-23"></a>sfi_grants <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>sfi_grants</span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="in">```</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a></span>
+<span id="cb9-26"><a href="#cb9-26"></a></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="fu">## Visualization</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="in">```{r, DEA, message=FALSE, warning=FALSE}</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a>sfi_grants <span class="sc">|&gt;</span> </span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="fu">mutate</span>(<span class="at">start_date =</span> <span class="fu">as.Date</span>(start_date),</span>
+<span id="cb9-32"><a href="#cb9-32"></a>       <span class="at">end_date   =</span> <span class="fu">as.Date</span>(end_date),</span>
+<span id="cb9-33"><a href="#cb9-33"></a>       <span class="at">program_long =</span> <span class="fu">as.numeric</span>(end_date <span class="sc">-</span> start_date)) <span class="co"># duration in day</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a></span>
+<span id="cb9-35"><a href="#cb9-35"></a>sfi_grants <span class="ot">&lt;-</span> sfi_grants <span class="sc">%&gt;%</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a>  <span class="fu">mutate</span>(<span class="at">program_long =</span> <span class="fu">interval</span>(start_date, end_date) <span class="sc">/</span> <span class="fu">months</span>(<span class="dv">1</span>))  <span class="co"># duration in months</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="co"># Calculate average grant per month per program</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a>grant_summary <span class="ot">&lt;-</span> sfi_grants <span class="sc">%&gt;%</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a>  <span class="fu">group_by</span>(programme_name) <span class="sc">%&gt;%</span></span>
+<span id="cb9-41"><a href="#cb9-41"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb9-42"><a href="#cb9-42"></a>    <span class="at">total_commitment =</span> <span class="fu">sum</span>(current_total_commitment, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-43"><a href="#cb9-43"></a>    <span class="at">program_long =</span> <span class="fu">mean</span>(program_long, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># average duration if multiple rows per program</span></span>
+<span id="cb9-44"><a href="#cb9-44"></a>    <span class="at">grant_per_month_avg =</span> total_commitment <span class="sc">/</span> program_long) <span class="sc">%&gt;%</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(grant_per_month_avg))</span>
+<span id="cb9-46"><a href="#cb9-46"></a><span class="in">```</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a></span>
+<span id="cb9-48"><a href="#cb9-48"></a></span>
+<span id="cb9-49"><a href="#cb9-49"></a><span class="in">``` {r}</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a><span class="co"># Plot</span></span>
+<span id="cb9-51"><a href="#cb9-51"></a><span class="fu">ggplot</span>(grant_summary, <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg)) <span class="sc">+</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb9-53"><a href="#cb9-53"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-54"><a href="#cb9-54"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
+<span id="cb9-55"><a href="#cb9-55"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month"</span>,</span>
+<span id="cb9-56"><a href="#cb9-56"></a>    <span class="at">title =</span> <span class="st">"Average Grant per Month vs Program Duration"</span></span>
+<span id="cb9-57"><a href="#cb9-57"></a>    <span class="co"># colour = "Program"</span></span>
+<span id="cb9-58"><a href="#cb9-58"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-59"><a href="#cb9-59"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb9-60"><a href="#cb9-60"></a></span>
+<span id="cb9-61"><a href="#cb9-61"></a></span>
+<span id="cb9-62"><a href="#cb9-62"></a>grant_summary <span class="ot">&lt;-</span> grant_summary <span class="sc">%&gt;%</span></span>
+<span id="cb9-63"><a href="#cb9-63"></a>  <span class="fu">mutate</span>(<span class="at">top10 =</span> grant_per_month_avg <span class="sc">%in%</span> <span class="fu">slice_max</span>(grant_summary, grant_per_month_avg, <span class="at">n =</span> <span class="dv">7</span>)<span class="sc">$</span>grant_per_month_avg)</span>
+<span id="cb9-64"><a href="#cb9-64"></a></span>
+<span id="cb9-65"><a href="#cb9-65"></a><span class="fu">ggplot</span>(grant_summary, <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg)) <span class="sc">+</span></span>
+<span id="cb9-66"><a href="#cb9-66"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb9-67"><a href="#cb9-67"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10), <span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_avg, <span class="at">colour =</span> programme_name), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb9-68"><a href="#cb9-68"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10), <span class="fu">aes</span>(<span class="at">label =</span> programme_name), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">size =</span> <span class="fl">2.3</span>) <span class="sc">+</span></span>
+<span id="cb9-69"><a href="#cb9-69"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-70"><a href="#cb9-70"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
+<span id="cb9-71"><a href="#cb9-71"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month"</span>,</span>
+<span id="cb9-72"><a href="#cb9-72"></a>    <span class="at">title =</span> <span class="st">"Average Grant per Month vs Program Duration (Top 7 Highlighted)"</span>) <span class="sc">+</span></span>
+<span id="cb9-73"><a href="#cb9-73"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb9-74"><a href="#cb9-74"></a></span>
+<span id="cb9-75"><a href="#cb9-75"></a>grant_summary <span class="ot">&lt;-</span> grant_summary <span class="sc">%&gt;%</span></span>
+<span id="cb9-76"><a href="#cb9-76"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-77"><a href="#cb9-77"></a>    <span class="at">grant_per_month_millions =</span> grant_per_month_avg <span class="sc">/</span> <span class="fl">1e6</span>,</span>
+<span id="cb9-78"><a href="#cb9-78"></a>    <span class="at">top10 =</span> <span class="fu">row_number</span>(<span class="fu">desc</span>(grant_per_month_avg)) <span class="sc">&lt;=</span> <span class="dv">10</span>)</span>
+<span id="cb9-79"><a href="#cb9-79"></a><span class="in">```</span></span>
+<span id="cb9-80"><a href="#cb9-80"></a></span>
+<span id="cb9-81"><a href="#cb9-81"></a><span class="in">```{r final_graph}</span></span>
+<span id="cb9-82"><a href="#cb9-82"></a>grant_summary <span class="sc">|&gt;</span> </span>
+<span id="cb9-83"><a href="#cb9-83"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> program_long, <span class="at">y =</span> grant_per_month_millions)) <span class="sc">+</span></span>
+<span id="cb9-84"><a href="#cb9-84"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"gray70"</span>) <span class="sc">+</span></span>
+<span id="cb9-85"><a href="#cb9-85"></a>  </span>
+<span id="cb9-86"><a href="#cb9-86"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb9-87"><a href="#cb9-87"></a>    <span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10),</span>
+<span id="cb9-88"><a href="#cb9-88"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb9-89"><a href="#cb9-89"></a>    <span class="at">color =</span> <span class="st">"#0E0E55"</span>) <span class="sc">+</span></span>
+<span id="cb9-90"><a href="#cb9-90"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb9-91"><a href="#cb9-91"></a>    <span class="at">data =</span> <span class="fu">subset</span>(grant_summary, top10),</span>
+<span id="cb9-92"><a href="#cb9-92"></a>    <span class="fu">aes</span>(<span class="at">label =</span> programme_name),</span>
+<span id="cb9-93"><a href="#cb9-93"></a>    <span class="at">size =</span> <span class="fl">2.5</span>,</span>
+<span id="cb9-94"><a href="#cb9-94"></a>    <span class="at">box.padding =</span> <span class="fl">0.4</span>,</span>
+<span id="cb9-95"><a href="#cb9-95"></a>    <span class="at">point.padding =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb9-96"><a href="#cb9-96"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-97"><a href="#cb9-97"></a>    <span class="at">x =</span> <span class="st">"Program Duration (months)"</span>,</span>
+<span id="cb9-98"><a href="#cb9-98"></a>    <span class="at">y =</span> <span class="st">"Average Grant per Month (Millions)"</span>,</span>
+<span id="cb9-99"><a href="#cb9-99"></a>    <span class="at">title =</span> <span class="st">"Monthly Average Grants vs Program Duration in Ireland's SFI* (2000-2014)"</span>,</span>
+<span id="cb9-100"><a href="#cb9-100"></a>    <span class="at">subtitle =</span> <span class="st">"We see how 'Research Centres Programme' took the lead out of all the programs </span><span class="sc">\n</span><span class="st">Top 10 Grants Highlighted."</span>,</span>
+<span id="cb9-101"><a href="#cb9-101"></a>    <span class="at">caption =</span> <span class="st">"</span></span>
+<span id="cb9-102"><a href="#cb9-102"></a><span class="st">    * SFI was the national Science Foundation in Ireland for investment in scientific and engineering research</span></span>
+<span id="cb9-103"><a href="#cb9-103"></a><span class="st">    Source: Ireland's Open Data Portal, obtained from TidyTueday Week 8. | Author: David Rios"</span>) <span class="sc">+</span></span>
+<span id="cb9-104"><a href="#cb9-104"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-105"><a href="#cb9-105"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-106"><a href="#cb9-106"></a>    <span class="co"># Axis lines in black</span></span>
+<span id="cb9-107"><a href="#cb9-107"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>, <span class="at">linewidth =</span> <span class="fl">0.6</span>),</span>
+<span id="cb9-108"><a href="#cb9-108"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size=</span><span class="dv">9</span>, <span class="at">color=</span><span class="st">"gray60"</span>))</span>
+<span id="cb9-109"><a href="#cb9-109"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
