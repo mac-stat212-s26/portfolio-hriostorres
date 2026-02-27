@@ -1,0 +1,81 @@
+---
+title: "W7: Agriculture in NZ"
+format: html
+---
+
+## Data Importing 
+
+```{r}
+## libraries
+library(tidyverse)
+library(forcats)
+
+
+##importing the data set
+sheep <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-02-17/dataset.csv')
+```
+
+## Research Question
+
+How has agricultural production in New Zealand evolved over time, and which sectors have driven long-term changes?
+
+
+### Data Cleaning
+```{r cleaning}
+sheep |>
+  group_by(value_label) |>
+  count()
+
+
+sheep_clean <- sheep |>
+  mutate(category = case_when(
+      # Land
+      value_label %in% c("Hectares", "Hectared", "Square metres") ~ "Land Area",
+      # Weight
+      value_label %in% c("Tonnes", "Kilograms") ~ "Weight",
+      # Volume
+      value_label == "Cubic metres" ~ "Volume",
+      # Farm structure
+      value_label == "Number of farm holdings" ~ "Farm Holdings",
+      # Eggs / dozens
+      value_label %in% c("Dozens", "Number of eggs") ~ "Egg Production",
+      # All livestock counts
+      str_detect(value_label, "Number of") ~ "Livestock",
+      TRUE ~ "Other"))
+
+# sheep_clean |>
+#   group_by(category) |>
+#   count()
+
+# Total by year
+total_by_year <- sheep_clean |>
+  group_by(year_ended_june) |>
+  summarise(total = sum(value, na.rm = TRUE))
+```
+```{r final_plot}
+## final plot
+ggplot() +
+  geom_line(
+    data = sheep_clean,
+    aes(x = year_ended_june, y = value/1000000, group = measure, color = category),
+    alpha = 0.8) +
+  geom_line(
+    data = total_by_year,
+    aes(x = year_ended_june, y = total/1000000),
+    linewidth = 0.8) +
+  labs(
+    title = "Agricultural Production in New Zealand Over Time",
+    subtitle = "Black line shows total in NZD; colored lines show production categories",
+    x = "Year Ended June",
+    y = "Production Value, in million NZD",
+    caption = "Source: TidyTuesday Challenge Week 7, 2026. Author: David Rios", 
+    color = "Production Category") +
+  theme_minimal()
+```
+
+
+## Conclusion
+
+From this graph we see how the egg production increased rapidly in the last two decades and it's driving the total up. Similarly, the total agricultural production in New Zealand dropped prior to the 2000 and early 2000's. This can either be explain by macro-economic shocks or missingness of data. Life stock and land area decreased its importance is terms of production value which is surprising!
+
+
