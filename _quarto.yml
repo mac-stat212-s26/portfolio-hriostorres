@@ -71,6 +71,7 @@ book:
       - tt/Week_6.qmd
       - tt/Week_7.qmd
       - tt/Week_8.qmd
+      - tt/Week_9.qmd
 
     - part: "Pre-Class Learnings"
       chapters:
@@ -90,6 +91,7 @@ book:
       - extra/missing_data.qmd
       - extra/Projections.qmd
       - extra/exam.qmd
+      - extra/Exam_2.qmd
 
 
 
