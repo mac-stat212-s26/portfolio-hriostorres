@@ -1,6 +1,7 @@
 ---
 title: "Exam 2"
 subtitle: "It matters more than you think."
+author: "David Rios"
 format:
   html:
     self-contained: true
