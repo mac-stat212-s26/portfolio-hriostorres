@@ -72,6 +72,7 @@ book:
       - tt/Week_7.qmd
       - tt/Week_8.qmd
       - tt/Week_9.qmd
+      - tt/Week_12.qmd
 
     - part: "Pre-Class Learnings"
       chapters:

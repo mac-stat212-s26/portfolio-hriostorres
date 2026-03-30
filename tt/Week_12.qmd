@@ -1,0 +1,103 @@
+---
+title: "W12: 10000 Pi Digits!"
+format: html
+---
+
+
+## PI-DAY
+
+In honour of pi day, this week TidyTuesday (TT) challenge is about the first 10000 digits of pi! 
+
+In this TT challenge, I will be playing around with the pi digits, and plot them based on the golden ratio, a concept learned in my math classes. Then, I will paired each number with its corresponding color to see if any pattern emerge.
+
+## Research Question
+
+> Are the digits of pi (0–9) uniformly distributed across the first 10,000 decimal places?
+
+## Data Preparation
+
+```{r message=FALSE}
+library(tidyverse)
+
+tuesdata <- tidytuesdayR::tt_load(2026, week = 12)
+
+pi_digits <- tuesdata$pi_digits
+```
+
+```{r pi_colors}
+
+## some data preparation
+
+golden_angle <- pi * (3 - sqrt(5))
+
+df <- pi_digits %>%
+  filter(digit_position <= 1000) %>%
+  mutate(
+    angle    = (digit_position - 1) * golden_angle,
+    radius   = sqrt(digit_position - 1) * 1.9,
+    x        = radius * cos(angle),
+    y        = radius * sin(angle),
+    dot_size = 0.3 + (radius / max(radius)) * 2.2,
+    digit_f  = factor(digit, levels = 0:9))
+
+# Color palette
+pi_colors <- c(
+  "0" = "#A0A0A0",   # silver
+  "1" = "#FF4081",   # hot pink
+  "2" = "#448AFF",   # blue
+  "3" = "#FF6D00",   # orange
+  "4" = "#00BCD4",   # cyan
+  "5" = "#AA00FF",   # purple
+  "6" = "#76FF03",   # lime green
+  "7" = "#FFD740",   # amber
+  "8" = "#1DE9B6",   # teal
+  "9" = "#FF6E40"    # coral
+)
+```
+
+
+## Final Plot, Enjoy! 
+
+```{r pi_final_plot}
+
+df |> 
+ggplot(aes(x = x, y = y, colour = digit_f, size = dot_size)) +
+  geom_point(shape = 16) +
+  annotate("text", x = 0, y = 0, label = "\u03c0",
+           colour = "white", size = 7, fontface = "bold") +
+  scale_colour_manual(values = pi_colors) +
+  scale_size_identity() +
+  coord_fixed() +
+  labs(
+  title    = "10,000 Digits of Pi",
+  subtitle = "Each dot represents a digit (0–9), coloured by its value",
+  caption  = "Data: TidyTuesday Week 12 · Author: David Rios") +
+theme_void() +
+theme(
+  plot.background  = element_rect(fill = "white", colour = NA),
+  panel.background = element_rect(fill = "black", colour = NA),
+  plot.title.position = "plot",
+    legend.position = "none",   
+  plot.title = element_text(
+    family   = "Times New Roman",
+    colour   = "grey10",
+    size     = 22,
+    face     = "bold",
+    hjust    = 0.5,
+    margin   = margin(t = 20, b = 6)
+  ),
+  plot.subtitle = element_text(
+    family   = "Times New Roman",
+    colour   = "grey30",
+    size     = 13,
+    hjust    = 0.5,
+    margin   = margin(b = 20) ),
+  plot.caption = element_text(
+    family   = "Times New Roman",
+    colour   = "grey50",
+    hjust    = 0.5,
+    margin   = margin(t = 16, b = 16)),
+  plot.caption.position = "plot",
+  plot.margin = margin(t = 10, r = 60, b = 10, l = 60))
+```
+
