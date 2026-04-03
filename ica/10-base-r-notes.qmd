@@ -490,7 +490,6 @@ class(results)
 
 results <- try(My_own_sum(c("a","b","c")), silent = TRUE)
 class(results)
-
 ```
 ## Done!
 

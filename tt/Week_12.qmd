@@ -1,6 +1,9 @@
 ---
 title: "W12: 10000 Pi Digits!"
 format: html
+format: 
+  html: 
+    embed-resources: true
 ---
 
 

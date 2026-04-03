@@ -1,6 +1,9 @@
 ---
 title: "12 Loops+Iter II"
 ---
+```{r}
+library(tidyverse)
+```
 
 ## 🧩 Learning Goals
 
@@ -30,7 +33,25 @@ Recall that:
 - Then translate each step to code.
 
 ```{r}
+# --- The "Manual" For Loop Way (Review) ---
 
+# 1. Create a storage container (Pre-allocation)
+output <- vector("character", length = length(mtcars))
+
+# 2. The loop: Translate steps to code
+for (i in seq_along(mtcars)) {
+  # Access the column with [[i]], get the class, and save it in the container
+  output[i] <- class(mtcars[[i]])
+}
+
+# 3. Add names so we know which class belongs to which column
+names(output) <- names(mtcars)
+output
+
+
+# --- The "purrr" Way (The New Way) ---
+# This replaces all the lines above with just one line:
+mtcars |> map_chr(class)
 ```
 
 ## Iteration with `purrr` 
@@ -170,8 +191,21 @@ map_int(diamonds |> select(!where(is.numeric)), n_distinct)
     
 Once you've done that with `map()`, write a `for` loop to achieve the same result. Which do you prefer in terms of ease of code writing and readability?
 
+```{r}
+summ_stats <- function(x) {
+  tibble(
+    mean   = mean(x, na.rm = TRUE),
+    median = median(x, na.rm = TRUE),
+    sd     = sd(x, na.rm = TRUE),
+    IQR    = IQR(x, na.rm = TRUE)
+  )
+}
 
-
+# To apply it to all numeric columns in diamonds:
+diamonds_stats <- diamonds |> 
+  select(where(is.numeric)) |> 
+  map_dfr(summ_stats, .id = "variable") # .id adds the column names back!
+```
 
 ## Iteration with `map2` or `pmap` 
 
@@ -237,7 +271,19 @@ pmap_chr(string_data, str_replace_all, string = "ppp nnn hhh")
 - Use different arguments for `start` and `end` but a fixed `string`
 
 ```{r}
+string_data1 <- tibble(
+  start = c(2, 1, 3),
+  end = c(5, 2, 4)
+)
 
+string_data2 <- tibble(
+  string = c('banana', 'turqoiuse', 'terrarium'),
+  start = c(2, 1, 3),
+  end = c(5, 2, 4)
+)
+
+pmap(string_data1, str_sub, string = 'banana')
+pmap(string_data2, str_sub)
 ```
 
 2. Last class we worked on an extended exercise where our goal was to write a series of functions and a `for` loop to repeat linear model fitting under different "settings" (removal of outliers, model formula choice). 
@@ -276,9 +322,12 @@ fit_model <- function(data, mod_formula, remove_outliers) {
 }
 
 # use pmap()
+# We pass 'diamonds' as a constant argument to the 'data' parameter
+model_results <- df_arg_combos |> 
+  mutate(model = pmap(df_arg_combos, fit_model, data = diamonds))
 
-
-
+# View results
+model_results
 
 ```
 
@@ -340,4 +389,3 @@ If you are interested in having a deeper understanding of the `purrr` package, I
 ## Done!
 
 - Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website
-
