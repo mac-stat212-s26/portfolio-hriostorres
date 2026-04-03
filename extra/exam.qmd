@@ -1,0 +1,82 @@
+---
+title: "Exam 1"
+subtitle: Summary of the content covered
+author: David Rios
+---
+
+
+# Reading a `geom` Help Page
+
+| Section | What to look for |
+|---------|-----------------|
+| **Usage** | All available arguments — names hint at customization options |
+| **Arguments** | `mapping` (aes), `data` (dataset), `...` (fixed aesthetics like `color="red"`) |
+| **Aesthetics** | Which visual channels (x, y, color, size…) the geom supports |
+
+---
+
+# Multiple `data=` Arguments in One Plot
+
+By default one dataset is passed to `ggplot()`. Override per-layer with `data=` inside `geom_*()`.
+
+```{r}
+#| eval: false
+# Dataset 1 in ggplot(), Dataset 2 in a specific geom layer
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point() +
+  geom_point(data = diamonds_avg_price,        # <-- different dataset
+             aes(x = carat, y = avg_price),
+             color = "deepskyblue", size = 3)
+```
+
+**When is this needed?** When one layer needs data filtered/summarised differently from the rest (e.g., adding summary stats, annotations, or vertical dividers at specific rows).
+
+---
+
+# Fixed vs. Mapped Aesthetics
+
+| Type | Where it goes | Example |
+|------|--------------|---------|
+| **Mapped** (varies by data) | Inside `aes()` | `aes(color = cut)` |
+| **Fixed** (same for all rows) | Outside `aes()`, in `...` | `color = "red"` |
+
+---
+
+# Useful Color References (Case Study)
+
+| Purpose | Hex |
+|---------|-----|
+| Record range (tan-grey) | `"#ECEBE3"` |
+| Normal range (mauve) | `"#C8B8BA"` |
+| Actual temp (red) | `"#A90248"` |
+| Precip bar (blue) | `"#32a3d8"` |
+| Precip background (tan) | `"#ebeae2"` |
+
+---
+
+# Quick Reference: Common `geom`s
+
+| `geom` | Best for | Key aesthetics |
+|--------|----------|---------------|
+| `geom_point` | Scatterplots, dot annotations | x, y, shape, size, color |
+| `geom_linerange` | Vertical intervals/ranges | x, ymin, ymax |
+| `geom_vline` | Vertical reference lines | xintercept |
+| `geom_hline` | Horizontal reference lines | yintercept |
+| `geom_text` | Text labels on plot | x, y, label, hjust, vjust |
+| `geom_bar` | Counts / bar charts | x |
+| `geom_col` | Pre-computed bar heights | x, y |
+| `geom_smooth` | Trend lines | x, y, method |
+
+---
+
+# Workflow Checklist for Recreating a Visualization
+
+1. **Identify variables** → what maps to position, color, size, shape?
+2. **Choose geoms** → browse ggplot2 reference, check small thumbnails
+3. **Check aesthetics** → open help page, read Usage + Aesthetics sections
+4. **Layer order** → background geoms first, foreground last
+5. **Separate datasets per layer** → use `data=` inside geom when needed
+6. **Axis & labels** → `scale_x_continuous(breaks, labels)`, `labs()`
+7. **Theme** → `theme_classic()` / `theme_bw()` + `theme()` for fine-tuning
+
+---

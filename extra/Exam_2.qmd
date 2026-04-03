@@ -1,0 +1,81 @@
+---
+title: "Exam 2"
+subtitle: "It matters more than you think."
+author: "David Rios"
+format:
+  html:
+    self-contained: true
+    theme: flatly
+---
+```{r setup, include=FALSE}
+library(tidyverse)
+library(htmltools)
+```
+
+
+```{r, echo=FALSE}
+sections <- tribble(
+  ~id, ~acronym, ~title,                        ~tagline,                                          ~color,    ~icon, ~plain,                                                                                                                                             ~explanation,                                                                                                                                                                                      ~example,                                                                                                                                                                                                                                          ~what_to_do,
+  1L,  "MCAR",   "Missing Completely At Random", "The librarian forgot — but equally, for everyone.", "#16a34a", "🎲",  "The simplest case. Data goes missing for reasons that have nothing to do with your dataset — it's pure chance.",                                      "Imagine a librarian who randomly forgets to log 5% of all book loans. It doesn't matter who borrowed the book, what it was, or when. The forgetting is totally unrelated to the data itself.",    "A librarian forgets to register a book loan about 5% of the time — and this forgetfulness is entirely random, not tied to any particular patron or book type.",                                                                                  list(c("Complete case analysis is fine — If data is MCAR, you can safely ignore missing rows and results won't be biased, because missingness was random to begin with.", "Watch out for small samples — If a lot of data is missing, throwing away rows loses statistical power. Imputation (filling blanks with educated estimates) helps retain your original sample size.")),
+  2L,  "MAR",    "Missing At Random",             "Not random — but predictable from what you can see.", "#2563eb", "🔍", "Misleadingly named! MAR doesn't mean the data is truly random. It means missing values can be explained by other variables you've already measured.", "You can see *why* something is missing — it's connected to information you already have. The gap isn't arbitrary; it's dependent on something observable.",                                          "In a survey, older people are more willing to share their income than younger people. Income data is missing more for younger respondents — and you recorded their age. The missingness is tied to 'age', which you can see.",                      list(c("Use imputation — Since you can predict what's missing from other variables (like age predicting income gaps), use those relationships to fill in the blanks, then verify your assumptions.")),
+  3L,  "MNAR",   "Missing Not At Random",         "The missing value itself is why it's missing.",       "#dc2626", "🕳️", "The trickiest case. The reason data is missing is directly tied to the value that would have been there — which you can't observe. This creates hidden bias.", "The data isn't missing by chance, and it's not explained by other variables you have. The missing value itself is the cause of its own absence.",                                                "High earners are less likely to reveal their income. The income data that's missing isn't random — the very fact that someone earned a lot made them stay silent. You can't see the income, and that's exactly why it's gone.", list(c("Investigate the cause — Try to understand why the data is missing. That context is crucial for deciding how to handle it.", "Try different assumptions (sensitivity analysis) — Test a range of plausible scenarios. For example: assume missing incomes are 'high', then 'very high', then 'extremely high' — and see how your conclusions change. If results stay consistent, you're on solid ground."))
+)
+
+make_card <- function(id, acronym, title, tagline, color, icon, plain, explanation, example, what_to_do) {
+  bullet_items <- map(what_to_do[[1]], function(point) {
+    parts <- str_split_1(point, " — ")
+    tags$li(style = "margin-bottom: 10px;",
+      tags$strong(parts[1]), " — ", parts[2]
+    )
+  })
+
+  tags$details(
+    style = paste0(
+      "border: 1px solid ", color, "44; border-radius: 8px; ",
+      "margin-bottom: 24px; overflow: hidden; ",
+      "box-shadow: 0 1px 4px rgba(0,0,0,0.06);"
+    ),
+    tags$summary(
+      style = paste0(
+        "padding: 24px 28px; cursor: pointer; list-style: none; ",
+        "background: white; border-left: 5px solid ", color, ";"
+      ),
+      tags$div(style = "display: flex; align-items: center; gap: 12px; margin-bottom: 6px;",
+        tags$span(style = "font-size: 22px;", icon),
+        tags$span(style = paste0("font-family: monospace; font-size: 13px; letter-spacing: 3px; color: ", color, "; font-weight: 700;"), acronym)
+      ),
+      tags$h3(style = "margin: 0 0 4px; font-size: 20px; font-weight: 600; color: #1a1a1a;", title),
+      tags$p(style = "margin: 0 0 12px; font-style: italic; color: #888; font-size: 14px;", tagline),
+      tags$p(style = "margin: 0; font-size: 15px; color: #444; line-height: 1.7;", plain)
+    ),
+    tags$div(
+      style = paste0("padding: 24px 28px; background: #fafafa; border-top: 1px solid ", color, "22;"),
+      tags$p(style = "font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 20px;", explanation),
+      tags$div(
+        style = paste0("background: white; border-left: 3px solid ", color, "; padding: 14px 18px; border-radius: 0 6px 6px 0; margin-bottom: 24px;"),
+        tags$div(style = paste0("font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: ", color, "; margin-bottom: 8px;"), "Real-world example"),
+        tags$p(style = "margin: 0; font-size: 15px; color: #444; line-height: 1.7;", example)
+      ),
+      tags$div(style = "font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #999; margin-bottom: 12px;", "What to do"),
+      tags$ul(style = "margin: 0; padding-left: 18px; color: #555; font-size: 15px; line-height: 1.75;", bullet_items)
+    )
+  )
+}
+
+card_list <- pmap(sections, make_card)
+
+tagList(
+  tags$div(style = "font-family: Georgia, serif; max-width: 720px; margin: 0 auto; padding: 20px 0 60px;",
+    tags$p(style = "font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #aaa; margin-bottom: 16px;",
+      "Data Science · Exam 2"),
+    tags$p(style = "font-size: 17px; line-height: 1.85; color: #555; margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 32px;",
+      "Not all missing data is created equal. Whether a gap in your dataset is harmless or dangerously misleading depends entirely on ",
+      tags$em("why"), " it's missing. Click each type below to explore."),
+    tags$div(card_list),
+    tags$div(style = "margin-top: 40px; padding-top: 24px; border-top: 1px solid #eee; font-size: 14px; color: #888; line-height: 1.8;",
+      tags$strong("The bottom line: "),
+      "Before doing anything with missing data, ask yourself ", tags$em("why"), " it's missing. The answer changes everything — from whether your analysis is valid, to which statistical tool you should reach for."
+    )
+  )
+)
+```
