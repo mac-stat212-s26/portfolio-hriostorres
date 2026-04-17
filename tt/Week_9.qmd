@@ -1,0 +1,94 @@
+---
+title: "W9: Golem Grad Tortoise Data"
+format: html
+---
+
+## Introduction
+
+Hermann’s tortoises inhabit both the island plateau of Lake Prespa and nearby mainland areas in North Macedonia. Island populations are exceptionally dense, and males strongly outnumber females, leading to frequent harassment that affects female body condition. This study examines whether such pressures are reflected in differences in carapace length between sexes across localities.
+
+
+## Research Question
+
+> Do female and male tortoises differ in carapace length within each locality?
+
+
+## Data Import
+
+```{r}
+library(tidyverse)
+
+tuesdata <- tidytuesdayR::tt_load(2026, week = 9)
+
+clutch_size_cleaned <- tuesdata$clutch_size_cleaned
+tortoise_body_condition_cleaned <- tuesdata$tortoise_body_condition_cleaned
+
+
+# Inspect tortoise body condition data
+glimpse(tortoise_body_condition_cleaned)
+# Inspect clutch size data
+glimpse(clutch_size_cleaned)
+```
+
+## Graph
+
+```{r}
+# Number of observations by sex and season
+tortoise_body_condition_cleaned %>%
+  group_by(sex, season) %>%
+  summarise(n_recaptures = n(), .groups = "drop")
+
+ggplot(tortoise_body_condition_cleaned, aes(x = season, fill = sex)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Recaptures by Season and Sex",
+       x = "Season", y = "Count of Recaptures") +
+  theme_classic()
+
+tortoise_body_condition_cleaned %>%
+  group_by(individual) %>%
+  summarise(total_recaptures = n()) %>%
+  ggplot(aes(x = total_recaptures)) +
+  geom_histogram(binwidth = 1, fill = "darkgreen", color = "white") +
+  labs(title = "Distribution of Recaptures per Tortoise",
+       x = "Number of Recaptures", y = "Count of Individuals") +
+  theme_classic()
+
+# Body Mass
+ggplot(tortoise_body_condition_cleaned, aes(x = locality, y = body_mass_grams, fill = sex)) +
+  geom_boxplot() +
+  labs(title = "Body Mass by Locality and Sex", y = "Body Mass (g)") +
+  theme_minimal()
+
+# Carapace Length
+ggplot(tortoise_body_condition_cleaned, aes(x = locality, y = straight_carapace_length_mm, fill = sex)) +
+  geom_boxplot() +
+  labs(title = "Carapace Length by Locality and Sex", y = "Length (mm)") +
+  theme_minimal()
+```
+```{r final_plot}
+# Carapace Length by Locality and Sex
+tortoise_body_condition_cleaned |>
+  ggplot(aes(x = locality, y = straight_carapace_length_mm, fill = sex)) +
+  geom_boxplot() +
+  scale_fill_manual(
+    values = c("f" = "#FF9999", "m" = "#66CC99"),
+    labels = c("f" = "Female", "m" = "Male"),
+    name = "Sex"
+  ) +
+  labs(
+    title = "Carapace Length by Locality and Sex",
+    subtitle = "Comparison across island and mainland populations.",
+    x = "Locality",
+    y = "Carapace Length (mm)",
+    caption = "Island females on Lake Prespa plateau show reduced body condition.\nData: Novica Nakov's Contribution on TidyTuesday 2026 W10. Author: David Rios.") +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 10),
+    plot.title = element_text(size = 14),
+    plot.subtitle = element_text(size = 11, hjust = 0),
+    plot.caption = element_text(size = 9, hjust = 0))
+```
+

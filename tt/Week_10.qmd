@@ -1,0 +1,77 @@
+---
+title: "W:10 How likely is 'likely'?"
+format: html
+---
+
+## Introduction
+
+People often use words like "likely," "probable," or "almost certain" to describe uncertain events, but how these phrases are interpreted can vary widely across individuals and cultures. In the *How Likely Is Likely?* dataset, over 5,000 participants assigned numerical probabilities (0–100%) to common probability phrases. This project explores how interpretation of these phrases differs across countries and demographic groups, highlighting global patterns of optimism and variation in probabilistic thinking.
+
+
+## Research Question
+
+> Which countries interpret probability phrases most optimistically?
+
+
+
+## Data Import
+```{r}
+library(tidyverse)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(sf)
+
+tuesdata <- tidytuesdayR::tt_load(2026, week = 10)
+
+absolute_judgements <- tuesdata$absolute_judgements
+pairwise_comparisons <- tuesdata$pairwise_comparisons
+respondent_metadata <- tuesdata$respondent_metadata
+```
+
+```{r final_plot}
+# Merge probability estimates with metadata
+data_full <- absolute_judgements |> 
+  left_join(respondent_metadata, by = "response_id")
+
+# Compute mean probability by country
+country_summary <- data_full |>
+  group_by(country_of_residence) |>
+  summarize(
+    mean_prob = mean(probability, na.rm = TRUE),
+    n = n(),
+    .groups = "drop")
+
+# Fix country names to match rnaturalearth
+country_summary <- country_summary |>
+  mutate(country_of_residence = case_when(
+    country_of_residence == "Federated States of Micronesia" ~ "Micronesia",
+    country_of_residence == "Myanmar (Burma)" ~ "Myanmar",
+    country_of_residence == "The Gambia" ~ "Gambia",
+    country_of_residence == "United States" ~ "United States of America",
+    TRUE ~ country_of_residence
+  ))
+
+# Load world map
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# Merge world map with country_summary
+world_data <- world |>
+  left_join(country_summary, by = c("name" = "country_of_residence"))
+
+# Plot world map
+ggplot(world_data) +
+  geom_sf(aes(fill = mean_prob)) +
+  scale_fill_viridis_c(option = "C", na.value = "white", name = "Mean Probability") +
+  labs(
+    title = "Global Optimism in Interpreting Probability Phrases",
+    subtitle = "Average probability assigned per country* (higher = more optimistic)",
+    caption = "Data: Kucharski's 'How Likely Is Likely?' TidyTuesday 2026 W10. Author: David Rios\nWe have limited information on the countries responses; thus, multiple have no information.") +
+  theme_classic() +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.caption =element_text(hjust = 0))
+```
+
+
+

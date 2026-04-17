@@ -1,0 +1,62 @@
+---
+title: "Missing Data?"
+subtitle: "Blog post about what to do when you have missing data"
+author: Hermogenes David Rios
+---
+
+## Welcome!
+
+Welcome to this series of posts that will walk you thought one of the most common problems we encounter when working with data sets. Today's blog will talk about missing data, what it is, and the missing data mechanisms.
+
+
+## What is missing data?
+
+Missing data is a very common issuea on multiple data sets and it refers to those missing values in your observations. For example, let's say your data set is about the ages in colleges, you surveyed 10 people, and in your data set you only have 9 entries (values) and 1 NA, the NA is your missing data.
+
+## Approaches to Missing data
+
+There are 3 main ways of proceeding:
+
+1. Drop the cases with missing data from the analysis
+2. For some variables, a missing value might be meaningful itself in a category.
+    - Example: The survey question “What is your gender?” might only provide two responses: “male” and “female”. Missing values could indicate that the respondent uses a non-binary designation. Thus, instead of dropping these cases, treating the missing data as its own category (“Other”) could be more appropriate.
+3. Impute (fill in) the missing data using imputation algorithms.
+Imputation algorithms can be as simple as replacing missing values with the mean of the non-missing values.
+More sophisticated imputation algorithms use models to predict missing values as a function of other variables in the data.
+
+Confused on which to use? That's fair and for that we have to understand the mechanism by which data become missing.
+
+
+## Missing Data Mechanisms
+
+This is a big topic, so let's start slowly:
+
+1. **Missing Completely At Random (MCAR):** This is when the probability of missing data for a variable is the same for all cases. Implies that causes of the missing data are unrelated to the data. Examples: 
+    - You collect data and the librarian says that 5% of the times they forget to register a book loan, and this is random.
+    
+    *What to do?*
+      - If MCAR, then complete case analysis will be unbiased.
+      - With a lot of missing observations, a complete case analysis will suffer from loss of statistical power, and imputation will be useful to retain the original sample size.
+
+2. **Missing At Random (MAR):** This is when the probability of missing data is related to observed variables but unrelated to unobserved information. Examples:
+    - In a survey, older people are more likely to report their income than younger people. Missingness is related to the observed age variable, but not to unobserved information.
+    
+    *What to do?*
+    - Use imputation methods that predict the value of the missing variables from other observed variables and verify.
+    
+3. **Missing Not At Random (MNAR):** The missingness of a value depends on a true value itself. Example:
+    - Following the income examples: High-income individuals may be less likely to report their income.
+    
+    *What to do?*
+    - Learn the reasons why, so we can use imputation models.
+    - We can use imputation methods with different assumptions about the missing data and try out a variety of assumptions.
+      - Example: If higher incomes are more likely to be missing, we can make different assumptions about what “high” could be to fill in the missing values and see how our results change under these different assumptions.
+      
+      
+## Conclusion
+
+Thank you for reading this blog post. I hope you learned more about missing data and how to deal with that. See you in another post.
+
+
+
+
