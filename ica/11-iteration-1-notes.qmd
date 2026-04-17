@@ -475,18 +475,31 @@ Note that in `df_arg_combos`:
 - `remove_outliers`: this column is a **vector** and you can extract the 1st element with `[1]`
 
 ```{r}
+# redefine fit_model to match your grid of arguments
+fit_model <- function(data, mod_formula, remove_outliers_flag) {
+  
+  if (remove_outliers_flag) {
+    data <- remove_outliers(data, what_var = carat, sd_thresh = 3)
+  }
+  
+  lm(mod_formula, data = data)
+}
 
+# storage
 model_storage <- vector("list", length = nrow(df_arg_combos))
 
+# loop
 for (i in seq_len(nrow(df_arg_combos))) {
   
-  this_formula <- df_arg_combos$mod_formula[[i]]   # list column
-  this_remove  <- df_arg_combos$remove_outliers[i] # logical vector
+  this_formula <- df_arg_combos$mod_formula[[i]]
+  this_remove  <- df_arg_combos$remove_outliers[i]
   
   model_storage[[i]] <- fit_model(
     data = diamonds,
     mod_formula = this_formula,
-    remove_outliers_flag = this_remove)}
+    remove_outliers_flag = this_remove
+  )
+}
 
 model_storage
 ```

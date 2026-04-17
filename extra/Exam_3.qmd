@@ -1,0 +1,101 @@
+---
+title: "Exam 3: Shiny"
+format: html
+author: "David Rios"
+---
+
+## Introduction
+
+This is a tutorial of how to make interactive Visualizations in R.
+In this tutorial, we are going to be using Shiny which is an R package that makes it easy to build interactive web applications (apps) straight from R.
+
+## Shiny and Interactive Dashboards
+
+Shiny is an R package that allows you to turn static analysis into interactive dashboards and web apps.
+Unlike a single plot, Shiny apps enable users to **engage with the data**—filtering, adjusting parameters, and exploring patterns in real time.
+This makes Shiny especially powerful when your goal is not just to present results, but to **let users discover insights themselves**.
+
+At its core, every Shiny app has three components:
+
+-   **UI (User Interface):** controls the layout and inputs (e.g., sliders, dropdowns)\
+-   **Server:** contains the logic and computations\
+-   **`shinyApp()`**: connects UI and server to run the app
+
+What makes Shiny unique is **reactivity**.
+Instead of rerunning your entire script, Shiny only updates the parts of the app that depend on user input.
+For example, in the “Hello Shiny” app, changing the number of bins automatically updates the histogram—no manual rerun required.
+
+## Connecting Shiny to Dashboard Tradeoffs
+
+This is where Shiny connects directly to the **design tradeoffs** discussed earlier:
+
+-   **Interaction increases:** Shiny enables filters, sliders, and dynamic visuals, making dashboards more exploratory\
+-   **Number of pages can decrease:** one app can contain multiple views instead of many static plots\
+-   **Screenspace becomes constrained:** layouts must be carefully designed to avoid clutter\
+-   **Abstraction becomes critical:** dashboards often start with summaries and allow drill-downs
+
+However, these benefits come at a cost:
+
+-   More **complexity in code and design**\
+-   Higher **development time**\
+-   Risk of **over-interaction**, where users get lost instead of informed
+
+## Takeaway
+
+Use Shiny when your audience needs to *interact* with the data.
+If your goal is simply to communicate one clear message, a well-designed static visualization is often the better choice.
+
+## Code Appendix
+
+```{r eval=FALSE}
+install.packages("shiny")
+
+# Here is the ui object for the Hello Shiny example.
+
+library(shiny)
+library(bslib)
+
+# Define UI for app that draws a histogram ----
+ui <- page_sidebar(
+  # App title ----
+  title = "Hello Shiny!",
+  # Sidebar panel for inputs ----
+  sidebar = sidebar(
+    # Input: Slider for the number of bins ----
+    sliderInput(
+      inputId = "bins",
+      label = "Number of bins:",
+      min = 1,
+      max = 50,
+      value = 30
+    )
+  ),
+  # Output: Histogram ----
+  plotOutput(outputId = "distPlot")
+)
+
+# Here is the server function for the Hello Shiny example.
+# Define server logic required to draw a histogram ----
+server <- function(input, output) {
+
+  # Histogram of the Old Faithful Geyser Data ----
+  # with requested number of bins
+  # This expression that generates a histogram is wrapped in a call
+  # to renderPlot to indicate that:
+  #
+  # 1. It is "reactive" and therefore should be automatically
+  #    re-executed when inputs (input$bins) change
+  # 2. Its output type is a plot
+  output$distPlot <- renderPlot({
+
+    x    <- faithful$waiting
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+    hist(x, breaks = bins, col = "#007bc2", border = "white",
+         xlab = "Waiting time to next eruption (in mins)",
+         main = "Histogram of waiting times")
+
+    })
+
+}
+```

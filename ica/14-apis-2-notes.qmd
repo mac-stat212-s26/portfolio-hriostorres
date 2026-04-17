@@ -95,7 +95,7 @@ Extra Resources:
     - Full documentation is available at <https://www.hrecht.com/censusapi/>
 
 What is going on behind the scenes with `get_acs()`? Let's look at how to access Web API's directly with URL's.
-
+> It is constructing a URL to the U.S. Census API, sending an HTTP request, and then parsing the response into a tidy dataset.
 
 
 ## Accessing web APIs directly
@@ -107,7 +107,7 @@ Many APIs require users to obtain a **key** to use their services.
 - This lets organizations keep track of what data is being used.
 - It also **rate limits** their API and ensures programs don't make too many requests per day/minute/hour. Be aware that most APIs do have rate limits --- especially for their free tiers.
 
-Navigate to <https://api.census.gov/data/key_signup.html> to obtain a Census API key:
+The U.S. Census Data API required (free) key registration when passing the [Query Limits](https://www.census.gov/data/developers/guidance/api-user-guide.Help_&_Contact_Us.html).  To obtain a key, navigate to <https://api.census.gov/data/key_signup.html> and enter your information as follows:
 
 - Organization: Macalester College
 - Email: Your Mac email address
@@ -123,11 +123,10 @@ Check your email. Copy and paste your key into a new text file:
 
 Read in the key with the following code:
 
-
 ```{r read_census_api_key2}
-#| eval: false
 census_api_key <- readLines("census_api_key.txt")
 ```
+
 
 ### Navigating API documentation
 
@@ -157,6 +156,8 @@ We will use the `httr2` package to build up a full URL from its parts because of
     - We can see from [here](https://www.census.gov/data/developers/guidance/api-user-guide.Help_&_Contact_Us.html) that providing an API key is achieved with `key=YOUR_API_KEY`.
 
 ```{r httr2_census}
+census_api_key <- readLines("census_api_key.txt")
+
 req <- request("https://api.census.gov") |> 
     req_url_path_append("data") |> 
     req_url_path_append("2019") |> 
@@ -205,7 +206,13 @@ head(resp_json_df)
 
 The [Board Game Geek API](https://boardgamegeek.com/wiki/page/BGG_XML_API2) is referenced in the [Games & Comics](https://github.com/toddmotto/public-apis?tab=readme-ov-file#games--comics) section of [toddmotto's public API list](https://github.com/toddmotto/public-apis).
 
-Our goal is to use the search API at the bottom of the page. 
+Our goal is to use the search API at the bottom of the page but before that an app registration is required. An app can be registered by first filling the application on <https://boardgamegeek.com/applications> and once the application get approved an app key can be created.  After creating an app key, copy it into a text file and save it as `bgg_key.txt` then read it into R as follows:
+
+```{r}
+#| eval: false
+bgg_key <- readLines("bgg_key.txt")
+```
+
 
 Let's start at the top of the API documentation page to see how to navigate this reference.
 
@@ -219,6 +226,7 @@ Let's start at the top of the API documentation page to see how to navigate this
 The following request searches for board games, board game accessories, and board game expansions with the words "mystery" and "curse" in the title:
 
 ```{r httr2_bgg}
+#| eval: false
 req <- request("https://boardgamegeek.com/xmlapi2") |> 
     req_url_path_append("search") |> 
     req_url_query(query = I("mystery+curse"), type = I("boardgame,boardgameaccessory,boardgameexpansion"))
@@ -230,6 +238,11 @@ When we use `req_perform()`, we see from `Content-Type` that the format of the r
 - We can use `resp_body_xml()` to read in the XML as an R object.
 
 ```{r bgg_response}
+#| eval: false
+req <- request("https://boardgamegeek.com/xmlapi2") |> 
+    req_url_path_append("search") |> 
+    req_url_query(query = I("mystery+curse"), type = I("boardgame,boardgameaccessory,boardgameexpansion"))
+
 resp <- req_perform(req)
 resp
 resp <- resp_body_xml(resp)
@@ -241,6 +254,7 @@ The XML output is not packaged in a nice way. (We'd love to have a data frame.) 
 Let's first use the `xml_structure()` function to see how information is organized:
 
 ```{r xml_structure}
+#| eval: false
 xml_structure(resp)
 ```
 
@@ -255,6 +269,7 @@ The key navigation and extraction functions in `xml2` are:
     - `<node_name attribute_name1="attribute_value1" attribute_name2="attribute_value2">`
 
 ```{r xml_nav_extract}
+#| eval: false
 # Get the item nodes in 2 different ways
 resp |> xml_find_all("item")
 resp |> xml_children()
@@ -273,7 +288,18 @@ resp |> xml_find_all("item/name") |> xml_attr("type")
 **Exercises**
 
 1. Get the board game name (e.g., "Murder Mystery..." and  "Robinson Crusoe")
+
+```{r bgg_ex1}
+#| eval: false
+resp |> xml_find_all("item/name") |> xml_attr("value")
+```
+
 2. Get the board game ID number (e.g., 63495, 40175)
+
+```{r bgg_ex2}
+#| eval: false
+resp |> xml_find_all("item") |> xml_attr("id")
+```
 
 
 ### New York Times API
@@ -292,8 +318,6 @@ As with your census API key, save this key in a `.txt` file, and read it in and 
 #| eval: false
 times_key <- read_lines("nyt_api_key.txt")
 ```
-
-
 
 Open this URL in your browser (you should replace `MY_KEY` with the API key you were given).
 
@@ -385,7 +409,6 @@ Using base R subsetting, we can access elements of a list in three ways:
 resp_pt[[1]]
 ```
 
-
 - By *name* with double square brackets `[[`: (note that list elements are not always named, so this won't always be possible)
 
 ```{r list_access2}
@@ -416,10 +439,26 @@ resp_pt$response$meta
 **Exercise:** In the `resp_pt` object, retrieve the data associated with:
 
 - the `copyright` key
+
+```{r nyt_ex1}
+#| eval: false
+resp_pt$copyright
+```
+
 - the number of `hits` (number of search results) within the `meta` object
+
+```{r nyt_ex2}
+#| eval: false
+resp_pt$response$meta$hits
+```
+
 - the abstracts and leading paragraphs of the articles found in the search
+
+```{r nyt_ex3}
+#| eval: false
+resp_pt$response$docs |> select(abstract, lead_paragraph)
+```
 
 ## Done!
 
 - Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website
-

@@ -2,4 +2,74 @@
 title: "Professional Viz"
 ---
 
-Add content here
+Here are some of my professional Vizs.
+
+## Research Funding 
+
+> How does program duration relate to funding intensity across Ireland's SFI programmes between 2000–2014?
+
+
+```{r output = FALSE}
+#libraries 
+library(tidyverse)
+library(dplyr)
+library(ggrepel)
+
+# loading the data
+tuesdata <- tidytuesdayR::tt_load(2026, week = 8)
+sfi_grants <- tuesdata$sfi_grants
+
+sfi_grants |> 
+mutate(start_date = as.Date(start_date),
+       end_date   = as.Date(end_date),
+       program_long = as.numeric(end_date - start_date)) # duration in day
+
+sfi_grants <- sfi_grants %>%
+  mutate(program_long = interval(start_date, end_date) / months(1))  # duration in months
+
+# Calculate average grant per month per program
+grant_summary <- sfi_grants %>%
+  group_by(programme_name) %>%
+  summarise(
+    total_commitment = sum(current_total_commitment, na.rm = TRUE),
+    program_long = mean(program_long, na.rm = TRUE), # average duration if multiple rows per program
+    grant_per_month_avg = total_commitment / program_long) %>%
+  arrange(desc(grant_per_month_avg))
+
+
+grant_summary <- grant_summary %>%
+  mutate(
+    grant_per_month_millions = grant_per_month_avg / 1e6,
+    top10 = row_number(desc(grant_per_month_avg)) <= 10)
+```
+
+```{r final_plot}
+grant_summary |> 
+ggplot(aes(x = program_long, y = grant_per_month_millions)) +
+  geom_point(color = "gray70") +
+  
+  geom_point(
+    data = subset(grant_summary, top10),
+    size = 3,
+    color = "#0E0E55") +
+  geom_text_repel(
+    data = subset(grant_summary, top10),
+    aes(label = programme_name),
+    size = 2.5,
+    box.padding = 0.4,
+    point.padding = 0.3) +
+  labs(
+    x = "Program Duration (months)",
+    y = "Average Grant per Month (Millions)",
+    title = "Monthly Average Grants vs Program Duration in Ireland's SFI* (2000-2014)",
+    subtitle = "We see how 'Research Centres Programme' took the lead out of all the programs \nTop 10 Grants Highlighted.",
+    caption = "
+    * SFI was the national Science Foundation in Ireland for investment in scientific and engineering research
+    Source: Ireland's Open Data Portal, obtained from TidyTueday Week 8. | Author: David Rios") +
+  theme_minimal() +
+  theme(
+    # Axis lines in black
+    axis.line = element_line(color = "gray70", linewidth = 0.6),
+    plot.caption = element_text(hjust = 0, size=9, color="gray60"))
+```
+
